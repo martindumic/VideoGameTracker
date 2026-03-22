@@ -1,1 +1,0 @@
-$input | Out-String | Add-Content -Path 'C:\\git\\.github\\hooks\\agent_log.txt'
