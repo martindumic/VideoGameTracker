@@ -1,4 +1,4 @@
-using VideoGameTracker.Model.Models;
+using VideoGameTracker.Models;
 
 // ============= INICIJALIZACIJA PODATAKA =============
 
