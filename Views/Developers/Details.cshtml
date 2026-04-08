@@ -1,0 +1,50 @@
+@model Developer
+
+@{
+    ViewData["Title"] = "Developer Details";
+}
+
+<h1>@Model.Name</h1>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <h5>Country</h5>
+                <p>@Model.Country</p>
+            </div>
+            <div class="col-md-6">
+                <h5>Founded</h5>
+                <p>@Model.Founded.ToString("dd/MM/yyyy")</p>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <h5>Description</h5>
+                <p>@Model.Description</p>
+            </div>
+        </div>
+
+        @if (Model.Games.Any())
+        {
+            <div class="row">
+                <div class="col-12">
+                    <h5>Games</h5>
+                    <ul class="list-group">
+                        @foreach (var game in Model.Games)
+                        {
+                            <li class="list-group-item">
+                                <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">@game.Title</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-controller="Developers" asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

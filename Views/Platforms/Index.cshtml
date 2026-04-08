@@ -1,0 +1,35 @@
+@model List<Platform>
+
+@{
+    ViewData["Title"] = "Platforms";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Games Count</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var platform in Model)
+            {
+                <tr>
+                    <td>@platform.Id</td>
+                    <td>@platform.Name</td>
+                    <td>@platform.Type</td>
+                    <td><span class="badge bg-info">@platform.Games.Count</span></td>
+                    <td>
+                        <a asp-controller="Platforms" asp-action="Details" asp-route-id="@platform.Id" class="btn btn-sm btn-primary">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

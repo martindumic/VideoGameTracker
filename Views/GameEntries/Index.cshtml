@@ -1,0 +1,39 @@
+@model List<GameEntry>
+
+@{
+    ViewData["Title"] = "Game Entries";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Game</th>
+                <th>User</th>
+                <th>Status</th>
+                <th>Hours Played</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in Model)
+            {
+                <tr>
+                    <td>@entry.Id</td>
+                    <td>@entry.Game?.Title</td>
+                    <td>@entry.User?.Username</td>
+                    <td><span class="badge bg-secondary">@entry.Status</span></td>
+                    <td>@entry.HoursPlayed</td>
+                    <td>@entry.DateAdded.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <a asp-controller="GameEntries" asp-action="Details" asp-route-id="@entry.Id" class="btn btn-sm btn-primary">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,905 @@
+[2026-04-08 18:18:52]
+{
+    "timestamp":  "2026-04-08T16:18:52.130Z",
+    "hook_event_name":  "UserPromptSubmit",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "prompt":  "prilo++io sam file 2. laboratorijske vje++be u kojem su navedeni zahtjevi vje++be te sadr++i cjeline koje su vezane uz vjebu s obja+�njenjima kako rije+�iti odre-�eni zahtjev. ne tra++im te da odmah sve rije+�i+� +�to je tra++eno u zahtjevima ve-� da .md file koristi+� kao podsjetnik kako i +�to napraviti.\r\n\r\n1. ++elim da kreira+� mock repositorye u Data folderu gdje -�e+� prebaciti podatke kreirane u Program.cs fileu na na-�in da svaki tip podatka bude u zasebnom repositoryu, npr GamesMockRepository sadr++i samo igre,...\r\nnaravno kasnije makni te podatke iz program.cs filea\r\n\r\nkrad zavrsis prelazimo na sljedeci zahjtev koji kazem",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:02]
+{
+    "timestamp":  "2026-04-08T16:19:02.162Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "list_dir",
+    "tool_input":  {
+                       "path":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Data"
+                   },
+    "tool_use_id":  "toolu_bdrk_01NJ3iL5G5dVzGH9Gd1qrTR9__vscode-1775664418491",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:02]
+{
+    "timestamp":  "2026-04-08T16:19:02.158Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "list_dir",
+    "tool_input":  {
+                       "path":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Models"
+                   },
+    "tool_use_id":  "toolu_bdrk_01XaVMd5P7ofaWRZtcrS6kH9__vscode-1775664418492",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:07]
+{
+    "timestamp":  "2026-04-08T16:19:06.641Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "read_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Models\\Developer.cs",
+                       "startLine":  1,
+                       "endLine":  20
+                   },
+    "tool_use_id":  "toolu_bdrk_01By64pwomTVJAHwwxLTxKjz__vscode-1775664418494",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:33]
+{
+    "timestamp":  "2026-04-08T16:19:33.272Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Data\\DevelopersMockRepository.cs",
+                       "content":  "using VideoGameTracker.Models;\n\nnamespace VideoGameTracker.Data;\n\npublic class DevelopersMockRepository\n{\n    private readonly List\u003cDeveloper\u003e _developers;\n\n    public DevelopersMockRepository()\n    {\n        _developers = new List\u003cDeveloper\u003e\n        {\n            new Developer\n            {\n                Id = 1,\n                Name = \"CD Projekt Red\",\n                Country = \"Poland\",\n                Founded = new DateTime(2002, 5, 30),\n                Description = \"Polish video game developer known for The Witcher series\",\n                Games = new List\u003cGame\u003e()\n            },\n            new Developer\n            {\n                Id = 2,\n                Name = \"Rockstar Games\",\n                Country = \"USA\",\n                Founded = new DateTime(1998, 12, 1),\n                Description = \"American video game developer and publisher known for GTA series\",\n                Games = new List\u003cGame\u003e()\n            },\n            new Developer\n            {\n                Id = 3,\n                Name = \"Valve Corporation\",\n                Country = \"USA\",\n                Founded = new DateTime(1996, 8, 1),\n                Description = \"Developer of legendary fps games and Half-Life series\",\n                Games = new List\u003cGame\u003e()\n            }\n        };\n    }\n\n    public List\u003cDeveloper\u003e GetAll() =\u003e _developers;\n\n    public Developer? GetById(int id) =\u003e _developers.FirstOrDefault(d =\u003e d.Id == id);\n}\n"
+                   },
+    "tool_use_id":  "toolu_bdrk_01QjpHuw8PLi4jiPLzDC6XK8__vscode-1775664418496",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:34]
+{
+    "timestamp":  "2026-04-08T16:19:33.922Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Data\\GenresMockRepository.cs",
+                       "content":  "using VideoGameTracker.Models;\n\nnamespace VideoGameTracker.Data;\n\npublic class GenresMockRepository\n{\n    private readonly List\u003cGenre\u003e _genres;\n\n    public GenresMockRepository()\n    {\n        _genres = new List\u003cGenre\u003e\n        {\n            new Genre\n            {\n                Id = 1,\n                Name = \"Role-Playing Game\",\n                Description = \"Games with character progression and storytelling\",\n                Games = new List\u003cGame\u003e()\n            },\n            new Genre\n            {\n                Id = 2,\n                Name = \"Action\",\n                Description = \"Fast-paced action-oriented games\",\n                Games = new List\u003cGame\u003e()\n            },\n            new Genre\n            {\n                Id = 3,\n                Name = \"First-Person Shooter\",\n                Description = \"Fast shooter games played from first-person perspective\",\n                Games = new List\u003cGame\u003e()\n            },\n            new Genre\n            {\n                Id = 4,\n                Name = \"Adventure\",\n                Description = \"Adventure and exploration games\",\n                Games = new List\u003cGame\u003e()\n            }\n        };\n    }\n\n    public List\u003cGenre\u003e GetAll() =\u003e _genres;\n\n    public Genre? GetById(int id) =\u003e _genres.FirstOrDefault(g =\u003e g.Id == id);\n}\n"
+                   },
+    "tool_use_id":  "toolu_bdrk_01PK4qLpS6oQRkuiP2rV15JL__vscode-1775664418497",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:35]
+{
+    "timestamp":  "2026-04-08T16:19:34.600Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Data\\PlatformsMockRepository.cs",
+                       "content":  "using VideoGameTracker.Models;\n\nnamespace VideoGameTracker.Data;\n\npublic class PlatformsMockRepository\n{\n    private readonly List\u003cPlatform\u003e _platforms;\n\n    public PlatformsMockRepository()\n    {\n        _platforms = new List\u003cPlatform\u003e\n        {\n            new Platform\n            {\n                Id = 1,\n                Name = \"PC\",\n                Type = PlatformType.PC,\n                Games = new List\u003cGame\u003e()\n            },\n            new Platform\n            {\n                Id = 2,\n                Name = \"PlayStation 5\",\n                Type = PlatformType.PlayStation,\n                Games = new List\u003cGame\u003e()\n            },\n            new Platform\n            {\n                Id = 3,\n                Name = \"Xbox Series X\",\n                Type = PlatformType.Xbox,\n                Games = new List\u003cGame\u003e()\n            }\n        };\n    }\n\n    public List\u003cPlatform\u003e GetAll() =\u003e _platforms;\n\n    public Platform? GetById(int id) =\u003e _platforms.FirstOrDefault(p =\u003e p.Id == id);\n}\n"
+                   },
+    "tool_use_id":  "toolu_bdrk_014nYRJ2EZJb1WEr3GWSSgbj__vscode-1775664418498",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:36]
+{
+    "timestamp":  "2026-04-08T16:19:35.501Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Data\\GamesMockRepository.cs",
+                       "content":  "using VideoGameTracker.Models;\n\nnamespace VideoGameTracker.Data;\n\npublic class GamesMockRepository\n{\n    private readonly List\u003cGame\u003e _games;\n    private readonly DevelopersMockRepository _developersRepo;\n    private readonly GenresMockRepository _genresRepo;\n    private readonly PlatformsMockRepository _platformsRepo;\n\n    public GamesMockRepository(\n        DevelopersMockRepository developersRepo,\n        GenresMockRepository genresRepo,\n        PlatformsMockRepository platformsRepo)\n    {\n        _developersRepo = developersRepo;\n        _genresRepo = genresRepo;\n        _platformsRepo = platformsRepo;\n\n        _games = InitializeGames();\n    }\n\n    private List\u003cGame\u003e InitializeGames()\n    {\n        var developer1 = _developersRepo.GetById(1);\n        var developer2 = _developersRepo.GetById(2);\n        var developer3 = _developersRepo.GetById(3);\n\n        var genreRPG = _genresRepo.GetById(1);\n        var genreAction = _genresRepo.GetById(2);\n        var genreFPS = _genresRepo.GetById(3);\n        var genreAdventure = _genresRepo.GetById(4);\n\n        var platformPC = _platformsRepo.GetById(1);\n        var platformPS5 = _platformsRepo.GetById(2);\n        var platformXbox = _platformsRepo.GetById(3);\n\n        var games = new List\u003cGame\u003e\n        {\n            new Game\n            {\n                Id = 1,\n                Title = \"The Witcher 3: Wild Hunt\",\n                ReleaseYear = 2015,\n                Description = \"Open-world RPG with rich storytelling and complex characters\",\n                Developer = developer1,\n                AverageRating = 95,\n                Genres = new List\u003cGenre\u003e { genreRPG, genreAction, genreAdventure },\n                Platforms = new List\u003cPlatform\u003e { platformPC, platformPS5, platformXbox },\n                Reviews = new List\u003cReview\u003e()\n            },\n            new Game\n            {\n                Id = 2,\n                Title = \"Cyberpunk 2077\",\n                ReleaseYear = 2020,\n                Description = \"Futuristic action RPG set in Night City\",\n                Developer = developer1,\n                AverageRating = 77,\n                Genres = new List\u003cGenre\u003e { genreRPG, genreAction },\n                Platforms = new List\u003cPlatform\u003e { platformPC, platformPS5, platformXbox },\n                Reviews = new List\u003cReview\u003e()\n            },\n            new Game\n            {\n                Id = 3,\n                Title = \"The Witcher 2: Assassins of Kings\",\n                ReleaseYear = 2011,\n                Description = \"Predecessor to The Witcher 3\",\n                Developer = developer1,\n                AverageRating = 88,\n                Genres = new List\u003cGenre\u003e { genreRPG, genreAction },\n                Platforms = new List\u003cPlatform\u003e { platformPC },\n                Reviews = new List\u003cReview\u003e()\n            },\n            new Game\n            {\n                Id = 4,\n                Title = \"Grand Theft Auto V\",\n                ReleaseYear = 2013,\n                Description = \"Open-world action game set in Los Santos\",\n                Developer = developer2,\n                AverageRating = 97,\n                Genres = new List\u003cGenre\u003e { genreAction, genreAdventure },\n                Platforms = new List\u003cPlatform\u003e { platformPC, platformPS5, platformXbox },\n                Reviews = new List\u003cReview\u003e()\n            },\n            new Game\n            {\n                Id = 5,\n                Title = \"Red Dead Redemption 2\",\n                ReleaseYear = 2018,\n                Description = \"Western action-adventure game\",\n                Developer = developer2,\n                AverageRating = 97,\n                Genres = new List\u003cGenre\u003e { genreAction, genreAdventure },\n                Platforms = new List\u003cPlatform\u003e { platformPC, platformPS5, platformXbox },\n                Reviews = new List\u003cReview\u003e()\n            },\n            new Game\n            {\n                Id = 6,\n                Title = \"GTA IV\",\n                ReleaseYear = 2008,\n                Description = \"Action game set in Liberty City\",\n                Developer = developer2,\n                AverageRating = 94,\n                Genres = new List\u003cGenre\u003e { genreAction },\n                Platforms = new List\u003cPlatform\u003e { platformPC, platformXbox },\n                Reviews = new List\u003cReview\u003e()\n            },\n            new Game\n            {\n                Id = 7,\n                Title = \"Half-Life 2\",\n                ReleaseYear = 2004,\n                Description = \"Revolutionary first-person shooter\",\n                Developer = developer3,\n                AverageRating = 96,\n                Genres = new List\u003cGenre\u003e { genreFPS, genreAction },\n                Platforms = new List\u003cPlatform\u003e { platformPC },\n                Reviews = new List\u003cReview\u003e()\n            },\n            new Game\n            {\n                Id = 8,\n                Title = \"Counter-Strike 2\",\n                ReleaseYear = 2023,\n                Description = \"Competitive team-based FPS\",\n                Developer = developer3,\n                AverageRating = 82,\n                Genres = new List\u003cGenre\u003e { genreFPS },\n                Platforms = new List\u003cPlatform\u003e { platformPC },\n                Reviews = new List\u003cReview\u003e()\n            },\n            new Game\n            {\n                Id = 9,\n                Title = \"Half-Life: Alyx\",\n                ReleaseYear = 2020,\n                Description = \"VR prequel to Half-Life 2\",\n                Developer = developer3,\n                AverageRating = 93,\n                Genres = new List\u003cGenre\u003e { genreFPS, genreAction },\n                Platforms = new List\u003cPlatform\u003e { platformPC },\n                Reviews = new List\u003cReview\u003e()\n            }\n        };\n\n        // Dodaj igre u developere\n        if (developer1 != null)\n            developer1.Games.AddRange(games.Where(g =\u003e g.Developer?.Id == 1));\n        if (developer2 != null)\n            developer2.Games.AddRange(games.Where(g =\u003e g.Developer?.Id == 2));\n        if (developer3 != null)\n            developer3.Games.AddRange(games.Where(g =\u003e g.Developer?.Id == 3));\n\n        return games;\n    }\n\n    public List\u003cGame\u003e GetAll() =\u003e _games;\n\n    public Game? GetById(int id) =\u003e _games.FirstOrDefault(g =\u003e g.Id == id);\n}\n"
+                   },
+    "tool_use_id":  "toolu_bdrk_013Cy3XhedagofkywEWk6VMo__vscode-1775664418499",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:37]
+{
+    "timestamp":  "2026-04-08T16:19:36.487Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Data\\UsersMockRepository.cs",
+                       "content":  "using VideoGameTracker.Models;\n\nnamespace VideoGameTracker.Data;\n\npublic class UsersMockRepository\n{\n    private readonly List\u003cUser\u003e _users;\n\n    public UsersMockRepository()\n    {\n        _users = new List\u003cUser\u003e\n        {\n            new User\n            {\n                Id = 1,\n                Username = \"GamerPro\",\n                Email = \"gamerpro@email.com\",\n                Password = \"hashed_password_1\",\n                RegisteredAt = new DateTime(2020, 3, 15),\n                GameEntries = new List\u003cGameEntry\u003e()\n            },\n            new User\n            {\n                Id = 2,\n                Username = \"RPGFanatic\",\n                Email = \"rpgfan@email.com\",\n                Password = \"hashed_password_2\",\n                RegisteredAt = new DateTime(2021, 7, 22),\n                GameEntries = new List\u003cGameEntry\u003e()\n            },\n            new User\n            {\n                Id = 3,\n                Username = \"ActionJunkie\",\n                Email = \"actionjunkie@email.com\",\n                Password = \"hashed_password_3\",\n                RegisteredAt = new DateTime(2019, 11, 10),\n                GameEntries = new List\u003cGameEntry\u003e()\n            }\n        };\n    }\n\n    public List\u003cUser\u003e GetAll() =\u003e _users;\n\n    public User? GetById(int id) =\u003e _users.FirstOrDefault(u =\u003e u.Id == id);\n}\n"
+                   },
+    "tool_use_id":  "toolu_bdrk_01TmVT49cW6vZM23NrjhZmGm__vscode-1775664418500",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:38]
+{
+    "timestamp":  "2026-04-08T16:19:37.425Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Data\\ReviewsMockRepository.cs",
+                       "content":  "using VideoGameTracker.Models;\n\nnamespace VideoGameTracker.Data;\n\npublic class ReviewsMockRepository\n{\n    private readonly List\u003cReview\u003e _reviews;\n    private readonly UsersMockRepository _usersRepo;\n    private readonly GamesMockRepository _gamesRepo;\n\n    public ReviewsMockRepository(\n        UsersMockRepository usersRepo,\n        GamesMockRepository gamesRepo)\n    {\n        _usersRepo = usersRepo;\n        _gamesRepo = gamesRepo;\n\n        _reviews = InitializeReviews();\n    }\n\n    private List\u003cReview\u003e InitializeReviews()\n    {\n        var user1 = _usersRepo.GetById(1);\n        var user2 = _usersRepo.GetById(2);\n        var user3 = _usersRepo.GetById(3);\n\n        var game1 = _gamesRepo.GetById(1);\n        var game2 = _gamesRepo.GetById(2);\n        var game4 = _gamesRepo.GetById(4);\n        var game5 = _gamesRepo.GetById(5);\n        var game8 = _gamesRepo.GetById(8);\n\n        var reviews = new List\u003cReview\u003e\n        {\n            new Review\n            {\n                Id = 1,\n                User = user1,\n                Game = game1,\n                Score = 95,\n                Comment = \"Amazing game, incredible story and characters!\",\n                CreatedAt = new DateTime(2023, 5, 10)\n            },\n            new Review\n            {\n                Id = 2,\n                User = user2,\n                Game = game1,\n                Score = 98,\n                Comment = \"Best RPG I\u0027ve ever played!\",\n                CreatedAt = new DateTime(2023, 6, 15)\n            },\n            new Review\n            {\n                Id = 3,\n                User = user1,\n                Game = game4,\n                Score = 90,\n                Comment = \"Great open-world gameplay\",\n                CreatedAt = new DateTime(2023, 7, 20)\n            },\n            new Review\n            {\n                Id = 4,\n                User = user3,\n                Game = game8,\n                Score = 85,\n                Comment = \"Competitive and fun\",\n                CreatedAt = new DateTime(2023, 8, 25)\n            },\n            new Review\n            {\n                Id = 5,\n                User = user2,\n                Game = game2,\n                Score = 75,\n                Comment = \"Good game, but buggy at launch\",\n                CreatedAt = new DateTime(2023, 9, 1)\n            },\n            new Review\n            {\n                Id = 6,\n                User = user3,\n                Game = game5,\n                Score = 96,\n                Comment = \"Outstanding story and immersion\",\n                CreatedAt = new DateTime(2023, 10, 5)\n            }\n        };\n\n        // Dodaj recenzije u igre\n        if (game1 != null)\n        {\n            game1.Reviews.Add(reviews[0]);\n            game1.Reviews.Add(reviews[1]);\n        }\n        if (game4 != null)\n            game4.Reviews.Add(reviews[2]);\n        if (game8 != null)\n            game8.Reviews.Add(reviews[3]);\n        if (game2 != null)\n            game2.Reviews.Add(reviews[4]);\n        if (game5 != null)\n            game5.Reviews.Add(reviews[5]);\n\n        return reviews;\n    }\n\n    public List\u003cReview\u003e GetAll() =\u003e _reviews;\n\n    public Review? GetById(int id) =\u003e _reviews.FirstOrDefault(r =\u003e r.Id == id);\n}\n"
+                   },
+    "tool_use_id":  "toolu_bdrk_01UyEhy3x5vyXpeGFQrna5C5__vscode-1775664418501",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:39]
+{
+    "timestamp":  "2026-04-08T16:19:38.560Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Data\\GameEntriesMockRepository.cs",
+                       "content":  "using VideoGameTracker.Models;\n\nnamespace VideoGameTracker.Data;\n\npublic class GameEntriesMockRepository\n{\n    private readonly List\u003cGameEntry\u003e _gameEntries;\n    private readonly GamesMockRepository _gamesRepo;\n    private readonly UsersMockRepository _usersRepo;\n    private readonly ReviewsMockRepository _reviewsRepo;\n\n    public GameEntriesMockRepository(\n        GamesMockRepository gamesRepo,\n        UsersMockRepository usersRepo,\n        ReviewsMockRepository reviewsRepo)\n    {\n        _gamesRepo = gamesRepo;\n        _usersRepo = usersRepo;\n        _reviewsRepo = reviewsRepo;\n\n        _gameEntries = InitializeGameEntries();\n    }\n\n    private List\u003cGameEntry\u003e InitializeGameEntries()\n    {\n        var game1 = _gamesRepo.GetById(1);\n        var game2 = _gamesRepo.GetById(2);\n        var game3 = _gamesRepo.GetById(3);\n        var game4 = _gamesRepo.GetById(4);\n        var game5 = _gamesRepo.GetById(5);\n        var game7 = _gamesRepo.GetById(7);\n        var game8 = _gamesRepo.GetById(8);\n\n        var user1 = _usersRepo.GetById(1);\n        var user2 = _usersRepo.GetById(2);\n        var user3 = _usersRepo.GetById(3);\n\n        var review1 = _reviewsRepo.GetById(1);\n        var review2 = _reviewsRepo.GetById(2);\n        var review3 = _reviewsRepo.GetById(3);\n        var review4 = _reviewsRepo.GetById(4);\n        var review5 = _reviewsRepo.GetById(5);\n        var review6 = _reviewsRepo.GetById(6);\n\n        var entries = new List\u003cGameEntry\u003e\n        {\n            new GameEntry\n            {\n                Id = 1,\n                Game = game1,\n                User = user1,\n                Status = GameStatus.Finished,\n                DateAdded = new DateTime(2022, 3, 10),\n                HoursPlayed = 150,\n                Review = review1\n            },\n            new GameEntry\n            {\n                Id = 2,\n                Game = game1,\n                User = user2,\n                Status = GameStatus.Finished,\n                DateAdded = new DateTime(2022, 5, 15),\n                HoursPlayed = 200,\n                Review = review2\n            },\n            new GameEntry\n            {\n                Id = 3,\n                Game = game4,\n                User = user1,\n                Status = GameStatus.Playing,\n                DateAdded = new DateTime(2023, 6, 20),\n                HoursPlayed = 80,\n                Review = review3\n            },\n            new GameEntry\n            {\n                Id = 4,\n                Game = game8,\n                User = user3,\n                Status = GameStatus.Playing,\n                DateAdded = new DateTime(2023, 9, 10),\n                HoursPlayed = 45,\n                Review = review4\n            },\n            new GameEntry\n            {\n                Id = 5,\n                Game = game2,\n                User = user2,\n                Status = GameStatus.Finished,\n                DateAdded = new DateTime(2021, 1, 5),\n                HoursPlayed = 120,\n                Review = review5\n            },\n            new GameEntry\n            {\n                Id = 6,\n                Game = game5,\n                User = user3,\n                Status = GameStatus.Finished,\n                DateAdded = new DateTime(2022, 8, 15),\n                HoursPlayed = 180,\n                Review = review6\n            },\n            new GameEntry\n            {\n                Id = 7,\n                Game = game7,\n                User = user3,\n                Status = GameStatus.Planned,\n                DateAdded = new DateTime(2023, 11, 1),\n                HoursPlayed = 0,\n                Review = null\n            },\n            new GameEntry\n            {\n                Id = 8,\n                Game = game3,\n                User = user2,\n                Status = GameStatus.Finished,\n                DateAdded = new DateTime(2020, 10, 20),\n                HoursPlayed = 95,\n                Review = null\n            }\n        };\n\n        // Dodaj GameEntry-je u korisnike\n        if (user1 != null)\n        {\n            user1.GameEntries.Add(entries[0]);\n            user1.GameEntries.Add(entries[2]);\n        }\n        if (user2 != null)\n        {\n            user2.GameEntries.Add(entries[1]);\n            user2.GameEntries.Add(entries[4]);\n            user2.GameEntries.Add(entries[7]);\n        }\n        if (user3 != null)\n        {\n            user3.GameEntries.Add(entries[3]);\n            user3.GameEntries.Add(entries[5]);\n            user3.GameEntries.Add(entries[6]);\n        }\n\n        return entries;\n    }\n\n    public List\u003cGameEntry\u003e GetAll() =\u003e _gameEntries;\n\n    public GameEntry? GetById(int id) =\u003e _gameEntries.FirstOrDefault(e =\u003e e.Id == id);\n}\n"
+                   },
+    "tool_use_id":  "toolu_bdrk_01EsVKmZqjDQSLUBYbmezH2Y__vscode-1775664418502",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:44]
+{
+    "timestamp":  "2026-04-08T16:19:44.116Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "read_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Program.cs",
+                       "startLine":  1,
+                       "endLine":  50
+                   },
+    "tool_use_id":  "toolu_bdrk_012eV1xjAXG4R16ZBUDjN4MH__vscode-1775664418503",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:48]
+{
+    "timestamp":  "2026-04-08T16:19:48.280Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "read_file",
+    "tool_input":  {
+                       "endLine":  350,
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Program.cs",
+                       "startLine":  320
+                   },
+    "tool_use_id":  "toolu_bdrk_012qmNMSeGscckMi41VYB2cg__vscode-1775664418504",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:52]
+{
+    "timestamp":  "2026-04-08T16:19:52.385Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "read_file",
+    "tool_input":  {
+                       "endLine":  400,
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Program.cs",
+                       "startLine":  370
+                   },
+    "tool_use_id":  "toolu_bdrk_01YMYrnDa1KobR3fmKKUydZz__vscode-1775664418505",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:56]
+{
+    "timestamp":  "2026-04-08T16:19:55.692Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "read_file",
+    "tool_input":  {
+                       "endLine":  450,
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Program.cs",
+                       "startLine":  410
+                   },
+    "tool_use_id":  "toolu_bdrk_0181vGKYZFQdvzXamWimuRa5__vscode-1775664418506",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:19:59]
+{
+    "timestamp":  "2026-04-08T16:19:59.212Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "read_file",
+    "tool_input":  {
+                       "endLine":  550,
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Program.cs",
+                       "startLine":  500
+                   },
+    "tool_use_id":  "toolu_bdrk_016vZe18Z7qHAmD2ZcuKEk2C__vscode-1775664418507",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:20:03]
+{
+    "timestamp":  "2026-04-08T16:20:03.184Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "read_file",
+    "tool_input":  {
+                       "endLine":  590,
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Program.cs",
+                       "startLine":  560
+                   },
+    "tool_use_id":  "toolu_bdrk_01JyBPre8S8RSgLGS1m2MBDF__vscode-1775664418508",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:20:32]
+{
+    "timestamp":  "2026-04-08T16:20:32.489Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Program.cs",
+                       "oldString":  "using VideoGameTracker.Models;\n\n// ============= INICIJALIZACIJA PODATAKA =============\n\n// 1. Kreiranje 3 RAZGRANATA DEVELOPERA\nvar developer1 = new Developer\n{\n    Id = 1,\n    Name = \"CD Projekt Red\",\n    Country = \"Poland\",\n    Founded = new DateTime(2002, 5, 30),\n    Description = \"Polish video game developer known for The Witcher series\",\n    Games = new List\u003cGame\u003e()\n};\n\nvar developer2 = new Developer\n{\n    Id = 2,\n    Name = \"Rockstar Games\",\n    Country = \"USA\",\n    Founded = new DateTime(1998, 12, 1),\n    Description = \"American video game developer and publisher known for GTA series\",\n    Games = new List\u003cGame\u003e()\n};\n\nvar developer3 = new Developer\n{\n    Id = 3,\n    Name = \"Valve Corporation\",\n    Country = \"USA\",\n    Founded = new DateTime(1996, 8, 1),\n    Description = \"Developer of legendary fps games and Half-Life series\",\n    Games = new List\u003cGame\u003e()\n};\n\n// 2. Kreiranje ++anrova\nvar genreRPG = new Genre\n{\n    Id = 1,\n    Name = \"Role-Playing Game\",\n    Description = \"Games with character progression and storytelling\",\n    Games = new List\u003cGame\u003e()\n};\n\nvar genreAction = new Genre\n{\n    Id = 2,\n    Name = \"Action\",\n    Description = \"Fast-paced action-oriented games\",\n    Games = new List\u003cGame\u003e()\n};\n\nvar genreFPS = new Genre\n{\n    Id = 3,\n    Name = \"First-Person Shooter\",\n    Description = \"Fast shooter games played from first-person perspective\",\n    Games = new List\u003cGame\u003e()\n};\n\nvar genreAdventure = new Genre\n{\n    Id = 4,\n    Name = \"Adventure\",\n    Description = \"Adventure and exploration games\",\n    Games = new List\u003cGame\u003e()\n};\n\n// 3. Kreiranje platformi\nvar platformPC = new Platform\n{\n    Id = 1,\n    Name = \"PC\",\n    Type = PlatformType.PC,\n    Games = new List\u003cGame\u003e()\n};\n\nvar platformPS5 = new Platform\n{\n    Id = 2,\n    Name = \"PlayStation 5\",\n    Type = PlatformType.PlayStation,\n    Games = new List\u003cGame\u003e()\n};\n\nvar platformXbox = new Platform\n{\n    Id = 3,\n    Name = \"Xbox Series X\",\n    Type = PlatformType.Xbox,\n    Games = new List\u003cGame\u003e()\n};\n\n// 4. Kreiranje igara za Developer 1 (CD Projekt Red)\nvar game1 = new Game\n{\n    Id = 1,\n    Title = \"The Witcher 3: Wild Hunt\",\n    ReleaseYear = 2015,\n    Description = \"Open-world RPG with rich storytelling and complex characters\",\n    Developer = developer1,\n    AverageRating = 95,\n    Genres = new List\u003cGenre\u003e { genreRPG, genreAction, genreAdventure },\n    Platforms = new List\u003cPlatform\u003e { platformPC, platformPS5, platformXbox },\n    Reviews = new List\u003cReview\u003e()\n};\n\nvar game2 = new Game\n{\n    Id = 2,\n    Title = \"Cyberpunk 2077\",\n    ReleaseYear = 2020,\n    Description = \"Futuristic action RPG set in Night City\",\n    Developer = developer1,\n    AverageRating = 77,\n    Genres = new List\u003cGenre\u003e { genreRPG, genreAction },\n    Platforms = new List\u003cPlatform\u003e { platformPC, platformPS5, platformXbox },\n    Reviews = new List\u003cReview\u003e()\n};\n\nvar game3 = new Game\n{\n    Id = 3,\n    Title = \"The Witcher 2: Assassins of Kings\",\n    ReleaseYear = 2011,\n    Description = \"Predecessor to The Witcher 3\",\n    Developer = developer1,\n    AverageRating = 88,\n    Genres = new List\u003cGenre\u003e { genreRPG, genreAction },\n    Platforms = new List\u003cPlatform\u003e { platformPC },\n    Reviews = new List\u003cReview\u003e()\n};\n\ndeveloper1.Games.AddRange(new[] { game1, game2, game3 });\n\n// 5. Kreiranje igara za Developer 2 (Rockstar Games)\nvar game4 = new Game\n{\n    Id = 4,\n    Title = \"Grand Theft Auto V\",\n    ReleaseYear = 2013,\n    Description = \"Open-world action game set in Los Santos\",\n    Developer = developer2,\n    AverageRating = 97,\n    Genres = new List\u003cGenre\u003e { genreAction, genreAdventure },\n    Platforms = new List\u003cPlatform\u003e { platformPC, platformPS5, platformXbox },\n    Reviews = new List\u003cReview\u003e()\n};\n\nvar game5 = new Game\n{\n    Id = 5,\n    Title = \"Red Dead Redemption 2\",\n    ReleaseYear = 2018,\n    Description = \"Western action-adventure game\",\n    Developer = developer2,\n    AverageRating = 97,\n    Genres = new List\u003cGenre\u003e { genreAction, genreAdventure },\n    Platforms = new List\u003cPlatform\u003e { platformPC, platformPS5, platformXbox },\n    Reviews = new List\u003cReview\u003e()\n};\n\nvar game6 = new Game\n{\n    Id = 6,\n    Title = \"GTA IV\",\n    ReleaseYear = 2008,\n    Description = \"Action game set in Liberty City\",\n    Developer = developer2,\n    AverageRating = 94,\n    Genres = new List\u003cGenre\u003e { genreAction },\n    Platforms = new List\u003cPlatform\u003e { platformPC, platformXbox },\n    Reviews = new List\u003cReview\u003e()\n};\n\ndeveloper2.Games.AddRange(new[] { game4, game5, game6 });\n\n// 6. Kreiranje igara za Developer 3 (Valve)\nvar game7 = new Game\n{\n    Id = 7,\n    Title = \"Half-Life 2\",\n    ReleaseYear = 2004,\n    Description = \"Revolutionary first-person shooter\",\n    Developer = developer3,\n    AverageRating = 96,\n    Genres = new List\u003cGenre\u003e { genreFPS, genreAction },\n    Platforms = new List\u003cPlatform\u003e { platformPC },\n    Reviews = new List\u003cReview\u003e()\n};\n\nvar game8 = new Game\n{\n    Id = 8,\n    Title = \"Counter-Strike 2\",\n    ReleaseYear = 2023,\n    Description = \"Competitive team-based FPS\",\n    Developer = developer3,\n    AverageRating = 82,\n    Genres = new List\u003cGenre\u003e { genreFPS },\n    Platforms = new List\u003cPlatform\u003e { platformPC },\n    Reviews = new List\u003cReview\u003e()\n};\n\nvar game9 = new Game\n{\n    Id = 9,\n    Title = \"Half-Life: Alyx\",\n    ReleaseYear = 2020,\n    Description = \"VR prequel to Half-Life 2\",\n    Developer = developer3,\n    AverageRating = 93,\n    Genres = new List\u003cGenre\u003e { genreFPS, genreAction },\n    Platforms = new List\u003cPlatform\u003e { platformPC },\n    Reviews = new List\u003cReview\u003e()\n};\n\ndeveloper3.Games.AddRange(new[] { game7, game8, game9 });\n\n// 7. Kreiranje korisnika\nvar user1 = new User\n{\n    Id = 1,\n    Username = \"GamerPro\",\n    Email = \"gamerpro@email.com\",\n    Password = \"hashed_password_1\",\n    RegisteredAt = new DateTime(2020, 3, 15),\n    GameEntries = new List\u003cGameEntry\u003e()\n};\n\nvar user2 = new User\n{\n    Id = 2,\n    Username = \"RPGFanatic\",\n    Email = \"rpgfan@email.com\",\n    Password = \"hashed_password_2\",\n    RegisteredAt = new DateTime(2021, 7, 22),\n    GameEntries = new List\u003cGameEntry\u003e()\n};\n\nvar user3 = new User\n{\n    Id = 3,\n    Username = \"ActionJunkie\",\n    Email = \"actionjunkie@email.com\",\n    Password = \"hashed_password_3\",\n    RegisteredAt = new DateTime(2019, 11, 10),\n    GameEntries = new List\u003cGameEntry\u003e()\n};\n\n// 8. Kreiranje recenzija\nvar review1 = new Review\n{\n    Id = 1,\n    User = user1,\n    Game = game1,\n    Score = 95,\n    Comment = \"Amazing game, incredible story and characters!\",\n    CreatedAt = new DateTime(2023, 5, 10)\n};\n\nvar review2 = new Review\n{\n    Id = 2,\n    User = user2,\n    Game = game1,\n    Score = 98,\n    Comment = \"Best RPG I\u0027ve ever played!\",\n    CreatedAt = new DateTime(2023, 6, 15)\n};\n\nvar review3 = new Review\n{\n    Id = 3,\n    User = user1,\n    Game = game4,\n    Score = 90,\n    Comment = \"Great open-world gameplay\",\n    CreatedAt = new DateTime(2023, 7, 20)\n};\n\nvar review4 = new Review\n{\n    Id = 4,\n    User = user3,\n    Game = game8,\n    Score = 85,\n    Comment = \"Competitive and fun\",\n    CreatedAt = new DateTime(2023, 8, 25)\n};\n\nvar review5 = new Review\n{\n    Id = 5,\n    User = user2,\n    Game = game2,\n    Score = 75,\n    Comment = \"Good game, but buggy at launch\",\n    CreatedAt = new DateTime(2023, 9, 1)\n};\n\nvar review6 = new Review\n{\n    Id = 6,\n    User = user3,\n    Game = game5,\n    Score = 96,\n    Comment = \"Outstanding story and immersion\",\n    CreatedAt = new DateTime(2023, 10, 5)\n};\n\ngame1.Reviews.AddRange(new[] { review1, review2 });\ngame4.Reviews.Add(review3);\ngame8.Reviews.Add(review4);\ngame2.Reviews.Add(review5);\ngame5.Reviews.Add(review6);\n\n// 9. Kreiranje GameEntry-ja (korisni-�ki unosi igara)\nvar entry1 = new GameEntry\n{\n    Id = 1,\n    Game = game1,\n    User = user1,\n    Status = GameStatus.Finished,\n    DateAdded = new DateTime(2022, 3, 10),\n    HoursPlayed = 150,\n    Review = review1\n};\n\nvar entry2 = new GameEntry\n{\n    Id = 2,\n    Game = game1,\n    User = user2,\n    Status = GameStatus.Finished,\n    DateAdded = new DateTime(2022, 5, 15),\n    HoursPlayed = 200,\n    Review = review2\n};\n\nvar entry3 = new GameEntry\n{\n    Id = 3,\n    Game = game4,\n    User = user1,\n    Status = GameStatus.Playing,\n    DateAdded = new DateTime(2023, 6, 20),\n    HoursPlayed = 80,\n    Review = review3\n};\n\nvar entry4 = new GameEntry\n{\n    Id = 4,\n    Game = game8,\n    User = user3,\n    Status = GameStatus.Playing,\n    DateAdded = new DateTime(2023, 9, 10),\n    HoursPlayed = 45,\n    Review = review4\n};\n\nvar entry5 = new GameEntry\n{\n    Id = 5,\n    Game = game2,\n    User = user2,\n    Status = GameStatus.Finished,\n    DateAdded = new DateTime(2021, 1, 5),\n    HoursPlayed = 120,\n    Review = review5\n};\n\nvar entry6 = new GameEntry\n{\n    Id = 6,\n    Game = game5,\n    User = user3,\n    Status = GameStatus.Finished,\n    DateAdded = new DateTime(2022, 8, 15),\n    HoursPlayed = 180,\n    Review = review6\n};\n\nvar entry7 = new GameEntry\n{\n    Id = 7,\n    Game = game7,\n    User = user3,\n    Status = GameStatus.Planned,\n    DateAdded = new DateTime(2023, 11, 1),\n    HoursPlayed = 0,\n    Review = null\n};\n\nvar entry8 = new GameEntry\n{\n    Id = 8,\n    Game = game3,\n    User = user2,\n    Status = GameStatus.Finished,\n    DateAdded = new DateTime(2020, 10, 20),\n    HoursPlayed = 95,\n    Review = null\n};\n\nuser1.GameEntries.AddRange(new[] { entry1, entry3 });\nuser2.GameEntries.AddRange(new[] { entry2, entry5, entry8 });\nuser3.GameEntries.AddRange(new[] { entry4, entry6, entry7 });\n\n// ============= KOLEKCIJE ZA UPITE =============\nvar developers = new List\u003cDeveloper\u003e { developer1, developer2, developer3 };\nvar games = new List\u003cGame\u003e { game1, game2, game3, game4, game5, game6, game7, game8, game9 };\nvar users = new List\u003cUser\u003e { user1, user2, user3 };\nvar gameEntries = new List\u003cGameEntry\u003e { entry1, entry2, entry3, entry4, entry5, entry6, entry7, entry8 };\nvar reviews = new List\u003cReview\u003e { review1, review2, review3, review4, review5, review6 };\nvar genres = new List\u003cGenre\u003e { genreRPG, genreAction, genreFPS, genreAdventure };\nvar platforms = new List\u003cPlatform\u003e { platformPC, platformPS5, platformXbox };\n\n// ============= LINQ UPITI =============\nConsole.WriteLine(\"==================== LINQ UPITI ====================\\n\");\n\n// UPIT 1: Sve igre od CD Projekt Red developera sortirane po godini izdanja\nConsole.WriteLine(\"1. Igre CD Projekt Red (sortirane po godini):\");\nvar cdProjektGames = games\n    .Where(g =\u003e g.Developer?.Name == \"CD Projekt Red\")\n    .OrderBy(g =\u003e g.ReleaseYear)\n    .Select(g =\u003e new { g.Title, g.ReleaseYear });\n\nforeach (var game in cdProjektGames)\n{\n    Console.WriteLine($\"   - {game.Title} ({game.ReleaseYear})\");\n}\nConsole.WriteLine();\n\n// UPIT 2: Igre sa prosje-�nom ocjenom \u003e 90\nConsole.WriteLine(\"2. Igre sa prosje-�nom ocjenom \u003e 90:\");\nvar topRatedGames = games\n    .Where(g =\u003e g.AverageRating \u003e 90)\n    .OrderByDescending(g =\u003e g.AverageRating);\n\nforeach (var game in topRatedGames)\n{\n    Console.WriteLine($\"   - {game.Title}: {game.AverageRating}/100\");\n}\nConsole.WriteLine();\n\n// UPIT 3: Igre dostupne na PC\nConsole.WriteLine(\"3. Igre dostupne na PC:\");\nvar pcGames = games\n    .Where(g =\u003e g.Platforms.Any(p =\u003e p.Type == PlatformType.PC))\n    .Select(g =\u003e g.Title)\n    .ToList();\n\nforeach (var game in pcGames)\n{\n    Console.WriteLine($\"   - {game}\");\n}\nConsole.WriteLine();\n\n// UPIT 4: Broj igara po developeru\nConsole.WriteLine(\"4. Broj igara po developeru:\");\nvar gamesByDeveloper = developers\n    .Select(d =\u003e new\n    {\n        Developer = d.Name,\n        GameCount = d.Games.Count()\n    })\n    .OrderByDescending(d =\u003e d.GameCount);\n\nforeach (var dev in gamesByDeveloper)\n{\n    Console.WriteLine($\"   - {dev.Developer}: {dev.GameCount} igre\");\n}\nConsole.WriteLine();\n\n// UPIT 5: Korisnici sortirani po broju zavr+�enih igara\nConsole.WriteLine(\"5. Korisnici sortirani po broju ZAVR+�ENIH igara:\");\nvar usersByFinished = users\n    .Select(u =\u003e new\n    {\n        Username = u.Username,\n        FinishedCount = u.GameEntries.Count(e =\u003e e.Status == GameStatus.Finished)\n    })\n    .OrderByDescending(u =\u003e u.FinishedCount);\n\nforeach (var user in usersByFinished)\n{\n    Console.WriteLine($\"   - {user.Username}: {user.FinishedCount} zavr+�enih igara\");\n}\nConsole.WriteLine();\n\n// UPIT 6: Igre sa recenzijama (kompleks upit)\nConsole.WriteLine(\"6. Igre sa recenzijama:\");\nvar withReviews = games\n    .Where(g =\u003e g.Reviews.Count() \u003e 0)\n    .Select(g =\u003e new\n    {\n        g.Title,\n        ReviewCount = g.Reviews.Count(),\n        AverageScore = g.Reviews.Average(r =\u003e r.Score)\n    });\n\nforeach (var game in withReviews)\n{\n    Console.WriteLine($\"   - {game.Title}: {game.ReviewCount} recenzije, prosje-�na ocjena: {game.AverageScore:F1}\");\n}\nConsole.WriteLine();\n\n// UPIT 7: Sve recenzije korisnika \"GamerPro\" sa ocjenom \u003e= 90\nConsole.WriteLine(\"7. Recenzije \u0027GamerPro\u0027 korisnika sa ocjenom \u003e= 90:\");\nvar gamerProReviews = reviews\n    .Where(r =\u003e r.User?.Username == \"GamerPro\" \u0026\u0026 r.Score \u003e= 90)\n    .Select(r =\u003e new\n    {\n        Game = r.Game?.Title ?? \"Unknown\",\n        r.Score,\n        r.Comment\n    });\n\nforeach (var review in gamerProReviews)\n{\n    Console.WriteLine($\"   - {review.Game}: {review.Score}/100 - \\\"{review.Comment}\\\"\");\n}\nConsole.WriteLine();\n\n// UPIT 8: Developeri sa vi+�e od 2 igre\nConsole.WriteLine(\"8. Developeri sa vi+�e od 2 igre:\");\nvar prolificDevelopers = developers\n    .Where(d =\u003e d.Games.Count() \u003e 2)\n    .Select(d =\u003e new { d.Name, GameCount = d.Games.Count() });\n\nforeach (var dev in prolificDevelopers)\n{\n    Console.WriteLine($\"   - {dev.Name}: {dev.GameCount} igre\");\n}\nConsole.WriteLine();\n\n// UPIT 9: Igre izdane nakon 2015. sortirane po ocjeni (LINQ sa First/FirstOrDefault)\nConsole.WriteLine(\"9. Najnovija igra (nakon 2015) sa najve-�om ocjenom:\");\nvar newestTopGame = games\n    .Where(g =\u003e g.ReleaseYear \u003e 2015)\n    .OrderByDescending(g =\u003e g.AverageRating)\n    .FirstOrDefault();\n\nif (newestTopGame != null)\n{\n    Console.WriteLine($\"   - {newestTopGame.Title} ({newestTopGame.ReleaseYear}): {newestTopGame.AverageRating}/100\");\n}\nConsole.WriteLine();\n\n// UPIT 10: ++anrovi sortirani po broju igara\nConsole.WriteLine(\"10. ++anrovi sortirani po broju igara:\");\nvar genresByCount = genres\n    .Select(g =\u003e new\n    {\n        g.Name,\n        GameCount = games.Count(game =\u003e game.Genres.Contains(g))\n    })\n    .OrderByDescending(g =\u003e g.GameCount);\n\nforeach (var genre in genresByCount)\n{\n    Console.WriteLine($\"   - {genre.Name}: {genre.GameCount} igre\");\n}\nConsole.WriteLine();\n\n\nConsole.WriteLine(\"\\n==================== KRAJ UPITA ====================\");",
+                       "newString":  "using VideoGameTracker.Data;\nusing VideoGameTracker.Models;"
+                   },
+    "tool_use_id":  "toolu_bdrk_01LpXom4pHSCRH4eJwfz6JSG__vscode-1775664418509",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:20:38]
+{
+    "timestamp":  "2026-04-08T16:20:38.055Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Program.cs",
+                       "newString":  "// ============= WEB APLIKACIJA SETUP =============\nvar builder = WebApplication.CreateBuilder(args);\n\n// Add services to the container.\nbuilder.Services.AddControllersWithViews();\n\n// Register Mock Repositories\nbuilder.Services.AddSingleton\u003cDevelopersMockRepository\u003e();\nbuilder.Services.AddSingleton\u003cGenresMockRepository\u003e();\nbuilder.Services.AddSingleton\u003cPlatformsMockRepository\u003e();\nbuilder.Services.AddSingleton\u003cGamesMockRepository\u003e();\nbuilder.Services.AddSingleton\u003cUsersMockRepository\u003e();\nbuilder.Services.AddSingleton\u003cReviewsMockRepository\u003e();\nbuilder.Services.AddSingleton\u003cGameEntriesMockRepository\u003e();",
+                       "oldString":  "// ============= WEB APLIKACIJA SETUP =============\nvar builder = WebApplication.CreateBuilder(args);\n\n// Add services to the container.\nbuilder.Services.AddControllersWithViews();"
+                   },
+    "tool_use_id":  "toolu_bdrk_017ucxECfv3Z5goStoRdW4Rb__vscode-1775664418510",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:20:42]
+{
+    "timestamp":  "2026-04-08T16:20:41.986Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "run_task",
+    "tool_input":  {
+                       "id":  "process: build-web",
+                       "workspaceFolder":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+                   },
+    "tool_use_id":  "toolu_bdrk_011iEMRxQZMvPtDZVV5B1jG9__vscode-1775664418511",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:20:54]
+{
+    "timestamp":  "2026-04-08T16:20:54.407Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "run_task",
+    "tool_input":  {
+                       "id":  "process: build",
+                       "workspaceFolder":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+                   },
+    "tool_use_id":  "toolu_bdrk_01YNmSpBE38WqQzZVpLesofk__vscode-1775664418512",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:21:10]
+{
+    "timestamp":  "2026-04-08T16:21:10.028Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "read_file",
+    "tool_input":  {
+                       "endLine":  30,
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Program.cs",
+                       "startLine":  1
+                   },
+    "tool_use_id":  "toolu_bdrk_015H4zedsUyiNtCuG5wjaQX5__vscode-1775664418513",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:45:35]
+{
+    "timestamp":  "2026-04-08T16:45:35.298Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "get_terminal_output",
+    "tool_input":  {
+                       "id":  "e7e11abd-fb51-4631-9953-9d4e8fdce558"
+                   },
+    "tool_use_id":  "toolu_bdrk_01XEzKsr6vdHNZd1kz6cTDJX__vscode-1775664418543",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:45:39]
+{
+    "timestamp":  "2026-04-08T16:45:39.568Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "open_browser_page",
+    "tool_input":  {
+                       "url":  "http://localhost:5207"
+                   },
+    "tool_use_id":  "toolu_bdrk_01CNtjyMiqf14oQJKvpykNUW__vscode-1775664418544",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:45:56]
+{
+    "timestamp":  "2026-04-08T16:45:56.006Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "kill_terminal",
+    "tool_input":  {
+                       "id":  "e7e11abd-fb51-4631-9953-9d4e8fdce558"
+                   },
+    "tool_use_id":  "toolu_bdrk_01LZh427WPFfCzewY9GJdgkT__vscode-1775664418545",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:46:03]
+{
+    "timestamp":  "2026-04-08T16:46:03.273Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "list_dir",
+    "tool_input":  {
+                       "path":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Controllers"
+                   },
+    "tool_use_id":  "toolu_bdrk_01G9CqW6yy6GFRgXJHXaPzHQ__vscode-1775664418546",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:46:03]
+{
+    "timestamp":  "2026-04-08T16:46:03.267Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "list_dir",
+    "tool_input":  {
+                       "path":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views"
+                   },
+    "tool_use_id":  "toolu_bdrk_01FeqgmoadmRzstHwHrXr2my__vscode-1775664418547",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:56:08]
+{
+    "timestamp":  "2026-04-08T16:56:08.485Z",
+    "hook_event_name":  "UserPromptSubmit",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "prompt":  "idemo dalje. sada na svakoj list stranici dodaj u tablicu entiteta uz svaki entitet gumb \"Details\" koji otvara novu stranicu koja prikazuju detalje specificnog entitea. naravno primjeni logiku kao i na dosadasnjem kodu. na details pageu prikazuju se svi podaci entiteta osim ID-a.pazi da ispunis sve zahtjeve",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:56:17]
+{
+    "timestamp":  "2026-04-08T16:56:16.763Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "read_file",
+    "tool_input":  {
+                       "endLine":  20,
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Controllers\\GamesController.cs",
+                       "startLine":  1
+                   },
+    "tool_use_id":  "toolu_bdrk_018BvF9eyoxDLBy4kdVFpZow__vscode-1775664418549",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:56:17]
+{
+    "timestamp":  "2026-04-08T16:56:16.768Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "read_file",
+    "tool_input":  {
+                       "endLine":  20,
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Controllers\\DevelopersController.cs",
+                       "startLine":  1
+                   },
+    "tool_use_id":  "toolu_bdrk_01BKUpAy7vCF4DYN2QUeF3JT__vscode-1775664418548",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:56:44]
+{
+    "timestamp":  "2026-04-08T16:56:43.747Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Controllers\\DevelopersController.cs",
+                       "oldString":  "        public IActionResult Index()\n        {\n            var developers = _developersRepository.GetAll();\n            return View(developers);\n        }\n    }",
+                       "newString":  "        public IActionResult Index()\n        {\n            var developers = _developersRepository.GetAll();\n            return View(developers);\n        }\n\n        public IActionResult Details(int id)\n        {\n            var developer = _developersRepository.GetById(id);\n            if (developer == null)\n                return NotFound();\n            return View(developer);\n        }\n    }"
+                   },
+    "tool_use_id":  "toolu_bdrk_017BxLcDWXPVUAfabgiMf9i6__vscode-1775664418552",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:56:44]
+{
+    "timestamp":  "2026-04-08T16:56:44.467Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Controllers\\GamesController.cs",
+                       "oldString":  "        public IActionResult Index()\n        {\n            var games = _gamesRepository.GetAll();\n            return View(games);\n        }\n    }",
+                       "newString":  "        public IActionResult Index()\n        {\n            var games = _gamesRepository.GetAll();\n            return View(games);\n        }\n\n        public IActionResult Details(int id)\n        {\n            var game = _gamesRepository.GetById(id);\n            if (game == null)\n                return NotFound();\n            return View(game);\n        }\n    }"
+                   },
+    "tool_use_id":  "toolu_bdrk_01LHkkmU3vk5jauM2rbmUwmx__vscode-1775664418553",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:56:45]
+{
+    "timestamp":  "2026-04-08T16:56:45.152Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Controllers\\GenresController.cs",
+                       "oldString":  "        public IActionResult Index()\n        {\n            var genres = _genresRepository.GetAll();\n            return View(genres);\n        }\n    }",
+                       "newString":  "        public IActionResult Index()\n        {\n            var genres = _genresRepository.GetAll();\n            return View(genres);\n        }\n\n        public IActionResult Details(int id)\n        {\n            var genre = _genresRepository.GetById(id);\n            if (genre == null)\n                return NotFound();\n            return View(genre);\n        }\n    }"
+                   },
+    "tool_use_id":  "toolu_bdrk_014C8H2GmbLfkzHqx81mRDgt__vscode-1775664418554",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:56:46]
+{
+    "timestamp":  "2026-04-08T16:56:45.957Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Controllers\\PlatformsController.cs",
+                       "oldString":  "        public IActionResult Index()\n        {\n            var platforms = _platformsRepository.GetAll();\n            return View(platforms);\n        }\n    }",
+                       "newString":  "        public IActionResult Index()\n        {\n            var platforms = _platformsRepository.GetAll();\n            return View(platforms);\n        }\n\n        public IActionResult Details(int id)\n        {\n            var platform = _platformsRepository.GetById(id);\n            if (platform == null)\n                return NotFound();\n            return View(platform);\n        }\n    }"
+                   },
+    "tool_use_id":  "toolu_bdrk_01V56yStbv2k3F5u4m46tDaV__vscode-1775664418555",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:56:47]
+{
+    "timestamp":  "2026-04-08T16:56:46.758Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Controllers\\UsersController.cs",
+                       "oldString":  "        public IActionResult Index()\n        {\n            var users = _usersRepository.GetAll();\n            return View(users);\n        }\n    }",
+                       "newString":  "        public IActionResult Index()\n        {\n            var users = _usersRepository.GetAll();\n            return View(users);\n        }\n\n        public IActionResult Details(int id)\n        {\n            var user = _usersRepository.GetById(id);\n            if (user == null)\n                return NotFound();\n            return View(user);\n        }\n    }"
+                   },
+    "tool_use_id":  "toolu_bdrk_01SrYa2gU1Q6EuiDmJMRbybv__vscode-1775664418556",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:56:47]
+{
+    "timestamp":  "2026-04-08T16:56:47.463Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Controllers\\ReviewsController.cs",
+                       "oldString":  "        public IActionResult Index()\n        {\n            var reviews = _reviewsRepository.GetAll();\n            return View(reviews);\n        }\n    }",
+                       "newString":  "        public IActionResult Index()\n        {\n            var reviews = _reviewsRepository.GetAll();\n            return View(reviews);\n        }\n\n        public IActionResult Details(int id)\n        {\n            var review = _reviewsRepository.GetById(id);\n            if (review == null)\n                return NotFound();\n            return View(review);\n        }\n    }"
+                   },
+    "tool_use_id":  "toolu_bdrk_016uKhQ6oZVLyMbGpuzfzSg9__vscode-1775664418557",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:56:48]
+{
+    "timestamp":  "2026-04-08T16:56:48.174Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Controllers\\GameEntriesController.cs",
+                       "oldString":  "        public IActionResult Index()\n        {\n            var gameEntries = _gameEntriesRepository.GetAll();\n            return View(gameEntries);\n        }\n    }",
+                       "newString":  "        public IActionResult Index()\n        {\n            var gameEntries = _gameEntriesRepository.GetAll();\n            return View(gameEntries);\n        }\n\n        public IActionResult Details(int id)\n        {\n            var gameEntry = _gameEntriesRepository.GetById(id);\n            if (gameEntry == null)\n                return NotFound();\n            return View(gameEntry);\n        }\n    }"
+                   },
+    "tool_use_id":  "toolu_bdrk_017uQWhntsBtmnHZJ8t88JHD__vscode-1775664418558",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:09]
+{
+    "timestamp":  "2026-04-08T16:57:09.068Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Developers\\Index.cshtml",
+                       "newString":  "@model List\u003cDeveloper\u003e\n\n@{\n    ViewData[\"Title\"] = \"Developers\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eName\u003c/th\u003e\n                \u003cth\u003eCountry\u003c/th\u003e\n                \u003cth\u003eFounded\u003c/th\u003e\n                \u003cth\u003eGames Count\u003c/th\u003e\n                \u003cth\u003eActions\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var developer in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@developer.Id\u003c/td\u003e\n                    \u003ctd\u003e@developer.Name\u003c/td\u003e\n                    \u003ctd\u003e@developer.Country\u003c/td\u003e\n                    \u003ctd\u003e@developer.Founded.Year\u003c/td\u003e\n                    \u003ctd\u003e\u003cspan class=\"badge bg-info\"\u003e@developer.Games.Count\u003c/span\u003e\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003ca asp-controller=\"Developers\" asp-action=\"Details\" asp-route-id=\"@developer.Id\" class=\"btn btn-sm btn-primary\"\u003eDetails\u003c/a\u003e\n                    \u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e",
+                       "oldString":  "@model List\u003cDeveloper\u003e\n\n@{\n    ViewData[\"Title\"] = \"Developers\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eName\u003c/th\u003e\n                \u003cth\u003eCountry\u003c/th\u003e\n                \u003cth\u003eFounded\u003c/th\u003e\n                \u003cth\u003eGames Count\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var developer in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@developer.Id\u003c/td\u003e\n                    \u003ctd\u003e@developer.Name\u003c/td\u003e\n                    \u003ctd\u003e@developer.Country\u003c/td\u003e\n                    \u003ctd\u003e@developer.Founded.Year\u003c/td\u003e\n                    \u003ctd\u003e\u003cspan class=\"badge bg-info\"\u003e@developer.Games.Count\u003c/span\u003e\u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e"
+                   },
+    "tool_use_id":  "toolu_bdrk_013DAnPKqyEfMA2pUbsn1nBs__vscode-1775664418559",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:10]
+{
+    "timestamp":  "2026-04-08T16:57:09.804Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Games\\Index.cshtml",
+                       "newString":  "@model List\u003cGame\u003e\n\n@{\n    ViewData[\"Title\"] = \"Games\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eTitle\u003c/th\u003e\n                \u003cth\u003eRelease Year\u003c/th\u003e\n                \u003cth\u003eDeveloper\u003c/th\u003e\n                \u003cth\u003eRating\u003c/th\u003e\n                \u003cth\u003ePlatforms\u003c/th\u003e\n                \u003cth\u003eActions\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var game in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@game.Id\u003c/td\u003e\n                    \u003ctd\u003e@game.Title\u003c/td\u003e\n                    \u003ctd\u003e@game.ReleaseYear\u003c/td\u003e\n                    \u003ctd\u003e@game.Developer?.Name\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003cspan class=\"badge bg-success\"\u003e@game.AverageRating/100\u003c/span\u003e\n                    \u003c/td\u003e\n                    \u003ctd\u003e@string.Join(\", \", game.Platforms.Select(p =\u003e p.Name))\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003ca asp-controller=\"Games\" asp-action=\"Details\" asp-route-id=\"@game.Id\" class=\"btn btn-sm btn-primary\"\u003eDetails\u003c/a\u003e\n                    \u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e",
+                       "oldString":  "@model List\u003cGame\u003e\n\n@{\n    ViewData[\"Title\"] = \"Games\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eTitle\u003c/th\u003e\n                \u003cth\u003eRelease Year\u003c/th\u003e\n                \u003cth\u003eDeveloper\u003c/th\u003e\n                \u003cth\u003eRating\u003c/th\u003e\n                \u003cth\u003ePlatforms\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var game in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@game.Id\u003c/td\u003e\n                    \u003ctd\u003e@game.Title\u003c/td\u003e\n                    \u003ctd\u003e@game.ReleaseYear\u003c/td\u003e\n                    \u003ctd\u003e@game.Developer?.Name\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003cspan class=\"badge bg-success\"\u003e@game.AverageRating/100\u003c/span\u003e\n                    \u003c/td\u003e\n                    \u003ctd\u003e@string.Join(\", \", game.Platforms.Select(p =\u003e p.Name))\u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e"
+                   },
+    "tool_use_id":  "toolu_bdrk_01FvzoexPJeSSkK7WkCV3wce__vscode-1775664418560",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:10]
+{
+    "timestamp":  "2026-04-08T16:57:10.532Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Genres\\Index.cshtml",
+                       "newString":  "@model List\u003cGenre\u003e\n\n@{\n    ViewData[\"Title\"] = \"Genres\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eName\u003c/th\u003e\n                \u003cth\u003eGames Count\u003c/th\u003e\n                \u003cth\u003eActions\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var genre in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@genre.Id\u003c/td\u003e\n                    \u003ctd\u003e@genre.Name\u003c/td\u003e\n                    \u003ctd\u003e\u003cspan class=\"badge bg-info\"\u003e@genre.Games.Count\u003c/span\u003e\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003ca asp-controller=\"Genres\" asp-action=\"Details\" asp-route-id=\"@genre.Id\" class=\"btn btn-sm btn-primary\"\u003eDetails\u003c/a\u003e\n                    \u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e",
+                       "oldString":  "@model List\u003cGenre\u003e\n\n@{\n    ViewData[\"Title\"] = \"Genres\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eName\u003c/th\u003e\n                \u003cth\u003eGames Count\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var genre in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@genre.Id\u003c/td\u003e\n                    \u003ctd\u003e@genre.Name\u003c/td\u003e\n                    \u003ctd\u003e\u003cspan class=\"badge bg-info\"\u003e@genre.Games.Count\u003c/span\u003e\u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e"
+                   },
+    "tool_use_id":  "toolu_bdrk_017vnY2BrWhNm5nuaV6GVGkm__vscode-1775664418561",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:11]
+{
+    "timestamp":  "2026-04-08T16:57:11.246Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Platforms\\Index.cshtml",
+                       "newString":  "@model List\u003cPlatform\u003e\n\n@{\n    ViewData[\"Title\"] = \"Platforms\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eName\u003c/th\u003e\n                \u003cth\u003eType\u003c/th\u003e\n                \u003cth\u003eGames Count\u003c/th\u003e\n                \u003cth\u003eActions\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var platform in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@platform.Id\u003c/td\u003e\n                    \u003ctd\u003e@platform.Name\u003c/td\u003e\n                    \u003ctd\u003e@platform.Type\u003c/td\u003e\n                    \u003ctd\u003e\u003cspan class=\"badge bg-info\"\u003e@platform.Games.Count\u003c/span\u003e\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003ca asp-controller=\"Platforms\" asp-action=\"Details\" asp-route-id=\"@platform.Id\" class=\"btn btn-sm btn-primary\"\u003eDetails\u003c/a\u003e\n                    \u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e",
+                       "oldString":  "@model List\u003cPlatform\u003e\n\n@{\n    ViewData[\"Title\"] = \"Platforms\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eName\u003c/th\u003e\n                \u003cth\u003eType\u003c/th\u003e\n                \u003cth\u003eGames Count\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var platform in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@platform.Id\u003c/td\u003e\n                    \u003ctd\u003e@platform.Name\u003c/td\u003e\n                    \u003ctd\u003e@platform.Type\u003c/td\u003e\n                    \u003ctd\u003e\u003cspan class=\"badge bg-info\"\u003e@platform.Games.Count\u003c/span\u003e\u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e"
+                   },
+    "tool_use_id":  "toolu_bdrk_01FP8kWJd2sDbJwmGGrcjhyx__vscode-1775664418562",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:12]
+{
+    "timestamp":  "2026-04-08T16:57:12.048Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Users\\Index.cshtml",
+                       "newString":  "@model List\u003cUser\u003e\n\n@{\n    ViewData[\"Title\"] = \"Users\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eUsername\u003c/th\u003e\n                \u003cth\u003eEmail\u003c/th\u003e\n                \u003cth\u003eRegistered At\u003c/th\u003e\n                \u003cth\u003eGame Entries\u003c/th\u003e\n                \u003cth\u003eActions\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var user in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@user.Id\u003c/td\u003e\n                    \u003ctd\u003e@user.Username\u003c/td\u003e\n                    \u003ctd\u003e@user.Email\u003c/td\u003e\n                    \u003ctd\u003e@user.RegisteredAt.ToString(\"dd/MM/yyyy\")\u003c/td\u003e\n                    \u003ctd\u003e\u003cspan class=\"badge bg-info\"\u003e@user.GameEntries.Count\u003c/span\u003e\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003ca asp-controller=\"Users\" asp-action=\"Details\" asp-route-id=\"@user.Id\" class=\"btn btn-sm btn-primary\"\u003eDetails\u003c/a\u003e\n                    \u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e",
+                       "oldString":  "@model List\u003cUser\u003e\n\n@{\n    ViewData[\"Title\"] = \"Users\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eUsername\u003c/th\u003e\n                \u003cth\u003eEmail\u003c/th\u003e\n                \u003cth\u003eRegistered At\u003c/th\u003e\n                \u003cth\u003eGame Entries\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var user in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@user.Id\u003c/td\u003e\n                    \u003ctd\u003e@user.Username\u003c/td\u003e\n                    \u003ctd\u003e@user.Email\u003c/td\u003e\n                    \u003ctd\u003e@user.RegisteredAt.ToString(\"dd/MM/yyyy\")\u003c/td\u003e\n                    \u003ctd\u003e\u003cspan class=\"badge bg-info\"\u003e@user.GameEntries.Count\u003c/span\u003e\u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e"
+                   },
+    "tool_use_id":  "toolu_bdrk_01TMYyJ5Lff81V5DMy6aAh3H__vscode-1775664418563",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:13]
+{
+    "timestamp":  "2026-04-08T16:57:12.782Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Reviews\\Index.cshtml",
+                       "newString":  "@model List\u003cReview\u003e\n\n@{\n    ViewData[\"Title\"] = \"Reviews\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eGame\u003c/th\u003e\n                \u003cth\u003eUser\u003c/th\u003e\n                \u003cth\u003eScore\u003c/th\u003e\n                \u003cth\u003eCreated At\u003c/th\u003e\n                \u003cth\u003eActions\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var review in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@review.Id\u003c/td\u003e\n                    \u003ctd\u003e@review.Game?.Title\u003c/td\u003e\n                    \u003ctd\u003e@review.User?.Username\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003cspan class=\"badge bg-warning\"\u003e@review.Score/100\u003c/span\u003e\n                    \u003c/td\u003e\n                    \u003ctd\u003e@review.CreatedAt.ToString(\"dd/MM/yyyy\")\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003ca asp-controller=\"Reviews\" asp-action=\"Details\" asp-route-id=\"@review.Id\" class=\"btn btn-sm btn-primary\"\u003eDetails\u003c/a\u003e\n                    \u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e",
+                       "oldString":  "@model List\u003cReview\u003e\n\n@{\n    ViewData[\"Title\"] = \"Reviews\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eGame\u003c/th\u003e\n                \u003cth\u003eUser\u003c/th\u003e\n                \u003cth\u003eScore\u003c/th\u003e\n                \u003cth\u003eCreated At\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var review in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@review.Id\u003c/td\u003e\n                    \u003ctd\u003e@review.Game?.Title\u003c/td\u003e\n                    \u003ctd\u003e@review.User?.Username\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003cspan class=\"badge bg-warning\"\u003e@review.Score/100\u003c/span\u003e\n                    \u003c/td\u003e\n                    \u003ctd\u003e@review.CreatedAt.ToString(\"dd/MM/yyyy\")\u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e"
+                   },
+    "tool_use_id":  "toolu_bdrk_01YUN8dgz5ZUmLW7NTn8bn4B__vscode-1775664418564",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:14]
+{
+    "timestamp":  "2026-04-08T16:57:13.732Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "replace_string_in_file",
+    "tool_input":  {
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\GameEntries\\Index.cshtml",
+                       "newString":  "@model List\u003cGameEntry\u003e\n\n@{\n    ViewData[\"Title\"] = \"Game Entries\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eGame\u003c/th\u003e\n                \u003cth\u003eUser\u003c/th\u003e\n                \u003cth\u003eStatus\u003c/th\u003e\n                \u003cth\u003eHours Played\u003c/th\u003e\n                \u003cth\u003eDate Added\u003c/th\u003e\n                \u003cth\u003eActions\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var entry in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@entry.Id\u003c/td\u003e\n                    \u003ctd\u003e@entry.Game?.Title\u003c/td\u003e\n                    \u003ctd\u003e@entry.User?.Username\u003c/td\u003e\n                    \u003ctd\u003e\u003cspan class=\"badge bg-secondary\"\u003e@entry.Status\u003c/span\u003e\u003c/td\u003e\n                    \u003ctd\u003e@entry.HoursPlayed\u003c/td\u003e\n                    \u003ctd\u003e@entry.DateAdded.ToString(\"dd/MM/yyyy\")\u003c/td\u003e\n                    \u003ctd\u003e\n                        \u003ca asp-controller=\"GameEntries\" asp-action=\"Details\" asp-route-id=\"@entry.Id\" class=\"btn btn-sm btn-primary\"\u003eDetails\u003c/a\u003e\n                    \u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e",
+                       "oldString":  "@model List\u003cGameEntry\u003e\n\n@{\n    ViewData[\"Title\"] = \"Game Entries\";\n}\n\n\u003ch1\u003e@ViewData[\"Title\"]\u003c/h1\u003e\n\n\u003cdiv class=\"table-responsive\"\u003e\n    \u003ctable class=\"table table-striped table-hover\"\u003e\n        \u003cthead class=\"table-dark\"\u003e\n            \u003ctr\u003e\n                \u003cth\u003eID\u003c/th\u003e\n                \u003cth\u003eGame\u003c/th\u003e\n                \u003cth\u003eUser\u003c/th\u003e\n                \u003cth\u003eStatus\u003c/th\u003e\n                \u003cth\u003eHours Played\u003c/th\u003e\n                \u003cth\u003eDate Added\u003c/th\u003e\n            \u003c/tr\u003e\n        \u003c/thead\u003e\n        \u003ctbody\u003e\n            @foreach (var entry in Model)\n            {\n                \u003ctr\u003e\n                    \u003ctd\u003e@entry.Id\u003c/td\u003e\n                    \u003ctd\u003e@entry.Game?.Title\u003c/td\u003e\n                    \u003ctd\u003e@entry.User?.Username\u003c/td\u003e\n                    \u003ctd\u003e\u003cspan class=\"badge bg-secondary\"\u003e@entry.Status\u003c/span\u003e\u003c/td\u003e\n                    \u003ctd\u003e@entry.HoursPlayed\u003c/td\u003e\n                    \u003ctd\u003e@entry.DateAdded.ToString(\"dd/MM/yyyy\")\u003c/td\u003e\n                \u003c/tr\u003e\n            }\n        \u003c/tbody\u003e\n    \u003c/table\u003e\n\u003c/div\u003e"
+                   },
+    "tool_use_id":  "toolu_bdrk_01WRgMGFXNTNTix6tapGwjwx__vscode-1775664418565",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:34]
+{
+    "timestamp":  "2026-04-08T16:57:33.609Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "content":  "@model Developer\n\n@{\n    ViewData[\"Title\"] = \"Developer Details\";\n}\n\n\u003ch1\u003e@Model.Name\u003c/h1\u003e\n\n\u003cdiv class=\"card\"\u003e\n    \u003cdiv class=\"card-body\"\u003e\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-md-6\"\u003e\n                \u003ch5\u003eCountry\u003c/h5\u003e\n                \u003cp\u003e@Model.Country\u003c/p\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"col-md-6\"\u003e\n                \u003ch5\u003eFounded\u003c/h5\u003e\n                \u003cp\u003e@Model.Founded.ToString(\"dd/MM/yyyy\")\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-12\"\u003e\n                \u003ch5\u003eDescription\u003c/h5\u003e\n                \u003cp\u003e@Model.Description\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        @if (Model.Games.Any())\n        {\n            \u003cdiv class=\"row\"\u003e\n                \u003cdiv class=\"col-12\"\u003e\n                    \u003ch5\u003eGames\u003c/h5\u003e\n                    \u003cul class=\"list-group\"\u003e\n                        @foreach (var game in Model.Games)\n                        {\n                            \u003cli class=\"list-group-item\"\u003e\n                                \u003ca asp-controller=\"Games\" asp-action=\"Details\" asp-route-id=\"@game.Id\"\u003e@game.Title\u003c/a\u003e\n                            \u003c/li\u003e\n                        }\n                    \u003c/ul\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        }\n    \u003c/div\u003e\n\u003c/div\u003e\n\n\u003cdiv class=\"mt-3\"\u003e\n    \u003ca asp-controller=\"Developers\" asp-action=\"Index\" class=\"btn btn-secondary\"\u003eBack to List\u003c/a\u003e\n\u003c/div\u003e\n",
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Developers\\Details.cshtml"
+                   },
+    "tool_use_id":  "toolu_bdrk_01CFtyhmPPkhqdj3tZ4EHb5U__vscode-1775664418566",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:34]
+{
+    "timestamp":  "2026-04-08T16:57:34.347Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "content":  "@model Game\n\n@{\n    ViewData[\"Title\"] = \"Game Details\";\n}\n\n\u003ch1\u003e@Model.Title\u003c/h1\u003e\n\n\u003cdiv class=\"card\"\u003e\n    \u003cdiv class=\"card-body\"\u003e\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-md-4\"\u003e\n                \u003ch5\u003eDeveloper\u003c/h5\u003e\n                \u003cp\u003e\n                    @if (Model.Developer != null)\n                    {\n                        \u003ca asp-controller=\"Developers\" asp-action=\"Details\" asp-route-id=\"@Model.Developer.Id\"\u003e\n                            @Model.Developer.Name\n                        \u003c/a\u003e\n                    }\n                \u003c/p\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"col-md-4\"\u003e\n                \u003ch5\u003eRelease Year\u003c/h5\u003e\n                \u003cp\u003e@Model.ReleaseYear\u003c/p\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"col-md-4\"\u003e\n                \u003ch5\u003eAverage Rating\u003c/h5\u003e\n                \u003cp\u003e\u003cspan class=\"badge bg-success\"\u003e@Model.AverageRating/100\u003c/span\u003e\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-12\"\u003e\n                \u003ch5\u003eDescription\u003c/h5\u003e\n                \u003cp\u003e@Model.Description\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        @if (Model.Genres.Any())\n        {\n            \u003cdiv class=\"row mb-3\"\u003e\n                \u003cdiv class=\"col-12\"\u003e\n                    \u003ch5\u003eGenres\u003c/h5\u003e\n                    \u003cdiv\u003e\n                        @foreach (var genre in Model.Genres)\n                        {\n                            \u003cspan class=\"badge bg-info me-1\"\u003e\n                                \u003ca asp-controller=\"Genres\" asp-action=\"Details\" asp-route-id=\"@genre.Id\" style=\"color: white; text-decoration: none;\"\u003e\n                                    @genre.Name\n                                \u003c/a\u003e\n                            \u003c/span\u003e\n                        }\n                    \u003c/div\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        }\n\n        @if (Model.Platforms.Any())\n        {\n            \u003cdiv class=\"row mb-3\"\u003e\n                \u003cdiv class=\"col-12\"\u003e\n                    \u003ch5\u003ePlatforms\u003c/h5\u003e\n                    \u003cdiv\u003e\n                        @foreach (var platform in Model.Platforms)\n                        {\n                            \u003cspan class=\"badge bg-warning me-1\"\u003e\n                                \u003ca asp-controller=\"Platforms\" asp-action=\"Details\" asp-route-id=\"@platform.Id\" style=\"color: white; text-decoration: none;\"\u003e\n                                    @platform.Name\n                                \u003c/a\u003e\n                            \u003c/span\u003e\n                        }\n                    \u003c/div\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        }\n\n        @if (Model.Reviews.Any())\n        {\n            \u003cdiv class=\"row\"\u003e\n                \u003cdiv class=\"col-12\"\u003e\n                    \u003ch5\u003eReviews (@Model.Reviews.Count)\u003c/h5\u003e\n                    \u003cul class=\"list-group\"\u003e\n                        @foreach (var review in Model.Reviews)\n                        {\n                            \u003cli class=\"list-group-item\"\u003e\n                                \u003cdiv\u003e\n                                    \u003cstrong\u003e@review.User?.Username\u003c/strong\u003e\n                                    \u003cspan class=\"badge bg-warning ms-2\"\u003e@review.Score/100\u003c/span\u003e\n                                \u003c/div\u003e\n                                \u003csmall\u003e@review.CreatedAt.ToString(\"dd/MM/yyyy\")\u003c/small\u003e\n                                \u003cp class=\"mt-2\"\u003e@review.Comment\u003c/p\u003e\n                            \u003c/li\u003e\n                        }\n                    \u003c/ul\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        }\n    \u003c/div\u003e\n\u003c/div\u003e\n\n\u003cdiv class=\"mt-3\"\u003e\n    \u003ca asp-controller=\"Games\" asp-action=\"Index\" class=\"btn btn-secondary\"\u003eBack to List\u003c/a\u003e\n\u003c/div\u003e\n",
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Games\\Details.cshtml"
+                   },
+    "tool_use_id":  "toolu_bdrk_01REtJkyQrazv1WVJ4hB8ist__vscode-1775664418567",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:35]
+{
+    "timestamp":  "2026-04-08T16:57:35.071Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "content":  "@model Genre\n\n@{\n    ViewData[\"Title\"] = \"Genre Details\";\n}\n\n\u003ch1\u003e@Model.Name\u003c/h1\u003e\n\n\u003cdiv class=\"card\"\u003e\n    \u003cdiv class=\"card-body\"\u003e\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-12\"\u003e\n                \u003ch5\u003eDescription\u003c/h5\u003e\n                \u003cp\u003e@Model.Description\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        @if (Model.Games.Any())\n        {\n            \u003cdiv class=\"row\"\u003e\n                \u003cdiv class=\"col-12\"\u003e\n                    \u003ch5\u003eGames in this Genre\u003c/h5\u003e\n                    \u003cul class=\"list-group\"\u003e\n                        @foreach (var game in Model.Games)\n                        {\n                            \u003cli class=\"list-group-item\"\u003e\n                                \u003ca asp-controller=\"Games\" asp-action=\"Details\" asp-route-id=\"@game.Id\"\u003e@game.Title\u003c/a\u003e\n                            \u003c/li\u003e\n                        }\n                    \u003c/ul\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        }\n    \u003c/div\u003e\n\u003c/div\u003e\n\n\u003cdiv class=\"mt-3\"\u003e\n    \u003ca asp-controller=\"Genres\" asp-action=\"Index\" class=\"btn btn-secondary\"\u003eBack to List\u003c/a\u003e\n\u003c/div\u003e\n",
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Genres\\Details.cshtml"
+                   },
+    "tool_use_id":  "toolu_bdrk_01H5kkFgvrptSw8r8PnnUNEW__vscode-1775664418568",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:36]
+{
+    "timestamp":  "2026-04-08T16:57:35.998Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "content":  "@model Platform\n\n@{\n    ViewData[\"Title\"] = \"Platform Details\";\n}\n\n\u003ch1\u003e@Model.Name\u003c/h1\u003e\n\n\u003cdiv class=\"card\"\u003e\n    \u003cdiv class=\"card-body\"\u003e\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-12\"\u003e\n                \u003ch5\u003eType\u003c/h5\u003e\n                \u003cp\u003e@Model.Type\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        @if (Model.Games.Any())\n        {\n            \u003cdiv class=\"row\"\u003e\n                \u003cdiv class=\"col-12\"\u003e\n                    \u003ch5\u003eGames on this Platform\u003c/h5\u003e\n                    \u003cul class=\"list-group\"\u003e\n                        @foreach (var game in Model.Games)\n                        {\n                            \u003cli class=\"list-group-item\"\u003e\n                                \u003ca asp-controller=\"Games\" asp-action=\"Details\" asp-route-id=\"@game.Id\"\u003e@game.Title\u003c/a\u003e\n                            \u003c/li\u003e\n                        }\n                    \u003c/ul\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        }\n    \u003c/div\u003e\n\u003c/div\u003e\n\n\u003cdiv class=\"mt-3\"\u003e\n    \u003ca asp-controller=\"Platforms\" asp-action=\"Index\" class=\"btn btn-secondary\"\u003eBack to List\u003c/a\u003e\n\u003c/div\u003e\n",
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Platforms\\Details.cshtml"
+                   },
+    "tool_use_id":  "toolu_bdrk_01CrpdmREN5AdVAduK2kUssu__vscode-1775664418569",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:37]
+{
+    "timestamp":  "2026-04-08T16:57:37.124Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "content":  "@model User\n\n@{\n    ViewData[\"Title\"] = \"User Details\";\n}\n\n\u003ch1\u003e@Model.Username\u003c/h1\u003e\n\n\u003cdiv class=\"card\"\u003e\n    \u003cdiv class=\"card-body\"\u003e\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-md-6\"\u003e\n                \u003ch5\u003eEmail\u003c/h5\u003e\n                \u003cp\u003e@Model.Email\u003c/p\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"col-md-6\"\u003e\n                \u003ch5\u003eRegistered At\u003c/h5\u003e\n                \u003cp\u003e@Model.RegisteredAt.ToString(\"dd/MM/yyyy\")\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        @if (Model.GameEntries.Any())\n        {\n            \u003cdiv class=\"row\"\u003e\n                \u003cdiv class=\"col-12\"\u003e\n                    \u003ch5\u003eGame Entries (@Model.GameEntries.Count)\u003c/h5\u003e\n                    \u003cul class=\"list-group\"\u003e\n                        @foreach (var entry in Model.GameEntries)\n                        {\n                            \u003cli class=\"list-group-item\"\u003e\n                                \u003cdiv\u003e\n                                    \u003cstrong\u003e\n                                        \u003ca asp-controller=\"Games\" asp-action=\"Details\" asp-route-id=\"@entry.Game?.Id\"\u003e\n                                            @entry.Game?.Title\n                                        \u003c/a\u003e\n                                    \u003c/strong\u003e\n                                    \u003cspan class=\"badge bg-secondary ms-2\"\u003e@entry.Status\u003c/span\u003e\n                                \u003c/div\u003e\n                                \u003csmall\u003e@entry.HoursPlayed hours played - Added: @entry.DateAdded.ToString(\"dd/MM/yyyy\")\u003c/small\u003e\n                            \u003c/li\u003e\n                        }\n                    \u003c/ul\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        }\n    \u003c/div\u003e\n\u003c/div\u003e\n\n\u003cdiv class=\"mt-3\"\u003e\n    \u003ca asp-controller=\"Users\" asp-action=\"Index\" class=\"btn btn-secondary\"\u003eBack to List\u003c/a\u003e\n\u003c/div\u003e\n",
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Users\\Details.cshtml"
+                   },
+    "tool_use_id":  "toolu_bdrk_016DNspMHhcVir3ru6b9vHPe__vscode-1775664418570",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:38]
+{
+    "timestamp":  "2026-04-08T16:57:38.244Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "content":  "@model Review\n\n@{\n    ViewData[\"Title\"] = \"Review Details\";\n}\n\n\u003ch1\u003eReview\u003c/h1\u003e\n\n\u003cdiv class=\"card\"\u003e\n    \u003cdiv class=\"card-body\"\u003e\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-md-6\"\u003e\n                \u003ch5\u003eGame\u003c/h5\u003e\n                \u003cp\u003e\n                    @if (Model.Game != null)\n                    {\n                        \u003ca asp-controller=\"Games\" asp-action=\"Details\" asp-route-id=\"@Model.Game.Id\"\u003e\n                            @Model.Game.Title\n                        \u003c/a\u003e\n                    }\n                \u003c/p\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"col-md-6\"\u003e\n                \u003ch5\u003eUser\u003c/h5\u003e\n                \u003cp\u003e\n                    @if (Model.User != null)\n                    {\n                        \u003ca asp-controller=\"Users\" asp-action=\"Details\" asp-route-id=\"@Model.User.Id\"\u003e\n                            @Model.User.Username\n                        \u003c/a\u003e\n                    }\n                \u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-md-6\"\u003e\n                \u003ch5\u003eScore\u003c/h5\u003e\n                \u003cp\u003e\u003cspan class=\"badge bg-warning\"\u003e@Model.Score/100\u003c/span\u003e\u003c/p\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"col-md-6\"\u003e\n                \u003ch5\u003eCreated At\u003c/h5\u003e\n                \u003cp\u003e@Model.CreatedAt.ToString(\"dd/MM/yyyy\")\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-12\"\u003e\n                \u003ch5\u003eComment\u003c/h5\u003e\n                \u003cp\u003e@Model.Comment\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n\u003c/div\u003e\n\n\u003cdiv class=\"mt-3\"\u003e\n    \u003ca asp-controller=\"Reviews\" asp-action=\"Index\" class=\"btn btn-secondary\"\u003eBack to List\u003c/a\u003e\n\u003c/div\u003e\n",
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\Reviews\\Details.cshtml"
+                   },
+    "tool_use_id":  "toolu_bdrk_01SW8sfJ42UNqf7CXFNWFj1H__vscode-1775664418571",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:39]
+{
+    "timestamp":  "2026-04-08T16:57:39.271Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "create_file",
+    "tool_input":  {
+                       "content":  "@model GameEntry\n\n@{\n    ViewData[\"Title\"] = \"Game Entry Details\";\n}\n\n\u003ch1\u003eGame Entry\u003c/h1\u003e\n\n\u003cdiv class=\"card\"\u003e\n    \u003cdiv class=\"card-body\"\u003e\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-md-6\"\u003e\n                \u003ch5\u003eGame\u003c/h5\u003e\n                \u003cp\u003e\n                    @if (Model.Game != null)\n                    {\n                        \u003ca asp-controller=\"Games\" asp-action=\"Details\" asp-route-id=\"@Model.Game.Id\"\u003e\n                            @Model.Game.Title\n                        \u003c/a\u003e\n                    }\n                \u003c/p\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"col-md-6\"\u003e\n                \u003ch5\u003eUser\u003c/h5\u003e\n                \u003cp\u003e\n                    @if (Model.User != null)\n                    {\n                        \u003ca asp-controller=\"Users\" asp-action=\"Details\" asp-route-id=\"@Model.User.Id\"\u003e\n                            @Model.User.Username\n                        \u003c/a\u003e\n                    }\n                \u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        \u003cdiv class=\"row mb-3\"\u003e\n            \u003cdiv class=\"col-md-4\"\u003e\n                \u003ch5\u003eStatus\u003c/h5\u003e\n                \u003cp\u003e\u003cspan class=\"badge bg-secondary\"\u003e@Model.Status\u003c/span\u003e\u003c/p\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"col-md-4\"\u003e\n                \u003ch5\u003eHours Played\u003c/h5\u003e\n                \u003cp\u003e@Model.HoursPlayed\u003c/p\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"col-md-4\"\u003e\n                \u003ch5\u003eDate Added\u003c/h5\u003e\n                \u003cp\u003e@Model.DateAdded.ToString(\"dd/MM/yyyy\")\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n        @if (Model.Review != null)\n        {\n            \u003cdiv class=\"row mb-3\"\u003e\n                \u003cdiv class=\"col-12\"\u003e\n                    \u003ch5\u003eReview\u003c/h5\u003e\n                    \u003cdiv class=\"card bg-light\"\u003e\n                        \u003cdiv class=\"card-body\"\u003e\n                            \u003cp\u003e\n                                \u003cstrong\u003eScore:\u003c/strong\u003e\n                                \u003cspan class=\"badge bg-warning\"\u003e@Model.Review.Score/100\u003c/span\u003e\n                            \u003c/p\u003e\n                            \u003cp\u003e\n                                \u003cstrong\u003eComment:\u003c/strong\u003e\n                                @Model.Review.Comment\n                            \u003c/p\u003e\n                            \u003cp\u003e\n                                \u003cstrong\u003eCreated:\u003c/strong\u003e\n                                @Model.Review.CreatedAt.ToString(\"dd/MM/yyyy\")\n                            \u003c/p\u003e\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        }\n    \u003c/div\u003e\n\u003c/div\u003e\n\n\u003cdiv class=\"mt-3\"\u003e\n    \u003ca asp-controller=\"GameEntries\" asp-action=\"Index\" class=\"btn btn-secondary\"\u003eBack to List\u003c/a\u003e\n\u003c/div\u003e\n",
+                       "filePath":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker\\Views\\GameEntries\\Details.cshtml"
+                   },
+    "tool_use_id":  "toolu_bdrk_015nQsdoujVsEqp8LvnvPNv2__vscode-1775664418572",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:57:44]
+{
+    "timestamp":  "2026-04-08T16:57:44.507Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "run_task",
+    "tool_input":  {
+                       "id":  "process: build",
+                       "workspaceFolder":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+                   },
+    "tool_use_id":  "toolu_bdrk_01MHz5kw7gzwXYdsw7aoy4Wj__vscode-1775664418573",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:58:00]
+{
+    "timestamp":  "2026-04-08T16:58:00.540Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "run_in_terminal",
+    "tool_input":  {
+                       "command":  "cd c:\\Users\\Martin\\source\\repos\\VideoGameTracker\\VideoGameTracker; dotnet run",
+                       "explanation":  "Pokretanje web aplikacije za testiranje Details stranica",
+                       "goal":  "Testirati da Details stranice i linkovi rade ispravno",
+                       "isBackground":  true,
+                       "timeout":  10000
+                   },
+    "tool_use_id":  "toolu_bdrk_017cy6YsUGpY7FJ86H2nvDM9__vscode-1775664418574",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:58:29]
+{
+    "timestamp":  "2026-04-08T16:58:29.005Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "get_terminal_output",
+    "tool_input":  {
+                       "id":  "0aea5f42-53c0-4731-92ff-e17a55775482"
+                   },
+    "tool_use_id":  "toolu_bdrk_01SnwJuydgDPMjQZEMfhBhH2__vscode-1775664418575",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:58:33]
+{
+    "timestamp":  "2026-04-08T16:58:33.630Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "open_browser_page",
+    "tool_input":  {
+                       "url":  "http://localhost:5207/Games/Index"
+                   },
+    "tool_use_id":  "toolu_bdrk_01BQ9FMBDVqLJRzhpYhghpi9__vscode-1775664418576",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+
+[2026-04-08 18:58:39]
+{
+    "timestamp":  "2026-04-08T16:58:38.705Z",
+    "hook_event_name":  "PreToolUse",
+    "session_id":  "675aaef0-e624-45b6-bec9-cf7de9ed6324",
+    "transcript_path":  "c:\\Users\\Martin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\59d6a8b055a0c495d68725b74ee87174\\GitHub.copilot-chat\\transcripts\\675aaef0-e624-45b6-bec9-cf7de9ed6324.jsonl",
+    "tool_name":  "kill_terminal",
+    "tool_input":  {
+                       "id":  "0aea5f42-53c0-4731-92ff-e17a55775482"
+                   },
+    "tool_use_id":  "toolu_bdrk_01U3vVQSjTjr83RHqSEGP41d__vscode-1775664418577",
+    "cwd":  "c:\\Users\\Martin\\source\\repos\\VideoGameTracker"
+}
+---
+

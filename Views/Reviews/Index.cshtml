@@ -1,0 +1,39 @@
+@model List<Review>
+
+@{
+    ViewData["Title"] = "Reviews";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Game</th>
+                <th>User</th>
+                <th>Score</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model)
+            {
+                <tr>
+                    <td>@review.Id</td>
+                    <td>@review.Game?.Title</td>
+                    <td>@review.User?.Username</td>
+                    <td>
+                        <span class="badge bg-warning">@review.Score/100</span>
+                    </td>
+                    <td>@review.CreatedAt.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <a asp-controller="Reviews" asp-action="Details" asp-route-id="@review.Id" class="btn btn-sm btn-primary">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,104 @@
+@model Game
+
+@{
+    ViewData["Title"] = "Game Details";
+}
+
+<h1>@Model.Title</h1>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <h5>Developer</h5>
+                <p>
+                    @if (Model.Developer != null)
+                    {
+                        <a asp-controller="Developers" asp-action="Details" asp-route-id="@Model.Developer.Id">
+                            @Model.Developer.Name
+                        </a>
+                    }
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h5>Release Year</h5>
+                <p>@Model.ReleaseYear</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Average Rating</h5>
+                <p><span class="badge bg-success">@Model.AverageRating/100</span></p>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <h5>Description</h5>
+                <p>@Model.Description</p>
+            </div>
+        </div>
+
+        @if (Model.Genres.Any())
+        {
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h5>Genres</h5>
+                    <div>
+                        @foreach (var genre in Model.Genres)
+                        {
+                            <span class="badge bg-info me-1">
+                                <a asp-controller="Genres" asp-action="Details" asp-route-id="@genre.Id" style="color: white; text-decoration: none;">
+                                    @genre.Name
+                                </a>
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.Platforms.Any())
+        {
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h5>Platforms</h5>
+                    <div>
+                        @foreach (var platform in Model.Platforms)
+                        {
+                            <span class="badge bg-warning me-1">
+                                <a asp-controller="Platforms" asp-action="Details" asp-route-id="@platform.Id" style="color: white; text-decoration: none;">
+                                    @platform.Name
+                                </a>
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.Reviews.Any())
+        {
+            <div class="row">
+                <div class="col-12">
+                    <h5>Reviews (@Model.Reviews.Count)</h5>
+                    <ul class="list-group">
+                        @foreach (var review in Model.Reviews)
+                        {
+                            <li class="list-group-item">
+                                <div>
+                                    <strong>@review.User?.Username</strong>
+                                    <span class="badge bg-warning ms-2">@review.Score/100</span>
+                                </div>
+                                <small>@review.CreatedAt.ToString("dd/MM/yyyy")</small>
+                                <p class="mt-2">@review.Comment</p>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-controller="Games" asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

@@ -1,0 +1,41 @@
+@model List<Game>
+
+@{
+    ViewData["Title"] = "Games";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Release Year</th>
+                <th>Developer</th>
+                <th>Rating</th>
+                <th>Platforms</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model)
+            {
+                <tr>
+                    <td>@game.Id</td>
+                    <td>@game.Title</td>
+                    <td>@game.ReleaseYear</td>
+                    <td>@game.Developer?.Name</td>
+                    <td>
+                        <span class="badge bg-success">@game.AverageRating/100</span>
+                    </td>
+                    <td>@string.Join(", ", game.Platforms.Select(p => p.Name))</td>
+                    <td>
+                        <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id" class="btn btn-sm btn-primary">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
