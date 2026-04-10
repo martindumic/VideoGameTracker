@@ -23,18 +23,18 @@ public class GamesMockRepository
 
     private List<Game> InitializeGames()
     {
-        var developer1 = _developersRepo.GetById(1);
-        var developer2 = _developersRepo.GetById(2);
-        var developer3 = _developersRepo.GetById(3);
+        var developer1 = _developersRepo.GetById(1) ?? new Developer();
+        var developer2 = _developersRepo.GetById(2) ?? new Developer();
+        var developer3 = _developersRepo.GetById(3) ?? new Developer();
 
-        var genreRPG = _genresRepo.GetById(1);
-        var genreAction = _genresRepo.GetById(2);
-        var genreFPS = _genresRepo.GetById(3);
-        var genreAdventure = _genresRepo.GetById(4);
+        var genreRPG = _genresRepo.GetById(1) ?? new Genre();
+        var genreAction = _genresRepo.GetById(2) ?? new Genre();
+        var genreFPS = _genresRepo.GetById(3) ?? new Genre();
+        var genreAdventure = _genresRepo.GetById(4) ?? new Genre();
 
-        var platformPC = _platformsRepo.GetById(1);
-        var platformPS5 = _platformsRepo.GetById(2);
-        var platformXbox = _platformsRepo.GetById(3);
+        var platformPC = _platformsRepo.GetById(1) ?? new Platform();
+        var platformPS5 = _platformsRepo.GetById(2) ?? new Platform();
+        var platformXbox = _platformsRepo.GetById(3) ?? new Platform();
 
         var games = new List<Game>
         {
@@ -46,8 +46,8 @@ public class GamesMockRepository
                 Description = "Open-world RPG with rich storytelling and complex characters",
                 Developer = developer1,
                 AverageRating = 95,
-                Genres = new List<Genre> { genreRPG, genreAction, genreAdventure },
-                Platforms = new List<Platform> { platformPC, platformPS5, platformXbox },
+                Genres = new List<Genre> { genreRPG!, genreAction!, genreAdventure! },
+                Platforms = new List<Platform> { platformPC!, platformPS5!, platformXbox! },
                 Reviews = new List<Review>()
             },
             new Game
@@ -58,8 +58,8 @@ public class GamesMockRepository
                 Description = "Futuristic action RPG set in Night City",
                 Developer = developer1,
                 AverageRating = 77,
-                Genres = new List<Genre> { genreRPG, genreAction },
-                Platforms = new List<Platform> { platformPC, platformPS5, platformXbox },
+                Genres = new List<Genre> { genreRPG!, genreAction! },
+                Platforms = new List<Platform> { platformPC!, platformPS5!, platformXbox! },
                 Reviews = new List<Review>()
             },
             new Game
@@ -70,8 +70,8 @@ public class GamesMockRepository
                 Description = "Predecessor to The Witcher 3",
                 Developer = developer1,
                 AverageRating = 88,
-                Genres = new List<Genre> { genreRPG, genreAction },
-                Platforms = new List<Platform> { platformPC },
+                Genres = new List<Genre> { genreRPG!, genreAction! },
+                Platforms = new List<Platform> { platformPC! },
                 Reviews = new List<Review>()
             },
             new Game
@@ -82,8 +82,8 @@ public class GamesMockRepository
                 Description = "Open-world action game set in Los Santos",
                 Developer = developer2,
                 AverageRating = 97,
-                Genres = new List<Genre> { genreAction, genreAdventure },
-                Platforms = new List<Platform> { platformPC, platformPS5, platformXbox },
+                Genres = new List<Genre> { genreAction!, genreAdventure! },
+                Platforms = new List<Platform> { platformPC!, platformPS5!, platformXbox! },
                 Reviews = new List<Review>()
             },
             new Game
@@ -94,8 +94,8 @@ public class GamesMockRepository
                 Description = "Western action-adventure game",
                 Developer = developer2,
                 AverageRating = 97,
-                Genres = new List<Genre> { genreAction, genreAdventure },
-                Platforms = new List<Platform> { platformPC, platformPS5, platformXbox },
+                Genres = new List<Genre> { genreAction!, genreAdventure! },
+                Platforms = new List<Platform> { platformPC!, platformPS5!, platformXbox! },
                 Reviews = new List<Review>()
             },
             new Game
@@ -106,8 +106,8 @@ public class GamesMockRepository
                 Description = "Action game set in Liberty City",
                 Developer = developer2,
                 AverageRating = 94,
-                Genres = new List<Genre> { genreAction },
-                Platforms = new List<Platform> { platformPC, platformXbox },
+                Genres = new List<Genre> { genreAction! },
+                Platforms = new List<Platform> { platformPC!, platformXbox! },
                 Reviews = new List<Review>()
             },
             new Game
@@ -118,8 +118,8 @@ public class GamesMockRepository
                 Description = "Revolutionary first-person shooter",
                 Developer = developer3,
                 AverageRating = 96,
-                Genres = new List<Genre> { genreFPS, genreAction },
-                Platforms = new List<Platform> { platformPC },
+                Genres = new List<Genre> { genreFPS!, genreAction! },
+                Platforms = new List<Platform> { platformPC! },
                 Reviews = new List<Review>()
             },
             new Game
@@ -130,8 +130,8 @@ public class GamesMockRepository
                 Description = "Competitive team-based FPS",
                 Developer = developer3,
                 AverageRating = 82,
-                Genres = new List<Genre> { genreFPS },
-                Platforms = new List<Platform> { platformPC },
+                Genres = new List<Genre> { genreFPS! },
+                Platforms = new List<Platform> { platformPC! },
                 Reviews = new List<Review>()
             },
             new Game
@@ -142,8 +142,8 @@ public class GamesMockRepository
                 Description = "VR prequel to Half-Life 2",
                 Developer = developer3,
                 AverageRating = 93,
-                Genres = new List<Genre> { genreFPS, genreAction },
-                Platforms = new List<Platform> { platformPC },
+                Genres = new List<Genre> { genreFPS!, genreAction! },
+                Platforms = new List<Platform> { platformPC! },
                 Reviews = new List<Review>()
             }
         };
