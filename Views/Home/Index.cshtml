@@ -1,90 +1,78 @@
 ﻿@{
     ViewData["Title"] = "Home";
+    ViewData["BodyClass"] = "page-mario page-home";
     var user = (VideoGameTracker.Models.User)ViewBag.User;
     var games = (List<VideoGameTracker.Models.Game>)ViewBag.Games;
     var statuses = (List<VideoGameTracker.Models.GameStatus>)ViewBag.Statuses;
 }
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h3>Welcome, @user.Username!</h3>
-                </div>
-                <div class="card-body">
-                    <p><strong>Email:</strong> @user.Email</p>
-                    <p><strong>Member Since:</strong> @user.RegisteredAt.ToString("dd/MM/yyyy")</p>
-                    <hr />
-
-                    @if (TempData["Success"] != null)
-                    {
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            @TempData["Success"]
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    }
-
-                    @if (TempData["Error"] != null)
-                    {
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            @TempData["Error"]
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    }
-
-                    <h5 class="mt-4 mb-3">Create Game Entry</h5>
-
-                    <form method="post" asp-action="CreateGameEntry" asp-controller="Home">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="gameId" class="form-label">Game *</label>
-                                <select class="form-select" id="gameId" name="gameId" required>
-                                    <option value="">Select a game...</option>
-                                    @foreach (var game in games)
-                                    {
-                                        <option value="@game.Id">@game.Title</option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="status" class="form-label">Status *</label>
-                                <select class="form-select" id="status" name="status" required>
-                                    <option value="">Select status...</option>
-                                    @foreach (var status in statuses)
-                                    {
-                                        <option value="@status">@status</option>
-                                    }
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="hoursPlayed" class="form-label">Hours Played *</label>
-                                <input type="number" class="form-control" id="hoursPlayed" name="hoursPlayed" min="0" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="score" class="form-label">Review Score (1-100) *</label>
-                                <input type="number" class="form-control" id="score" name="score" min="1" max="100" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="comment" class="form-label">Review Comment</label>
-                            <textarea class="form-control" id="comment" name="comment" rows="4" placeholder="Write your review..."></textarea>
-                        </div>
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">Create Game Entry</button>
-                        </div>
-                    </form>
-
-                    <div class="mt-4">
-                        <a href="@Url.Action("Logout", "Login")" class="btn btn-secondary">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section class="login-title-stage home-title-stage">
+    <div class="login-title-lockup home-title-lockup">
+        <img src="~/images/smb_logo.png" alt="Super Mario Bros inspired logo" class="login-logo-image" />
+        <h1 class="login-app-title">VideoGameTracker</h1>
+        <p class="login-subtitle">PLAYER DASHBOARD</p>
     </div>
-</div>
+
+    <div class="home-title-copy">
+        <p class="home-title-line"><strong>Email:</strong> @user.Email</p>
+        <p class="home-title-line"><strong>Member Since:</strong> @user.RegisteredAt.ToString("dd/MM/yyyy")</p>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="login-alert home-alert" role="alert">@TempData["Success"]</div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="login-alert home-alert" role="alert">@TempData["Error"]</div>
+    }
+
+    <div class="home-entry-form-wrap">
+        <form method="post" asp-action="CreateGameEntry" asp-controller="Home" class="login-title-form home-title-form">
+            <h2 class="home-form-title">CREATE GAME ENTRY</h2>
+
+            <div class="login-field">
+                <label for="gameId" class="login-field-label">GAME</label>
+                <select class="login-title-input" id="gameId" name="gameId" required>
+                    <option value="">SELECT A GAME...</option>
+                    @foreach (var game in games)
+                    {
+                        <option value="@game.Id">@game.Title</option>
+                    }
+                </select>
+            </div>
+
+            <div class="login-field">
+                <label for="status" class="login-field-label">STATUS</label>
+                <select class="login-title-input" id="status" name="status" required>
+                    <option value="">SELECT STATUS...</option>
+                    @foreach (var status in statuses)
+                    {
+                        <option value="@status">@status</option>
+                    }
+                </select>
+            </div>
+
+            <div class="login-field">
+                <label for="hoursPlayed" class="login-field-label">HOURS PLAYED</label>
+                <input type="number" class="login-title-input" id="hoursPlayed" name="hoursPlayed" min="0" required>
+            </div>
+
+            <div class="login-field">
+                <label for="score" class="login-field-label">REVIEW SCORE</label>
+                <input type="number" class="login-title-input" id="score" name="score" min="1" max="100" required>
+            </div>
+
+            <div class="login-field">
+                <label for="comment" class="login-field-label">REVIEW COMMENT</label>
+                <textarea class="login-title-input home-textarea" id="comment" name="comment" rows="4" placeholder="WRITE YOUR REVIEW..."></textarea>
+            </div>
+
+            <button type="submit" class="login-title-button home-action-button">
+                <span class="login-title-bullet" aria-hidden="true">●</span>
+                <span>CREATE GAME ENTRY</span>
+            </button>
+        </form>
+    </div>
+</section>

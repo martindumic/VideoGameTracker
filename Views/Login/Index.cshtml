@@ -1,117 +1,47 @@
 @{
     ViewData["Title"] = "Login";
-    Layout = null; // Bez layout-a za login stranicu
+    ViewData["BodyClass"] = "page-mario page-login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - VideoGameTracker</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .login-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            padding: 40px;
-            width: 100%;
-            max-width: 400px;
-        }
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .login-header h1 {
-            color: #333;
-            font-size: 28px;
-            font-weight: 700;
-        }
-        .login-header p {
-            color: #999;
-            font-size: 14px;
-        }
-        .form-control {
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-        }
-        .form-control:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-        .btn-login {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            font-weight: 600;
-            padding: 10px;
-            border-radius: 5px;
-            transition: transform 0.2s;
-        }
-        .btn-login:hover {
-            transform: translateY(-2px);
-            color: white;
-            text-decoration: none;
-        }
-        .alert {
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <div class="login-header">
-            <h1>VideoGameTracker</h1>
-            <p>Sign in to your account</p>
-        </div>
-
-        @if (!ViewData.ModelState.IsValid)
-        {
-            @foreach (var modelState in ViewData.ModelState.Values)
-            {
-                @foreach (var error in modelState.Errors)
-                {
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        @error.ErrorMessage
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                }
-            }
-        }
-
-        <form method="post" asp-action="Index" asp-controller="Login">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-
-            <button type="submit" class="btn btn-login">Sign In</button>
-        </form>
-
-        <div class="mt-4 text-center">
-            <p style="color: #999; font-size: 12px;">
-                Demo credentials:<br>
-                Email: gamerpro@email.com | Password: hashed_password_1
-            </p>
-        </div>
+<section class="login-title-stage">
+    <div class="login-title-lockup">
+        <img src="~/images/smb_logo.png" alt="Super Mario Bros inspired logo" class="login-logo-image" />
+        <h1 class="login-app-title">VideoGameTracker</h1>
+        <p class="login-subtitle">SIGN IN TO CONTINUE</p>
     </div>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        @foreach (var modelState in ViewData.ModelState.Values)
+        {
+            @foreach (var error in modelState.Errors)
+            {
+                <div class="login-alert" role="alert">
+                    @error.ErrorMessage
+                </div>
+            }
+        }
+    }
+
+    <form method="post" asp-action="Index" asp-controller="Login" class="login-title-form">
+        <div class="login-field">
+            <label for="email" class="login-field-label">EMAIL</label>
+            <input type="email" class="login-title-input" id="email" name="email" placeholder="gamer@email.com" required>
+        </div>
+
+        <div class="login-field">
+            <label for="password" class="login-field-label">PASSWORD</label>
+            <input type="password" class="login-title-input" id="password" name="password" placeholder="********" required>
+        </div>
+
+        <button type="submit" class="login-title-button">
+            <span class="login-title-bullet" aria-hidden="true">●</span>
+            <span>SIGN IN</span>
+        </button>
+    </form>
+
+    <div class="login-hint">
+        Demo credentials: Email: gamerpro@email.com | Password: hashed_password_1
+    </div>
+</section>

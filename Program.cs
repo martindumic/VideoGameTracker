@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using VideoGameTracker.Data;
 using VideoGameTracker.Models;
 
@@ -33,6 +34,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "images")),
+    RequestPath = "/images"
+});
 app.UseRouting();
 app.UseSession();
 
