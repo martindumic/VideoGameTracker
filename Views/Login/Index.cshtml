@@ -6,8 +6,7 @@
 
 <section class="login-title-stage">
     <div class="login-title-lockup">
-        <img src="~/images/smb_logo.png" alt="Super Mario Bros inspired logo" class="login-logo-image" />
-        <h1 class="login-app-title">VideoGameTracker</h1>
+        <img src="~/images/videogametracker_logo.png" alt="VideoGameTracker logo" class="login-logo-image" />
         <p class="login-subtitle">SIGN IN TO CONTINUE</p>
     </div>
 
@@ -17,7 +16,7 @@
         {
             @foreach (var error in modelState.Errors)
             {
-                <div class="login-alert" role="alert">
+                <div class="login-alert login-alert-error" role="alert">
                     @error.ErrorMessage
                 </div>
             }
@@ -35,10 +34,7 @@
             <input type="password" class="login-title-input" id="password" name="password" placeholder="********" required>
         </div>
 
-        <button type="submit" class="login-title-button">
-            <span class="login-title-bullet" aria-hidden="true">●</span>
-            <span>SIGN IN</span>
-        </button>
+        <button type="submit" class="login-title-button">SIGN IN</button>
     </form>
 
     <div class="login-hint">

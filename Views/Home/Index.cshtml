@@ -8,24 +8,17 @@
 
 <section class="login-title-stage home-title-stage">
     <div class="login-title-lockup home-title-lockup">
-        <img src="~/images/smb_logo.png" alt="Super Mario Bros inspired logo" class="login-logo-image" />
-        <h1 class="login-app-title">VideoGameTracker</h1>
-        <p class="login-subtitle">PLAYER DASHBOARD</p>
-    </div>
-
-    <div class="home-title-copy">
-        <p class="home-title-line"><strong>Email:</strong> @user.Email</p>
-        <p class="home-title-line"><strong>Member Since:</strong> @user.RegisteredAt.ToString("dd/MM/yyyy")</p>
+        <img src="~/images/videogametracker_logo.png" alt="VideoGameTracker logo" class="login-logo-image" />
     </div>
 
     @if (TempData["Success"] != null)
     {
-        <div class="login-alert home-alert" role="alert">@TempData["Success"]</div>
+        <div class="login-alert home-alert login-alert-success" role="alert">@TempData["Success"]</div>
     }
 
     @if (TempData["Error"] != null)
     {
-        <div class="login-alert home-alert" role="alert">@TempData["Error"]</div>
+        <div class="login-alert home-alert login-alert-error" role="alert">@TempData["Error"]</div>
     }
 
     <div class="home-entry-form-wrap">
@@ -69,10 +62,7 @@
                 <textarea class="login-title-input home-textarea" id="comment" name="comment" rows="4" placeholder="WRITE YOUR REVIEW..."></textarea>
             </div>
 
-            <button type="submit" class="login-title-button home-action-button">
-                <span class="login-title-bullet" aria-hidden="true">●</span>
-                <span>CREATE GAME ENTRY</span>
-            </button>
+            <button type="submit" class="login-title-button home-action-button">CREATE GAME ENTRY</button>
         </form>
     </div>
 </section>

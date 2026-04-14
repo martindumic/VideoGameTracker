@@ -29,7 +29,7 @@ namespace VideoGameTracker.Controllers
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                ModelState.AddModelError("", "Email i lozinka su obavezni!");
+                ModelState.AddModelError("", "Email and password are required!");
                 return View();
             }
 
@@ -38,7 +38,7 @@ namespace VideoGameTracker.Controllers
 
             if (user == null)
             {
-                ModelState.AddModelError("", "Email ili lozinka nisu točni!");
+                ModelState.AddModelError("", "Email or password is incorrect!");
                 return View();
             }
 

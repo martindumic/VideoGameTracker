@@ -67,7 +67,7 @@ namespace VideoGameTracker.Controllers
 
             if (user == null || game == null)
             {
-                TempData["Error"] = "Korisnik ili igra nisu pronađeni!";
+                TempData["Error"] = "User or game was not found!";
                 return RedirectToAction("Index");
             }
 
@@ -100,7 +100,7 @@ namespace VideoGameTracker.Controllers
             game.Reviews.Add(review);
             user.GameEntries.Add(gameEntry);
 
-            TempData["Success"] = "Game entry je uspješno kreiran!";
+            TempData["Success"] = "Game entry was created successfully!";
             return RedirectToAction("Index");
         }
 
