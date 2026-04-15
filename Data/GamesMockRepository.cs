@@ -156,6 +156,22 @@ public class GamesMockRepository
         if (developer3 != null)
             developer3.Games.AddRange(games.Where(g => g.Developer?.Id == 3));
 
+        if (genreRPG != null)
+            genreRPG.Games.AddRange(games.Where(g => g.Genres.Any(genre => genre.Id == 1)));
+        if (genreAction != null)
+            genreAction.Games.AddRange(games.Where(g => g.Genres.Any(genre => genre.Id == 2)));
+        if (genreFPS != null)
+            genreFPS.Games.AddRange(games.Where(g => g.Genres.Any(genre => genre.Id == 3)));
+        if (genreAdventure != null)
+            genreAdventure.Games.AddRange(games.Where(g => g.Genres.Any(genre => genre.Id == 4)));
+
+        if (platformPC != null)
+            platformPC.Games.AddRange(games.Where(g => g.Platforms.Any(platform => platform.Id == 1)));
+        if (platformPS5 != null)
+            platformPS5.Games.AddRange(games.Where(g => g.Platforms.Any(platform => platform.Id == 2)));
+        if (platformXbox != null)
+            platformXbox.Games.AddRange(games.Where(g => g.Platforms.Any(platform => platform.Id == 3)));
+
         return games;
     }
 
