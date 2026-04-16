@@ -1,0 +1,990 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 0;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+:root {
+  --mario-sky: #69a7ff;
+  --mario-sky-dark: #2e5fb2;
+  --mario-navy: #10203c;
+  --mario-cream: #fff3d1;
+  --mario-brick-shadow: rgba(35, 15, 0, 0.85);
+  --mario-glow: rgba(255, 231, 166, 0.22);
+}
+
+body.page-mario {
+  min-height: 100vh;
+  color: #fff7e6;
+  background-image: url('/images/smb_background1.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Trebuchet MS", "Verdana", sans-serif;
+  overflow-x: hidden;
+}
+
+body.page-mario.page-login {
+  background: url('/images/smb_background1.png') center center / cover no-repeat;
+  background-attachment: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+body.page-mario::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top center, rgba(255, 255, 255, 0.14), transparent 40%);
+  z-index: 0;
+}
+
+body.page-mario.page-login::before {
+  content: none;
+}
+
+header,
+.smb-page-shell,
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.smb-page-shell {
+  width: min(1180px, calc(100% - 2rem));
+  padding-top: 0.5rem;
+  padding-bottom: 2rem;
+}
+
+.smb-navbar-cloud {
+  position: relative;
+  margin: 1rem auto 0;
+  width: min(1280px, calc(100% - 1rem));
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    url('/images/smb_cloud.png') center center / 230px auto repeat-x;
+  filter: drop-shadow(0 16px 0 rgba(0, 0, 0, 0.35));
+}
+
+.smb-navbar-cloud::after {
+  content: "";
+  position: absolute;
+  inset: 18px 2% 22px;
+  border-radius: 999px;
+  background: rgba(81, 48, 0, 0.18);
+  box-shadow: inset 0 0 0 4px rgba(255, 247, 222, 0.08);
+  pointer-events: none;
+}
+
+body.page-login .smb-navbar-cloud {
+  filter: none;
+}
+
+body.page-login .smb-navbar-cloud {
+  background: url('/images/smb_cloud.png') center center / 230px auto repeat-x;
+}
+
+body.page-login .smb-navbar-cloud::after {
+  display: none;
+}
+
+.smb-navbar-inner {
+  position: relative;
+  z-index: 1;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+}
+
+body.page-login .smb-navbar-inner-login {
+  justify-content: center;
+}
+
+body.page-login .smb-navbar-inner {
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem 1.5rem 1.25rem;
+}
+
+body.page-login .smb-brand {
+  flex: 0 0 100%;
+  margin: 0;
+  text-align: center;
+}
+
+body.page-login .navbar-toggler {
+  margin: 0 auto;
+}
+
+.smb-brand,
+.smb-nav-link,
+.smb-nav-link:hover,
+.smb-nav-link:focus {
+  color: #fff9ef !important;
+  text-shadow: 2px 2px 0 #0e2044, 0 0 12px rgba(255, 255, 255, 0.18);
+}
+
+.smb-brand {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.smb-nav-list,
+.smb-nav-user {
+  gap: 0.35rem;
+  align-items: center;
+}
+
+body.page-login .smb-navbar-collapse {
+  justify-content: center !important;
+  width: 100%;
+}
+
+body.page-login .smb-nav-list {
+  flex-grow: 0;
+  justify-content: center;
+}
+
+body.page-login .smb-nav-user {
+  margin-left: 0;
+  justify-content: center;
+}
+
+.smb-nav-link {
+  padding: 0.65rem 1rem !important;
+  border-radius: 999px;
+  background: rgba(36, 81, 27, 0.55);
+  border: 2px solid rgba(255, 245, 211, 0.35);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.16);
+}
+
+.smb-nav-link:hover,
+.smb-nav-link:focus {
+  background: rgba(59, 119, 38, 0.82);
+}
+
+.smb-navbar-collapse .dropdown-menu {
+  border: 3px solid #2b1d08;
+  background: #fff5d9;
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 0 rgba(0, 0, 0, 0.25);
+}
+
+.smb-navbar-collapse .dropdown-item {
+  font-weight: 700;
+  color: #4d2a08;
+}
+
+.mario-stage {
+  position: relative;
+  min-height: calc(100vh - 220px);
+  display: grid;
+  place-items: center;
+  padding: 1.25rem 0 2rem;
+}
+
+body.page-login .smb-page-shell {
+  height: calc(100dvh - 170px);
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+body.page-login .mario-stage-login {
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  padding: 0.75rem 0;
+  justify-content: center;
+}
+
+.mario-stage-home {
+  padding-top: 2rem;
+}
+
+.mario-panel {
+  position: relative;
+  width: min(100%, 920px);
+  color: #fff7e6;
+  background: linear-gradient(180deg, rgba(20, 34, 61, 0.95), rgba(14, 24, 44, 0.92));
+  border: 24px solid transparent;
+  border-image: url('/images/smb_brick.png') 24 round;
+  box-shadow:
+    0 28px 0 rgba(0, 0, 0, 0.28),
+    0 0 0 6px rgba(255, 248, 230, 0.08),
+    0 0 70px var(--mario-glow);
+  overflow: hidden;
+}
+
+.mario-panel::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 2px dashed rgba(255, 243, 209, 0.12);
+  pointer-events: none;
+}
+
+.mario-panel-wide {
+  padding: 1.5rem 1.5rem 1.75rem;
+}
+
+.mario-panel-narrow {
+  width: min(100%, 520px);
+  padding: 1.5rem;
+}
+
+.mario-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mario-panel-header-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.mario-panel-header h1 {
+  margin: 0.2rem 0 0;
+  font-size: clamp(2rem, 4vw, 3.15rem);
+  line-height: 0.95;
+  color: #fff8e1;
+  text-shadow: 4px 4px 0 #5b2200;
+}
+
+.mario-kicker {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  margin-bottom: 0.25rem;
+  color: #ffefb7;
+  background: rgba(255, 182, 65, 0.16);
+  border: 1px solid rgba(255, 236, 180, 0.24);
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mario-subtitle {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 247, 230, 0.78);
+}
+
+.mario-panel-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  color: rgba(255, 247, 230, 0.85);
+}
+
+.mario-panel-meta strong {
+  color: #ffe07d;
+}
+
+.mario-panel-body h2 {
+  margin: 1.25rem 0 1rem;
+  color: #ffd36d;
+  font-size: 1.35rem;
+  text-shadow: 2px 2px 0 #5b2200;
+}
+
+.mario-form .form-label {
+  color: #fff7e6;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.mario-input {
+  background: rgba(255, 248, 232, 0.96) !important;
+  color: #2f1b0b !important;
+  border: 3px solid #5a2d00 !important;
+  border-radius: 0.65rem !important;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.07);
+}
+
+.mario-input:focus {
+  border-color: #ffb347 !important;
+  box-shadow: 0 0 0 0.22rem rgba(255, 179, 71, 0.22) !important;
+}
+
+.mario-actions {
+  margin-top: 0.5rem;
+}
+
+.smb-question-button {
+  appearance: none;
+  border: 0;
+  width: 100%;
+  min-height: 82px;
+  padding: 1rem 1.25rem;
+  color: #4a2200;
+  background:
+    linear-gradient(rgba(255, 248, 230, 0.15), rgba(255, 248, 230, 0.05)),
+    url('/images/smb_question_block.png') center center / 100% 100% no-repeat;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.45);
+  box-shadow: 0 12px 0 rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+body.page-login .smb-question-button {
+  color: #fff8de;
+  background: url('/images/smb_question_block.png') center center / contain no-repeat;
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+  filter: none;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.9);
+}
+
+.smb-question-button:hover,
+.smb-question-button:focus {
+  transform: translateY(-2px) scale(1.01);
+  filter: brightness(1.08);
+}
+
+.smb-question-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.25);
+}
+
+.smb-question-button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 180px;
+  text-decoration: none;
+}
+
+.mario-alert {
+  margin: 1rem 0 0;
+  padding: 0.9rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  color: #fff8df;
+  border: 2px solid rgba(255, 248, 230, 0.18);
+}
+
+.mario-alert-success {
+  background: rgba(48, 145, 61, 0.75);
+}
+
+.mario-alert-danger {
+  background: rgba(147, 46, 29, 0.82);
+}
+
+.mario-hint {
+  margin-top: 1.2rem;
+  color: rgba(255, 247, 230, 0.7);
+  font-size: 0.92rem;
+}
+
+body.page-login .mario-decoration {
+  display: none;
+}
+
+body.page-login .mario-stage-login {
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  padding: 0.75rem 0;
+  justify-content: center;
+}
+
+body.page-login .mario-panel {
+  box-shadow:
+    0 20px 0 rgba(0, 0, 0, 0.24),
+    0 0 0 6px rgba(255, 248, 230, 0.08),
+    0 0 48px rgba(255, 231, 166, 0.14);
+}
+
+@media (max-width: 991.98px) {
+  .smb-navbar-cloud {
+    min-height: 130px;
+  }
+
+  .mario-panel-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mario-panel-header .smb-question-button-link {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .smb-navbar-inner {
+    padding: 0.75rem 1rem;
+  }
+
+  .smb-navbar-cloud {
+    min-height: auto;
+    background-size: 180px auto;
+  }
+
+  .smb-brand {
+    font-size: 0.95rem;
+  }
+
+  .mario-stage {
+    min-height: auto;
+    padding-top: 1rem;
+  }
+
+  .mario-panel,
+  .mario-panel-wide,
+  .mario-panel-narrow {
+    width: 100%;
+  }
+
+  .mario-panel-wide,
+  .mario-panel-narrow {
+    padding: 1rem;
+  }
+
+  .smb-question-button {
+    min-height: 72px;
+  }
+}
+
+body.page-mario h1,
+body.page-mario h2,
+body.page-mario h3,
+body.page-mario h4,
+body.page-mario h5,
+body.page-mario h6 {
+  color: #fff8e1;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-shadow: 4px 4px 0 #5b2200;
+}
+
+body.page-mario p,
+body.page-mario li,
+body.page-mario td,
+body.page-mario th,
+body.page-mario label,
+body.page-mario small {
+  color: #fff7e6;
+}
+
+body.page-mario .mario-prose-panel {
+  width: min(920px, 100%);
+  margin: 0 auto;
+}
+
+body.page-mario .mario-stage-prose {
+  min-height: calc(100vh - 260px);
+  padding: 1.5rem 0 2rem;
+}
+
+body.page-mario .table-responsive,
+body.page-mario .card,
+body.page-mario .list-group,
+body.page-mario .alert {
+  position: relative;
+  background: rgba(8, 16, 30, 0.22);
+  color: #fff7e6;
+  border: 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 247, 230, 0.08);
+}
+
+body.page-mario .table-responsive {
+  padding: 0.75rem;
+  overflow: auto;
+}
+
+body.page-mario .table {
+  margin-bottom: 0;
+  color: #fff7e6;
+}
+
+body.page-mario .table > :not(caption) > * > * {
+  padding: 0.85rem 0.9rem;
+  background-color: transparent;
+  color: inherit;
+  border-color: rgba(255, 247, 230, 0.14);
+}
+
+body.page-mario .table thead th,
+body.page-mario .table tbody td,
+body.page-mario .table tfoot td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+body.page-mario .table thead th {
+  background: #8d4c15;
+  color: #fff7e6;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-color: rgba(44, 23, 8, 0.35);
+}
+
+body.page-mario .table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(255, 247, 230, 0.04);
+}
+
+body.page-mario .table-hover > tbody > tr:hover > * {
+  background-color: rgba(180, 104, 29, 0.2);
+}
+
+body.page-mario .card {
+  overflow: hidden;
+}
+
+body.page-mario .card-body {
+  background: rgba(8, 16, 30, 0.28);
+}
+
+body.page-mario .mario-detail-box {
+  margin-top: 0.35rem;
+  padding: 0.9rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(255, 247, 230, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 247, 230, 0.05);
+}
+
+body.page-mario .mario-detail-box-body {
+  padding: 0;
+  background: transparent;
+}
+
+body.page-mario .list-group {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.page-mario .list-group-item {
+  background: rgba(255, 247, 230, 0.04);
+  color: #fff7e6;
+  border-color: rgba(255, 247, 230, 0.14);
+}
+
+body.page-mario .badge {
+  color: #fff9ef;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.55);
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.04em;
+}
+
+body.page-mario .badge.bg-success {
+  background-color: #9b5420 !important;
+}
+
+body.page-mario .badge.bg-info {
+  background-color: #8d4c15 !important;
+}
+
+body.page-mario .badge.bg-warning {
+  background-color: #c4722a !important;
+  color: #fff7e6 !important;
+}
+
+body.page-mario .badge.bg-secondary {
+  background-color: #6f3d12 !important;
+}
+
+body.page-mario .btn {
+  appearance: none;
+  border: 3px solid #2c1a00;
+  background: linear-gradient(180deg, #cb6b1d 0%, #9a4d12 100%);
+  border-radius: 0.35rem;
+  color: #fff9ef !important;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.22), 0 8px 0 rgba(0, 0, 0, 0.18);
+}
+
+body.page-mario .btn:hover,
+body.page-mario .btn:focus {
+  color: #fffdf2 !important;
+  filter: brightness(1.05);
+}
+
+body.page-mario .btn-sm {
+  min-width: 96px;
+  min-height: 40px;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.78rem;
+}
+
+body.page-mario .btn:not(.btn-sm) {
+  min-width: 132px;
+  min-height: 48px;
+  padding: 0.55rem 0.95rem;
+}
+
+body.page-mario .alert {
+  border-radius: 0;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+body.page-mario .alert a {
+  color: #fffbd9;
+}
+
+body.page-mario .card a,
+body.page-mario .list-group a,
+body.page-mario .table a {
+  color: #ffe8ac;
+  text-decoration: none;
+}
+
+body.page-mario .card a:hover,
+body.page-mario .list-group a:hover,
+body.page-mario .table a:hover {
+  color: #fff7ef;
+  text-decoration: underline;
+}
+
+body.page-mario code {
+  color: #ffd37d;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.12rem 0.35rem;
+  border-radius: 0.25rem;
+}
+
+body.page-login .smb-page-shell {
+  height: calc(100dvh - 92px);
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+body.page-login .mario-stage {
+  min-height: 0;
+}
+
+body.page-login .mario-stage-login {
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+  justify-content: center;
+}
+
+body.page-login .mario-panel,
+body.page-login .mario-panel::before,
+body.page-login .mario-panel-wide,
+body.page-login .mario-panel-narrow,
+body.page-login .mario-decoration {
+  display: none;
+}
+
+.smb-login-header {
+  position: relative;
+  z-index: 1;
+  padding-top: 0.75rem;
+}
+
+.smb-login-nav {
+  width: min(760px, calc(100% - 2rem));
+  margin: 0 auto;
+  background: transparent;
+  border: 0;
+}
+
+.smb-login-nav-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1.5rem, 6vw, 3rem);
+  padding: 0.4rem 0 0.25rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.smb-login-nav-link {
+  color: #fff7f0 !important;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.9);
+  background: transparent;
+}
+
+.smb-login-nav-link:hover,
+.smb-login-nav-link:focus {
+  color: #fffbe7 !important;
+}
+
+.login-title-stage {
+  width: min(920px, 100%);
+  margin: 0 auto;
+  min-height: calc(100dvh - 180px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0 1rem;
+  overflow: hidden;
+}
+
+.login-title-lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.login-logo-image {
+  width: min(430px, 90vw);
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.login-app-title {
+  margin: 0;
+  color: #ffe6e1;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(1.9rem, 4.8vw, 3.9rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 5px 5px 0 #5b2200, 8px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.login-subtitle {
+  margin: 0;
+  color: #fff9ef;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.9);
+}
+
+.login-title-form {
+  width: min(430px, calc(100% - 2rem));
+  display: grid;
+  gap: 0.65rem;
+  padding-top: 0.35rem;
+}
+
+.login-field {
+  display: grid;
+  gap: 0.24rem;
+}
+
+.login-field-label {
+  color: #fff9ef;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.9);
+}
+
+.login-title-input {
+  width: 100%;
+  border: 3px solid #2c1a00;
+  border-radius: 0.2rem;
+  background: rgba(255, 248, 232, 0.96);
+  color: #2c1708;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.98rem;
+  letter-spacing: 0.04em;
+  padding: 0.72rem 0.86rem;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.14);
+}
+
+.login-title-input::placeholder {
+  color: rgba(44, 23, 8, 0.6);
+}
+
+.login-title-input:focus {
+  border-color: #ffd37d;
+  box-shadow: 0 0 0 0.2rem rgba(255, 211, 125, 0.28);
+}
+
+.login-title-button {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 230px;
+  padding: 0.42rem 0.95rem;
+  border: 3px solid #2c1a00;
+  background: linear-gradient(180deg, #cb6b1d 0%, #9a4d12 100%);
+  color: #fffaf1;
+  border-radius: 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(1rem, 2.4vw, 1.35rem);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.92);
+  box-shadow:
+    inset 0 -4px 0 rgba(0, 0, 0, 0.22),
+    4px 4px 0 #2c1a00,
+    0 8px 0 rgba(0, 0, 0, 0.18);
+}
+
+.login-alert {
+  width: min(430px, calc(100% - 2rem));
+  padding: 0.55rem 0.75rem;
+  color: #fff7ef;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.9);
+}
+
+.login-alert-success,
+.mario-alert-success {
+  background: rgba(46, 123, 56, 0.86);
+  border: 2px solid rgba(9, 34, 14, 0.55);
+}
+
+.login-alert-error,
+.mario-alert-danger {
+  background: rgba(152, 42, 31, 0.88);
+  border: 2px solid rgba(54, 10, 6, 0.65);
+}
+
+.login-hint {
+  width: min(560px, calc(100% - 2rem));
+  margin-top: 0.15rem;
+  color: #fff7ef;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.9);
+}
+
+.home-title-stage {
+  min-height: calc(100vh - 220px);
+  gap: 0.9rem;
+  padding-top: 0.9rem;
+}
+
+.home-title-lockup {
+  margin-top: 0;
+}
+
+.home-title-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-align: center;
+}
+
+.home-title-line {
+  margin: 0;
+  color: #fff9ef;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.9);
+}
+
+.home-title-line strong {
+  color: #ffd37d;
+}
+
+.home-alert {
+  width: min(760px, calc(100% - 2rem));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-entry-form-wrap {
+  width: min(860px, 100%);
+  display: flex;
+  justify-content: center;
+  padding-top: 0.25rem;
+}
+
+.home-title-form {
+  width: min(760px, 100%);
+  gap: 0.8rem;
+}
+
+.home-form-title {
+  margin: 0;
+  color: #fff7ef;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  text-align: center;
+  letter-spacing: 0.14em;
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.9);
+}
+
+.home-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.home-action-button {
+  margin-top: 0.25rem;
+}
+
+body.page-home .mario-decoration,
+body.page-home .mario-panel,
+body.page-home .mario-panel::before,
+body.page-home .mario-panel-wide,
+body.page-home .mario-panel-narrow {
+  display: none;
+}
+
+body.page-home .mario-stage {
+  min-height: calc(100vh - 180px);
+  padding-top: 0.75rem;
+}
