@@ -5,9 +5,9 @@ namespace VideoGameTracker.Controllers
 {
     public class GenresController : Controller
     {
-        private readonly GenresMockRepository _genresRepository;
+        private readonly GenresRepository _genresRepository;
 
-        public GenresController(GenresMockRepository genresRepository)
+        public GenresController(GenresRepository genresRepository)
         {
             _genresRepository = genresRepository;
         }

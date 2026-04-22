@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace VideoGameTracker.Models;
 
 public class Developer
 {
+    [Key]
     public int Id { get; set; }
 
     public string? Name { get; set; }
@@ -12,7 +15,7 @@ public class Developer
 
     public string? Description { get; set; }
 
-    public List<Game> Games { get; set; }
+    public virtual ICollection<Game> Games { get; set; }
 
     public Developer()
     {

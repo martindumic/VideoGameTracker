@@ -7,16 +7,16 @@ namespace VideoGameTracker.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UsersMockRepository _usersRepository;
-        private readonly GamesMockRepository _gamesRepository;
-        private readonly GameEntriesMockRepository _gameEntriesRepository;
-        private readonly ReviewsMockRepository _reviewsRepository;
+        private readonly UsersRepository _usersRepository;
+        private readonly GamesRepository _gamesRepository;
+        private readonly GameEntriesRepository _gameEntriesRepository;
+        private readonly ReviewsRepository _reviewsRepository;
 
         public HomeController(
-            UsersMockRepository usersRepository,
-            GamesMockRepository gamesRepository,
-            GameEntriesMockRepository gameEntriesRepository,
-            ReviewsMockRepository reviewsRepository)
+            UsersRepository usersRepository,
+            GamesRepository gamesRepository,
+            GameEntriesRepository gameEntriesRepository,
+            ReviewsRepository reviewsRepository)
         {
             _usersRepository = usersRepository;
             _gamesRepository = gamesRepository;
@@ -74,31 +74,25 @@ namespace VideoGameTracker.Controllers
             // Kreiraj Review
             var review = new Review
             {
-                Id = _reviewsRepository.GetAll().Max(r => r.Id) + 1,
-                User = user,
-                Game = game,
+                UserId = user.Id,
+                GameId = game.Id,
                 Score = score,
                 Comment = comment,
                 CreatedAt = DateTime.Now
             };
+            _reviewsRepository.Add(review);
 
             // Kreiraj GameEntry
             var gameEntry = new GameEntry
             {
-                Id = _gameEntriesRepository.GetAll().Max(e => e.Id) + 1,
-                Game = game,
-                User = user,
+                GameId = game.Id,
+                UserId = user.Id,
                 Status = status,
                 DateAdded = DateTime.Now,
                 HoursPlayed = hoursPlayed,
-                Review = review
+                ReviewId = review.Id
             };
-
-            // Dodaj u mock repozitorije (ovi su singleton pa će biti dostupni dalje)
-            _gameEntriesRepository.GetAll().Add(gameEntry);
-            _reviewsRepository.GetAll().Add(review);
-            game.Reviews.Add(review);
-            user.GameEntries.Add(gameEntry);
+            _gameEntriesRepository.Add(gameEntry);
 
             TempData["Success"] = "Game entry was created successfully!";
             return RedirectToAction("Index");

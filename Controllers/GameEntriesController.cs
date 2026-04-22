@@ -5,9 +5,9 @@ namespace VideoGameTracker.Controllers
 {
     public class GameEntriesController : Controller
     {
-        private readonly GameEntriesMockRepository _gameEntriesRepository;
+        private readonly GameEntriesRepository _gameEntriesRepository;
 
-        public GameEntriesController(GameEntriesMockRepository gameEntriesRepository)
+        public GameEntriesController(GameEntriesRepository gameEntriesRepository)
         {
             _gameEntriesRepository = gameEntriesRepository;
         }

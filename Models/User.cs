@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace VideoGameTracker.Models
 {
     public class User
     {
+        [Key]
         public int Id { get; set; }
 
         public string? Username { get; set; }
@@ -12,11 +15,14 @@ namespace VideoGameTracker.Models
 
         public DateTime RegisteredAt { get; set; }
 
-        public List<GameEntry> GameEntries { get; set; }
+        public virtual ICollection<GameEntry> GameEntries { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
 
         public User()
         {
             GameEntries = new List<GameEntry>();
+            Reviews = new List<Review>();
         }
     }
 }

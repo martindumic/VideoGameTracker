@@ -5,9 +5,9 @@ namespace VideoGameTracker.Controllers
 {
     public class PlatformsController : Controller
     {
-        private readonly PlatformsMockRepository _platformsRepository;
+        private readonly PlatformsRepository _platformsRepository;
 
-        public PlatformsController(PlatformsMockRepository platformsRepository)
+        public PlatformsController(PlatformsRepository platformsRepository)
         {
             _platformsRepository = platformsRepository;
         }

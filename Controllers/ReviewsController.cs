@@ -5,9 +5,9 @@ namespace VideoGameTracker.Controllers
 {
     public class ReviewsController : Controller
     {
-        private readonly ReviewsMockRepository _reviewsRepository;
+        private readonly ReviewsRepository _reviewsRepository;
 
-        public ReviewsController(ReviewsMockRepository reviewsRepository)
+        public ReviewsController(ReviewsRepository reviewsRepository)
         {
             _reviewsRepository = reviewsRepository;
         }

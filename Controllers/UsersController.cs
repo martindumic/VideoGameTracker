@@ -5,9 +5,9 @@ namespace VideoGameTracker.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly UsersMockRepository _usersRepository;
+        private readonly UsersRepository _usersRepository;
 
-        public UsersController(UsersMockRepository usersRepository)
+        public UsersController(UsersRepository usersRepository)
         {
             _usersRepository = usersRepository;
         }

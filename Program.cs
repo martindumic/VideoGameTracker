@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using VideoGameTracker.Data;
 using VideoGameTracker.Models;
@@ -7,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<VideoGameTrackerDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("VideoGameTrackerDb")));
+
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -14,14 +18,14 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Register Mock Repositories
-builder.Services.AddSingleton<DevelopersMockRepository>();
-builder.Services.AddSingleton<GenresMockRepository>();
-builder.Services.AddSingleton<PlatformsMockRepository>();
-builder.Services.AddSingleton<GamesMockRepository>();
-builder.Services.AddSingleton<UsersMockRepository>();
-builder.Services.AddSingleton<ReviewsMockRepository>();
-builder.Services.AddSingleton<GameEntriesMockRepository>();
+// Register EF Repositories
+builder.Services.AddScoped<DevelopersRepository>();
+builder.Services.AddScoped<GenresRepository>();
+builder.Services.AddScoped<PlatformsRepository>();
+builder.Services.AddScoped<GamesRepository>();
+builder.Services.AddScoped<UsersRepository>();
+builder.Services.AddScoped<ReviewsRepository>();
+builder.Services.AddScoped<GameEntriesRepository>();
 
 var app = builder.Build();
 
