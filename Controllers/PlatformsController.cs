@@ -3,6 +3,7 @@ using VideoGameTracker.Data;
 
 namespace VideoGameTracker.Controllers
 {
+    [Route("platforms")]
     public class PlatformsController : Controller
     {
         private readonly PlatformsRepository _platformsRepository;
@@ -12,12 +13,14 @@ namespace VideoGameTracker.Controllers
             _platformsRepository = platformsRepository;
         }
 
+        [HttpGet("")]
         public IActionResult Index()
         {
             var platforms = _platformsRepository.GetAll();
             return View(platforms);
         }
 
+        [HttpGet("{id:int}")]
         public IActionResult Details(int id)
         {
             var platform = _platformsRepository.GetById(id);

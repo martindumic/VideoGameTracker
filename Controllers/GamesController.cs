@@ -3,6 +3,7 @@ using VideoGameTracker.Data;
 
 namespace VideoGameTracker.Controllers
 {
+    [Route("games")]
     public class GamesController : Controller
     {
         private readonly GamesRepository _gamesRepository;
@@ -12,12 +13,14 @@ namespace VideoGameTracker.Controllers
             _gamesRepository = gamesRepository;
         }
 
+        [HttpGet("")]
         public IActionResult Index()
         {
             var games = _gamesRepository.GetAll();
             return View(games);
         }
 
+        [HttpGet("{id:int}")]
         public IActionResult Details(int id)
         {
             var game = _gamesRepository.GetById(id);

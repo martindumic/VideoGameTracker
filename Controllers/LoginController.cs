@@ -4,6 +4,7 @@ using VideoGameTracker.Models;
 
 namespace VideoGameTracker.Controllers
 {
+    [Route("login")]
     public class LoginController : Controller
     {
         private readonly UsersRepository _usersRepository;
@@ -13,7 +14,8 @@ namespace VideoGameTracker.Controllers
             _usersRepository = usersRepository;
         }
 
-        [HttpGet]
+        [HttpGet("")]
+        [HttpGet("/")]
         public IActionResult Index()
         {
             // Ako je korisnik već prijavljen, preusmjeri na Home
@@ -24,7 +26,7 @@ namespace VideoGameTracker.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("")]
         public IActionResult Index(string email, string password)
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
@@ -50,6 +52,7 @@ namespace VideoGameTracker.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet("logout")]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

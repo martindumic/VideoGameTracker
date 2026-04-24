@@ -5,6 +5,7 @@ using VideoGameTracker.Models;
 
 namespace VideoGameTracker.Controllers
 {
+    [Route("home")]
     public class HomeController : Controller
     {
         private readonly UsersRepository _usersRepository;
@@ -24,6 +25,7 @@ namespace VideoGameTracker.Controllers
             _reviewsRepository = reviewsRepository;
         }
 
+        [HttpGet("")]
         public IActionResult Index()
         {
             // Provjeri dali je korisnik prijavljen
@@ -52,7 +54,7 @@ namespace VideoGameTracker.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("create-game-entry")]
         public IActionResult CreateGameEntry(int gameId, GameStatus status, int hoursPlayed, string comment, int score)
         {
             // Provjeri dali je korisnik prijavljen
@@ -98,12 +100,14 @@ namespace VideoGameTracker.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet("privacy")]
         public IActionResult Privacy()
         {
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [HttpGet("error")]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
