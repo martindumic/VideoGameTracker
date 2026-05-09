@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<VideoGameTrackerDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("VideoGameTrackerDb")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("VideoGameTrackerDb")));
 
 builder.Services.AddSession(options =>
 {
@@ -24,7 +24,6 @@ builder.Services.AddScoped<GenresRepository>();
 builder.Services.AddScoped<PlatformsRepository>();
 builder.Services.AddScoped<GamesRepository>();
 builder.Services.AddScoped<UsersRepository>();
-builder.Services.AddScoped<ReviewsRepository>();
 builder.Services.AddScoped<GameEntriesRepository>();
 
 var app = builder.Build();

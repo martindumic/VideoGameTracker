@@ -17,12 +17,9 @@ namespace VideoGameTracker.Models
 
         public virtual ICollection<GameEntry> GameEntries { get; set; }
 
-        public virtual ICollection<Review> Reviews { get; set; }
-
         public User()
         {
             GameEntries = new List<GameEntry>();
-            Reviews = new List<Review>();
         }
     }
 }

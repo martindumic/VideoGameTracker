@@ -75,27 +75,6 @@
             </div>
         }
 
-        @if (Model.Reviews.Any())
-        {
-            <div class="row">
-                <div class="col-12">
-                    <h5>Reviews (@Model.Reviews.Count)</h5>
-                    <ul class="list-group">
-                        @foreach (var review in Model.Reviews)
-                        {
-                            <li class="list-group-item">
-                                <div>
-                                    <strong>@review.User?.Username</strong>
-                                    <span class="badge bg-warning ms-2">@review.Score/100</span>
-                                </div>
-                                <small>@review.CreatedAt.ToString("dd/MM/yyyy")</small>
-                                <p class="mt-2">@review.Comment</p>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        }
     </div>
 </div>
 

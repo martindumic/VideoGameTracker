@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        @if (Model.Review != null)
+        @if (Model.ReviewScore.HasValue || !string.IsNullOrWhiteSpace(Model.ReviewComment))
         {
             <div class="row mb-3">
                 <div class="col-12">
@@ -57,15 +57,15 @@
                         <div class="mario-detail-box-body">
                             <p>
                                 <strong>Score:</strong>
-                                <span class="badge bg-warning">@Model.Review.Score/100</span>
+                                <span class="badge bg-warning">@Model.ReviewScore/100</span>
                             </p>
                             <p>
                                 <strong>Comment:</strong>
-                                @Model.Review.Comment
+                                @Model.ReviewComment
                             </p>
                             <p>
                                 <strong>Created:</strong>
-                                @Model.Review.CreatedAt.ToString("dd/MM/yyyy")
+                                @(Model.ReviewCreatedAt?.ToString("dd/MM/yyyy") ?? "-")
                             </p>
                         </div>
                     </div>

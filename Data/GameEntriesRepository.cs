@@ -15,13 +15,11 @@ public class GameEntriesRepository
     public List<GameEntry> GetAll() => _dbContext.GameEntries
         .Include(e => e.Game)
         .Include(e => e.User)
-        .Include(e => e.Review)
         .ToList();
 
     public GameEntry? GetById(int id) => _dbContext.GameEntries
         .Include(e => e.Game)
         .Include(e => e.User)
-        .Include(e => e.Review)
         .FirstOrDefault(e => e.Id == id);
 
     public void Add(GameEntry gameEntry)

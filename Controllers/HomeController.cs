@@ -11,18 +11,15 @@ namespace VideoGameTracker.Controllers
         private readonly UsersRepository _usersRepository;
         private readonly GamesRepository _gamesRepository;
         private readonly GameEntriesRepository _gameEntriesRepository;
-        private readonly ReviewsRepository _reviewsRepository;
 
         public HomeController(
             UsersRepository usersRepository,
             GamesRepository gamesRepository,
-            GameEntriesRepository gameEntriesRepository,
-            ReviewsRepository reviewsRepository)
+            GameEntriesRepository gameEntriesRepository)
         {
             _usersRepository = usersRepository;
             _gamesRepository = gamesRepository;
             _gameEntriesRepository = gameEntriesRepository;
-            _reviewsRepository = reviewsRepository;
         }
 
         [HttpGet("")]
@@ -73,17 +70,6 @@ namespace VideoGameTracker.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Kreiraj Review
-            var review = new Review
-            {
-                UserId = user.Id,
-                GameId = game.Id,
-                Score = score,
-                Comment = comment,
-                CreatedAt = DateTime.Now
-            };
-            _reviewsRepository.Add(review);
-
             // Kreiraj GameEntry
             var gameEntry = new GameEntry
             {
@@ -92,7 +78,9 @@ namespace VideoGameTracker.Controllers
                 Status = status,
                 DateAdded = DateTime.Now,
                 HoursPlayed = hoursPlayed,
-                ReviewId = review.Id
+                ReviewScore = score,
+                ReviewComment = string.IsNullOrWhiteSpace(comment) ? null : comment,
+                ReviewCreatedAt = DateTime.Now
             };
             _gameEntriesRepository.Add(gameEntry);
 

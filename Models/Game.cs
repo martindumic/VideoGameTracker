@@ -25,15 +25,12 @@ public class Game
 
     public virtual ICollection<Platform> Platforms { get; set; }
 
-    public virtual ICollection<Review> Reviews { get; set; }
-
     public virtual ICollection<GameEntry> GameEntries { get; set; }
 
     public Game()
     {
         Genres = new List<Genre>();
         Platforms = new List<Platform>();
-        Reviews = new List<Review>();
         GameEntries = new List<GameEntry>();
     }
 }

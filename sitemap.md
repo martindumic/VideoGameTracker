@@ -27,11 +27,6 @@
 - GET /users -> UsersController.Index -> Views/Users/Index.cshtml
 - GET /users/{id} -> UsersController.Details -> Views/Users/Details.cshtml
 
-## Reviews
-
-- GET /reviews -> ReviewsController.Index -> Views/Reviews/Index.cshtml
-- GET /reviews/{id} -> ReviewsController.Details -> Views/Reviews/Details.cshtml
-
 ## Game Entries
 
 - GET /game-entries -> GameEntriesController.Index -> Views/GameEntries/Index.cshtml

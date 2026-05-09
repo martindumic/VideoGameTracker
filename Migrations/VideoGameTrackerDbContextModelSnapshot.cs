@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideoGameTracker.Data;
 
@@ -16,19 +15,15 @@ namespace VideoGameTracker.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
 
             modelBuilder.Entity("GameGenres", b =>
                 {
                     b.Property<int>("GamesId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("GenresId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("GamesId", "GenresId");
 
@@ -127,10 +122,10 @@ namespace VideoGameTracker.Migrations
             modelBuilder.Entity("GamePlatforms", b =>
                 {
                     b.Property<int>("GamesId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("PlatformsId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("GamesId", "PlatformsId");
 
@@ -235,21 +230,19 @@ namespace VideoGameTracker.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Founded")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -286,24 +279,22 @@ namespace VideoGameTracker.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("AverageRating")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("DeveloperId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ReleaseYear")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -399,35 +390,35 @@ namespace VideoGameTracker.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateAdded")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("GameId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("HoursPlayed")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ReviewId")
-                        .HasColumnType("int");
+                    b.Property<string>("ReviewComment")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ReviewCreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ReviewScore")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Status")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GameId");
-
-                    b.HasIndex("ReviewId")
-                        .IsUnique()
-                        .HasFilter("[ReviewId] IS NOT NULL");
 
                     b.HasIndex("UserId");
 
@@ -440,7 +431,9 @@ namespace VideoGameTracker.Migrations
                             DateAdded = new DateTime(2022, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 1,
                             HoursPlayed = 150,
-                            ReviewId = 1,
+                            ReviewComment = "Amazing game, incredible story and characters!",
+                            ReviewCreatedAt = new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewScore = 95,
                             Status = 2,
                             UserId = 1
                         },
@@ -450,7 +443,9 @@ namespace VideoGameTracker.Migrations
                             DateAdded = new DateTime(2022, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 1,
                             HoursPlayed = 200,
-                            ReviewId = 2,
+                            ReviewComment = "Best RPG I've ever played!",
+                            ReviewCreatedAt = new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewScore = 98,
                             Status = 2,
                             UserId = 2
                         },
@@ -460,7 +455,9 @@ namespace VideoGameTracker.Migrations
                             DateAdded = new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 4,
                             HoursPlayed = 80,
-                            ReviewId = 3,
+                            ReviewComment = "Great open-world gameplay",
+                            ReviewCreatedAt = new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewScore = 90,
                             Status = 1,
                             UserId = 1
                         },
@@ -470,7 +467,9 @@ namespace VideoGameTracker.Migrations
                             DateAdded = new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 8,
                             HoursPlayed = 45,
-                            ReviewId = 4,
+                            ReviewComment = "Competitive and fun",
+                            ReviewCreatedAt = new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewScore = 85,
                             Status = 1,
                             UserId = 3
                         },
@@ -480,7 +479,9 @@ namespace VideoGameTracker.Migrations
                             DateAdded = new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 2,
                             HoursPlayed = 120,
-                            ReviewId = 5,
+                            ReviewComment = "Good game, but buggy at launch",
+                            ReviewCreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewScore = 75,
                             Status = 2,
                             UserId = 2
                         },
@@ -490,7 +491,9 @@ namespace VideoGameTracker.Migrations
                             DateAdded = new DateTime(2022, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 5,
                             HoursPlayed = 180,
-                            ReviewId = 6,
+                            ReviewComment = "Outstanding story and immersion",
+                            ReviewCreatedAt = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewScore = 96,
                             Status = 2,
                             UserId = 3
                         },
@@ -518,15 +521,13 @@ namespace VideoGameTracker.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -563,15 +564,13 @@ namespace VideoGameTracker.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Type")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -598,113 +597,23 @@ namespace VideoGameTracker.Migrations
                         });
                 });
 
-            modelBuilder.Entity("VideoGameTracker.Models.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Reviews");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Comment = "Amazing game, incredible story and characters!",
-                            CreatedAt = new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GameId = 1,
-                            Score = 95,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Comment = "Best RPG I've ever played!",
-                            CreatedAt = new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GameId = 1,
-                            Score = 98,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Comment = "Great open-world gameplay",
-                            CreatedAt = new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GameId = 4,
-                            Score = 90,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Comment = "Competitive and fun",
-                            CreatedAt = new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GameId = 8,
-                            Score = 85,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Comment = "Good game, but buggy at launch",
-                            CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GameId = 2,
-                            Score = 75,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Comment = "Outstanding story and immersion",
-                            CreatedAt = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GameId = 5,
-                            Score = 96,
-                            UserId = 3
-                        });
-                });
-
             modelBuilder.Entity("VideoGameTracker.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("RegisteredAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -786,36 +695,10 @@ namespace VideoGameTracker.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("VideoGameTracker.Models.Review", "Review")
-                        .WithOne()
-                        .HasForeignKey("VideoGameTracker.Models.GameEntry", "ReviewId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.HasOne("VideoGameTracker.Models.User", "User")
                         .WithMany("GameEntries")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Game");
-
-                    b.Navigation("Review");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("VideoGameTracker.Models.Review", b =>
-                {
-                    b.HasOne("VideoGameTracker.Models.Game", "Game")
-                        .WithMany("Reviews")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VideoGameTracker.Models.User", "User")
-                        .WithMany("Reviews")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Game");
@@ -831,15 +714,11 @@ namespace VideoGameTracker.Migrations
             modelBuilder.Entity("VideoGameTracker.Models.Game", b =>
                 {
                     b.Navigation("GameEntries");
-
-                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("VideoGameTracker.Models.User", b =>
                 {
                     b.Navigation("GameEntries");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

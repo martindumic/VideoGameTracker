@@ -24,8 +24,9 @@ public class GameEntry
 
     public int HoursPlayed { get; set; }
 
-    [ForeignKey(nameof(Review))]
-    public int? ReviewId { get; set; }
+    public int? ReviewScore { get; set; }
 
-    public virtual Review? Review { get; set; }
+    public string? ReviewComment { get; set; }
+
+    public DateTime? ReviewCreatedAt { get; set; }
 }

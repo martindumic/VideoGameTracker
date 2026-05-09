@@ -15,7 +15,6 @@ public class VideoGameTrackerDbContext : DbContext
     public DbSet<GameEntry> GameEntries => Set<GameEntry>();
     public DbSet<Genre> Genres => Set<Genre>();
     public DbSet<Platform> Platforms => Set<Platform>();
-    public DbSet<Review> Reviews => Set<Review>();
     public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,18 +27,6 @@ public class VideoGameTrackerDbContext : DbContext
             .HasForeignKey(g => g.DeveloperId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        modelBuilder.Entity<Review>()
-            .HasOne(r => r.Game)
-            .WithMany(g => g.Reviews)
-            .HasForeignKey(r => r.GameId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        modelBuilder.Entity<Review>()
-            .HasOne(r => r.User)
-            .WithMany(u => u.Reviews)
-            .HasForeignKey(r => r.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
-
         modelBuilder.Entity<GameEntry>()
             .HasOne(ge => ge.Game)
             .WithMany(g => g.GameEntries)
@@ -51,12 +38,6 @@ public class VideoGameTrackerDbContext : DbContext
             .WithMany(u => u.GameEntries)
             .HasForeignKey(ge => ge.UserId)
             .OnDelete(DeleteBehavior.Restrict);
-
-        modelBuilder.Entity<GameEntry>()
-            .HasOne(ge => ge.Review)
-            .WithOne()
-            .HasForeignKey<GameEntry>(ge => ge.ReviewId)
-            .OnDelete(DeleteBehavior.SetNull);
 
         modelBuilder.Entity<Game>()
             .HasMany(g => g.Genres)
@@ -110,24 +91,15 @@ public class VideoGameTrackerDbContext : DbContext
             new Game { Id = 9, Title = "Half-Life: Alyx", ReleaseYear = 2020, Description = "VR prequel to Half-Life 2", DeveloperId = 3, AverageRating = 93 }
         );
 
-        modelBuilder.Entity<Review>().HasData(
-            new Review { Id = 1, UserId = 1, GameId = 1, Score = 95, Comment = "Amazing game, incredible story and characters!", CreatedAt = new DateTime(2023, 5, 10) },
-            new Review { Id = 2, UserId = 2, GameId = 1, Score = 98, Comment = "Best RPG I've ever played!", CreatedAt = new DateTime(2023, 6, 15) },
-            new Review { Id = 3, UserId = 1, GameId = 4, Score = 90, Comment = "Great open-world gameplay", CreatedAt = new DateTime(2023, 7, 20) },
-            new Review { Id = 4, UserId = 3, GameId = 8, Score = 85, Comment = "Competitive and fun", CreatedAt = new DateTime(2023, 8, 25) },
-            new Review { Id = 5, UserId = 2, GameId = 2, Score = 75, Comment = "Good game, but buggy at launch", CreatedAt = new DateTime(2023, 9, 1) },
-            new Review { Id = 6, UserId = 3, GameId = 5, Score = 96, Comment = "Outstanding story and immersion", CreatedAt = new DateTime(2023, 10, 5) }
-        );
-
         modelBuilder.Entity<GameEntry>().HasData(
-            new GameEntry { Id = 1, GameId = 1, UserId = 1, Status = GameStatus.Finished, DateAdded = new DateTime(2022, 3, 10), HoursPlayed = 150, ReviewId = 1 },
-            new GameEntry { Id = 2, GameId = 1, UserId = 2, Status = GameStatus.Finished, DateAdded = new DateTime(2022, 5, 15), HoursPlayed = 200, ReviewId = 2 },
-            new GameEntry { Id = 3, GameId = 4, UserId = 1, Status = GameStatus.Playing, DateAdded = new DateTime(2023, 6, 20), HoursPlayed = 80, ReviewId = 3 },
-            new GameEntry { Id = 4, GameId = 8, UserId = 3, Status = GameStatus.Playing, DateAdded = new DateTime(2023, 9, 10), HoursPlayed = 45, ReviewId = 4 },
-            new GameEntry { Id = 5, GameId = 2, UserId = 2, Status = GameStatus.Finished, DateAdded = new DateTime(2021, 1, 5), HoursPlayed = 120, ReviewId = 5 },
-            new GameEntry { Id = 6, GameId = 5, UserId = 3, Status = GameStatus.Finished, DateAdded = new DateTime(2022, 8, 15), HoursPlayed = 180, ReviewId = 6 },
-            new GameEntry { Id = 7, GameId = 7, UserId = 3, Status = GameStatus.Planned, DateAdded = new DateTime(2023, 11, 1), HoursPlayed = 0, ReviewId = null },
-            new GameEntry { Id = 8, GameId = 3, UserId = 2, Status = GameStatus.Finished, DateAdded = new DateTime(2020, 10, 20), HoursPlayed = 95, ReviewId = null }
+            new GameEntry { Id = 1, GameId = 1, UserId = 1, Status = GameStatus.Finished, DateAdded = new DateTime(2022, 3, 10), HoursPlayed = 150, ReviewScore = 95, ReviewComment = "Amazing game, incredible story and characters!", ReviewCreatedAt = new DateTime(2023, 5, 10) },
+            new GameEntry { Id = 2, GameId = 1, UserId = 2, Status = GameStatus.Finished, DateAdded = new DateTime(2022, 5, 15), HoursPlayed = 200, ReviewScore = 98, ReviewComment = "Best RPG I've ever played!", ReviewCreatedAt = new DateTime(2023, 6, 15) },
+            new GameEntry { Id = 3, GameId = 4, UserId = 1, Status = GameStatus.Playing, DateAdded = new DateTime(2023, 6, 20), HoursPlayed = 80, ReviewScore = 90, ReviewComment = "Great open-world gameplay", ReviewCreatedAt = new DateTime(2023, 7, 20) },
+            new GameEntry { Id = 4, GameId = 8, UserId = 3, Status = GameStatus.Playing, DateAdded = new DateTime(2023, 9, 10), HoursPlayed = 45, ReviewScore = 85, ReviewComment = "Competitive and fun", ReviewCreatedAt = new DateTime(2023, 8, 25) },
+            new GameEntry { Id = 5, GameId = 2, UserId = 2, Status = GameStatus.Finished, DateAdded = new DateTime(2021, 1, 5), HoursPlayed = 120, ReviewScore = 75, ReviewComment = "Good game, but buggy at launch", ReviewCreatedAt = new DateTime(2023, 9, 1) },
+            new GameEntry { Id = 6, GameId = 5, UserId = 3, Status = GameStatus.Finished, DateAdded = new DateTime(2022, 8, 15), HoursPlayed = 180, ReviewScore = 96, ReviewComment = "Outstanding story and immersion", ReviewCreatedAt = new DateTime(2023, 10, 5) },
+            new GameEntry { Id = 7, GameId = 7, UserId = 3, Status = GameStatus.Planned, DateAdded = new DateTime(2023, 11, 1), HoursPlayed = 0, ReviewScore = null, ReviewComment = null, ReviewCreatedAt = null },
+            new GameEntry { Id = 8, GameId = 3, UserId = 2, Status = GameStatus.Finished, DateAdded = new DateTime(2020, 10, 20), HoursPlayed = 95, ReviewScore = null, ReviewComment = null, ReviewCreatedAt = null }
         );
 
         modelBuilder.Entity("GameGenres").HasData(

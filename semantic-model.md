@@ -24,7 +24,6 @@ Glavna svojstva:
 - AverageRating
 - Genres
 - Platforms
-- Reviews
 - GameEntries
 
 ## GameEntry
@@ -39,8 +38,9 @@ Glavna svojstva:
 - Status
 - DateAdded
 - HoursPlayed
-- ReviewId
-- Review
+- ReviewScore
+- ReviewComment
+- ReviewCreatedAt
 
 ## Genre
 Kratki opis: Zanr igre (npr. RPG, Action).
@@ -60,19 +60,6 @@ Glavna svojstva:
 - Type
 - Games
 
-## Review
-Kratki opis: Korisnicka recenzija igre s ocjenom i komentarom.
-
-Glavna svojstva:
-- Id
-- UserId
-- User
-- GameId
-- Game
-- Score
-- Comment
-- CreatedAt
-
 ## User
 Kratki opis: Korisnik aplikacije.
 
@@ -83,14 +70,11 @@ Glavna svojstva:
 - Password
 - RegisteredAt
 - GameEntries
-- Reviews
 
 ## Veze medu entitetima
 
 1-N veze:
 - Developer -> Game (1:N), FK: Game.DeveloperId
-- Game -> Review (1:N), FK: Review.GameId
-- User -> Review (1:N), FK: Review.UserId
 - Game -> GameEntry (1:N), FK: GameEntry.GameId
 - User -> GameEntry (1:N), FK: GameEntry.UserId
 
@@ -99,4 +83,4 @@ N-N veze:
 - Game <-> Platform (N:N), join tablica: GamePlatforms
 
 Opcionalne veze:
-- GameEntry -> Review (0..1:1), FK: GameEntry.ReviewId (nullable)
+- GameEntry ima opcionalne recenzijske podatke (ReviewScore, ReviewComment, ReviewCreatedAt).

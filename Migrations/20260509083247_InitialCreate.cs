@@ -17,12 +17,12 @@ namespace VideoGameTracker.Migrations
                 name: "Developers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Founded = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Country = table.Column<string>(type: "TEXT", nullable: true),
+                    Founded = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -33,10 +33,10 @@ namespace VideoGameTracker.Migrations
                 name: "Genres",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,10 +47,10 @@ namespace VideoGameTracker.Migrations
                 name: "Platforms",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Type = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Type = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,12 +61,12 @@ namespace VideoGameTracker.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RegisteredAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Username = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    Password = table.Column<string>(type: "TEXT", nullable: true),
+                    RegisteredAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,13 +77,13 @@ namespace VideoGameTracker.Migrations
                 name: "Games",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ReleaseYear = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeveloperId = table.Column<int>(type: "int", nullable: false),
-                    AverageRating = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: true),
+                    ReleaseYear = table.Column<int>(type: "INTEGER", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    DeveloperId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AverageRating = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,11 +97,43 @@ namespace VideoGameTracker.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GameEntries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    GameId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    DateAdded = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    HoursPlayed = table.Column<int>(type: "INTEGER", nullable: false),
+                    ReviewScore = table.Column<int>(type: "INTEGER", nullable: true),
+                    ReviewComment = table.Column<string>(type: "TEXT", nullable: true),
+                    ReviewCreatedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GameEntries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GameEntries_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_GameEntries_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GameGenres",
                 columns: table => new
                 {
-                    GamesId = table.Column<int>(type: "int", nullable: false),
-                    GenresId = table.Column<int>(type: "int", nullable: false)
+                    GamesId = table.Column<int>(type: "INTEGER", nullable: false),
+                    GenresId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,8 +156,8 @@ namespace VideoGameTracker.Migrations
                 name: "GamePlatforms",
                 columns: table => new
                 {
-                    GamesId = table.Column<int>(type: "int", nullable: false),
-                    PlatformsId = table.Column<int>(type: "int", nullable: false)
+                    GamesId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PlatformsId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,71 +174,6 @@ namespace VideoGameTracker.Migrations
                         principalTable: "Platforms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Reviews",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    GameId = table.Column<int>(type: "int", nullable: false),
-                    Score = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reviews", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reviews_Games_GameId",
-                        column: x => x.GameId,
-                        principalTable: "Games",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reviews_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GameEntries",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GameId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HoursPlayed = table.Column<int>(type: "int", nullable: false),
-                    ReviewId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GameEntries", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_GameEntries_Games_GameId",
-                        column: x => x.GameId,
-                        principalTable: "Games",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_GameEntries_Reviews_ReviewId",
-                        column: x => x.ReviewId,
-                        principalTable: "Reviews",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_GameEntries_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -268,11 +235,17 @@ namespace VideoGameTracker.Migrations
 
             migrationBuilder.InsertData(
                 table: "GameEntries",
-                columns: new[] { "Id", "DateAdded", "GameId", "HoursPlayed", "ReviewId", "Status", "UserId" },
+                columns: new[] { "Id", "DateAdded", "GameId", "HoursPlayed", "ReviewComment", "ReviewCreatedAt", "ReviewScore", "Status", "UserId" },
                 values: new object[,]
                 {
-                    { 7, new DateTime(2023, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, 0, null, 0, 3 },
-                    { 8, new DateTime(2020, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 95, null, 2, 2 }
+                    { 1, new DateTime(2022, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 150, "Amazing game, incredible story and characters!", new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 95, 2, 1 },
+                    { 2, new DateTime(2022, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 200, "Best RPG I've ever played!", new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 98, 2, 2 },
+                    { 3, new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 80, "Great open-world gameplay", new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 90, 1, 1 },
+                    { 4, new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 8, 45, "Competitive and fun", new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 85, 1, 3 },
+                    { 5, new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 120, "Good game, but buggy at launch", new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 75, 2, 2 },
+                    { 6, new DateTime(2022, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 180, "Outstanding story and immersion", new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 96, 2, 3 },
+                    { 7, new DateTime(2023, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, 0, null, null, null, 0, 3 },
+                    { 8, new DateTime(2020, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 95, null, null, null, 2, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -324,43 +297,10 @@ namespace VideoGameTracker.Migrations
                     { 9, 1 }
                 });
 
-            migrationBuilder.InsertData(
-                table: "Reviews",
-                columns: new[] { "Id", "Comment", "CreatedAt", "GameId", "Score", "UserId" },
-                values: new object[,]
-                {
-                    { 1, "Amazing game, incredible story and characters!", new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 95, 1 },
-                    { 2, "Best RPG I've ever played!", new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 98, 2 },
-                    { 3, "Great open-world gameplay", new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 90, 1 },
-                    { 4, "Competitive and fun", new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 8, 85, 3 },
-                    { 5, "Good game, but buggy at launch", new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 75, 2 },
-                    { 6, "Outstanding story and immersion", new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 96, 3 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "GameEntries",
-                columns: new[] { "Id", "DateAdded", "GameId", "HoursPlayed", "ReviewId", "Status", "UserId" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2022, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 150, 1, 2, 1 },
-                    { 2, new DateTime(2022, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 200, 2, 2, 2 },
-                    { 3, new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 80, 3, 1, 1 },
-                    { 4, new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 8, 45, 4, 1, 3 },
-                    { 5, new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 120, 5, 2, 2 },
-                    { 6, new DateTime(2022, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 180, 6, 2, 3 }
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_GameEntries_GameId",
                 table: "GameEntries",
                 column: "GameId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GameEntries_ReviewId",
-                table: "GameEntries",
-                column: "ReviewId",
-                unique: true,
-                filter: "[ReviewId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameEntries_UserId",
@@ -381,16 +321,6 @@ namespace VideoGameTracker.Migrations
                 name: "IX_Games_DeveloperId",
                 table: "Games",
                 column: "DeveloperId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reviews_GameId",
-                table: "Reviews",
-                column: "GameId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reviews_UserId",
-                table: "Reviews",
-                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -406,19 +336,16 @@ namespace VideoGameTracker.Migrations
                 name: "GamePlatforms");
 
             migrationBuilder.DropTable(
-                name: "Reviews");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Genres");
 
             migrationBuilder.DropTable(
-                name: "Platforms");
-
-            migrationBuilder.DropTable(
                 name: "Games");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Platforms");
 
             migrationBuilder.DropTable(
                 name: "Developers");

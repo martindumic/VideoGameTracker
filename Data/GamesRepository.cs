@@ -21,7 +21,5 @@ public class GamesRepository
         .Include(g => g.Developer)
         .Include(g => g.Genres)
         .Include(g => g.Platforms)
-        .Include(g => g.Reviews)
-            .ThenInclude(r => r.User)
         .FirstOrDefault(g => g.Id == id);
 }

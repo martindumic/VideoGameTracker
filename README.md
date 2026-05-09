@@ -7,32 +7,17 @@ ASP.NET Core MVC aplikacija za praćenje video igara, developera, žanrova, plat
 ### Preduvjeti
 
 - Instaliran .NET 10 SDK
-- Instaliran i pokrenut Docker Desktop
 - Preuzet ili kopiran cijeli projekt
 
-### 1. Pokreni SQL Server container
+### 1. Provjeri connection string
 
-U terminalu pokreni:
-
-```bash
-docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=VideoGame123! -p 1433:1433 --name vgt-sql -d mcr.microsoft.com/mssql/server:2022-latest
-```
-
-Ako je container već jednom kreiran i samo ga želiš ponovno upaliti, koristi:
-
-```bash
-docker start vgt-sql
-```
-
-### 2. Provjeri connection string
-
-U datoteci [appsettings.json](appsettings.json) connection string mora pokazivati na lokalni SQL Server container:
+U datoteci [appsettings.json](appsettings.json) connection string mora pokazivati na lokalnu SQLite datoteku:
 
 ```json
-"Server=localhost,1433;Database=VideoGameTrackerDb;User Id=sa;Password=VideoGame123!;TrustServerCertificate=True;MultipleActiveResultSets=True"
+"Data Source=VideoGameTracker.db"
 ```
 
-### 3. Vrati NuGet pakete
+### 2. Vrati NuGet pakete
 
 Iz roota rješenja pokreni:
 
@@ -40,7 +25,7 @@ Iz roota rješenja pokreni:
 dotnet restore
 ```
 
-### 4. Primijeni migracije
+### 3. Primijeni migracije
 
 Prije prvog pokretanja baze primijeni EF migracije:
 
@@ -50,13 +35,13 @@ dotnet ef database update --project VideoGameTracker.csproj --startup-project Vi
 
 Ova naredba će kreirati bazu i tablice prema postojećim migracijama u folderu [Migrations](Migrations).
 
-### 5. Pokreni aplikaciju
+### 4. Pokreni aplikaciju
 
 ```bash
 dotnet run --project VideoGameTracker.csproj
 ```
 
-### 6. Otvori aplikaciju u pregledniku
+### 5. Otvori aplikaciju u pregledniku
 
 Po pokretanju aplikacija će ispisati lokalnu adresu, najčešće nešto poput:
 
@@ -70,4 +55,4 @@ Otvori tu adresu u browseru.
 
 - `dotnet ef migrations add ...` se koristi samo kada mijenjaš modele i želiš generirati novu migraciju.
 - `dotnet ef database update` samo primjenjuje postojeće migracije na bazu.
-- Ako premještaš projekt na novo računalo, dovoljno je imati kod, Docker i .NET SDK; baza se može ponovno izgraditi kroz migracije.
+- Ako premještaš projekt na novo računalo, dovoljno je imati kod i .NET SDK; baza se može ponovno izgraditi kroz migracije.
