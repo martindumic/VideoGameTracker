@@ -36,11 +36,10 @@ Glavna svojstva:
 - UserId
 - User
 - Status
-- DateAdded
+- CreatedAt
 - HoursPlayed
 - ReviewScore
 - ReviewComment
-- ReviewCreatedAt
 
 ## Genre
 Kratki opis: Zanr igre (npr. RPG, Action).
@@ -83,4 +82,4 @@ N-N veze:
 - Game <-> Platform (N:N), join tablica: GamePlatforms
 
 Opcionalne veze:
-- GameEntry ima opcionalne recenzijske podatke (ReviewScore, ReviewComment, ReviewCreatedAt).
+- GameEntry ima opcionalne recenzijske podatke (ReviewScore, ReviewComment).

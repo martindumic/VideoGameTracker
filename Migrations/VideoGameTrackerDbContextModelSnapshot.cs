@@ -392,7 +392,7 @@ namespace VideoGameTracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("DateAdded")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("GameId")
@@ -402,9 +402,6 @@ namespace VideoGameTracker.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ReviewComment")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("ReviewCreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("ReviewScore")
@@ -428,11 +425,10 @@ namespace VideoGameTracker.Migrations
                         new
                         {
                             Id = 1,
-                            DateAdded = new DateTime(2022, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2022, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 1,
                             HoursPlayed = 150,
                             ReviewComment = "Amazing game, incredible story and characters!",
-                            ReviewCreatedAt = new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReviewScore = 95,
                             Status = 2,
                             UserId = 1
@@ -440,11 +436,10 @@ namespace VideoGameTracker.Migrations
                         new
                         {
                             Id = 2,
-                            DateAdded = new DateTime(2022, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2022, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 1,
                             HoursPlayed = 200,
                             ReviewComment = "Best RPG I've ever played!",
-                            ReviewCreatedAt = new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReviewScore = 98,
                             Status = 2,
                             UserId = 2
@@ -452,11 +447,10 @@ namespace VideoGameTracker.Migrations
                         new
                         {
                             Id = 3,
-                            DateAdded = new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 4,
                             HoursPlayed = 80,
                             ReviewComment = "Great open-world gameplay",
-                            ReviewCreatedAt = new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReviewScore = 90,
                             Status = 1,
                             UserId = 1
@@ -464,11 +458,10 @@ namespace VideoGameTracker.Migrations
                         new
                         {
                             Id = 4,
-                            DateAdded = new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 8,
                             HoursPlayed = 45,
                             ReviewComment = "Competitive and fun",
-                            ReviewCreatedAt = new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReviewScore = 85,
                             Status = 1,
                             UserId = 3
@@ -476,11 +469,10 @@ namespace VideoGameTracker.Migrations
                         new
                         {
                             Id = 5,
-                            DateAdded = new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 2,
                             HoursPlayed = 120,
                             ReviewComment = "Good game, but buggy at launch",
-                            ReviewCreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReviewScore = 75,
                             Status = 2,
                             UserId = 2
@@ -488,11 +480,10 @@ namespace VideoGameTracker.Migrations
                         new
                         {
                             Id = 6,
-                            DateAdded = new DateTime(2022, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2022, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 5,
                             HoursPlayed = 180,
                             ReviewComment = "Outstanding story and immersion",
-                            ReviewCreatedAt = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReviewScore = 96,
                             Status = 2,
                             UserId = 3
@@ -500,7 +491,7 @@ namespace VideoGameTracker.Migrations
                         new
                         {
                             Id = 7,
-                            DateAdded = new DateTime(2023, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 7,
                             HoursPlayed = 0,
                             Status = 0,
@@ -509,7 +500,7 @@ namespace VideoGameTracker.Migrations
                         new
                         {
                             Id = 8,
-                            DateAdded = new DateTime(2020, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2020, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GameId = 3,
                             HoursPlayed = 95,
                             Status = 2,

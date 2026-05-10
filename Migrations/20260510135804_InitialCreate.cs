@@ -105,11 +105,10 @@ namespace VideoGameTracker.Migrations
                     GameId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     Status = table.Column<int>(type: "INTEGER", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     HoursPlayed = table.Column<int>(type: "INTEGER", nullable: false),
                     ReviewScore = table.Column<int>(type: "INTEGER", nullable: true),
-                    ReviewComment = table.Column<string>(type: "TEXT", nullable: true),
-                    ReviewCreatedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    ReviewComment = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -235,17 +234,17 @@ namespace VideoGameTracker.Migrations
 
             migrationBuilder.InsertData(
                 table: "GameEntries",
-                columns: new[] { "Id", "DateAdded", "GameId", "HoursPlayed", "ReviewComment", "ReviewCreatedAt", "ReviewScore", "Status", "UserId" },
+                columns: new[] { "Id", "CreatedAt", "GameId", "HoursPlayed", "ReviewComment", "ReviewScore", "Status", "UserId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 150, "Amazing game, incredible story and characters!", new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 95, 2, 1 },
-                    { 2, new DateTime(2022, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 200, "Best RPG I've ever played!", new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 98, 2, 2 },
-                    { 3, new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 80, "Great open-world gameplay", new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 90, 1, 1 },
-                    { 4, new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 8, 45, "Competitive and fun", new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 85, 1, 3 },
-                    { 5, new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 120, "Good game, but buggy at launch", new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 75, 2, 2 },
-                    { 6, new DateTime(2022, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 180, "Outstanding story and immersion", new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 96, 2, 3 },
-                    { 7, new DateTime(2023, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, 0, null, null, null, 0, 3 },
-                    { 8, new DateTime(2020, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 95, null, null, null, 2, 2 }
+                    { 1, new DateTime(2022, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 150, "Amazing game, incredible story and characters!", 95, 2, 1 },
+                    { 2, new DateTime(2022, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 200, "Best RPG I've ever played!", 98, 2, 2 },
+                    { 3, new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 80, "Great open-world gameplay", 90, 1, 1 },
+                    { 4, new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 8, 45, "Competitive and fun", 85, 1, 3 },
+                    { 5, new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 120, "Good game, but buggy at launch", 75, 2, 2 },
+                    { 6, new DateTime(2022, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 180, "Outstanding story and immersion", 96, 2, 3 },
+                    { 7, new DateTime(2023, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, 0, null, null, 0, 3 },
+                    { 8, new DateTime(2020, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 95, null, null, 2, 2 }
                 });
 
             migrationBuilder.InsertData(

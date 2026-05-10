@@ -28,7 +28,7 @@
                     <td>@entry.User?.Username</td>
                     <td><span class="badge bg-secondary">@entry.Status</span></td>
                     <td>@entry.HoursPlayed</td>
-                    <td>@entry.DateAdded.ToString("dd/MM/yyyy")</td>
+                    <td>@entry.CreatedAt.ToString("dd/MM/yyyy")</td>
                     <td>
                         <a asp-controller="GameEntries" asp-action="Details" asp-route-id="@entry.Id" class="btn btn-sm btn-primary">Details</a>
                     </td>

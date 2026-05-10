@@ -20,7 +20,7 @@ public class GameEntry
 
     public GameStatus Status { get; set; }
 
-    public DateTime DateAdded { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     public int HoursPlayed { get; set; }
 
@@ -28,5 +28,4 @@ public class GameEntry
 
     public string? ReviewComment { get; set; }
 
-    public DateTime? ReviewCreatedAt { get; set; }
 }

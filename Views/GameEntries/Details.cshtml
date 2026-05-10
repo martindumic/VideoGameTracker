@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-4">
                 <h5>Date Added</h5>
-                <p>@Model.DateAdded.ToString("dd/MM/yyyy")</p>
+                <p>@Model.CreatedAt.ToString("dd/MM/yyyy")</p>
             </div>
         </div>
 
@@ -65,7 +65,7 @@
                             </p>
                             <p>
                                 <strong>Created:</strong>
-                                @(Model.ReviewCreatedAt?.ToString("dd/MM/yyyy") ?? "-")
+                                @Model.CreatedAt.ToString("dd/MM/yyyy")
                             </p>
                         </div>
                     </div>

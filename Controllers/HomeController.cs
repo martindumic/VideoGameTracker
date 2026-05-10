@@ -76,11 +76,10 @@ namespace VideoGameTracker.Controllers
                 GameId = game.Id,
                 UserId = user.Id,
                 Status = status,
-                DateAdded = DateTime.Now,
+                CreatedAt = DateTime.Now,
                 HoursPlayed = hoursPlayed,
                 ReviewScore = score,
-                ReviewComment = string.IsNullOrWhiteSpace(comment) ? null : comment,
-                ReviewCreatedAt = DateTime.Now
+                ReviewComment = string.IsNullOrWhiteSpace(comment) ? null : comment
             };
             _gameEntriesRepository.Add(gameEntry);
 
