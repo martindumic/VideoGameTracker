@@ -1,0 +1,44 @@
+@model List<GameEntry>
+
+<div class="table-responsive mario-table-wrap">
+    <table class="table table-striped table-hover mario-table">
+        <thead>
+            <tr>
+                <th>Game</th>
+                <th>User</th>
+                <th>Status</th>
+                <th>Hours</th>
+                <th>Score</th>
+                <th>Review Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr>
+                    <td colspan="7" class="text-center">No game entries found.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var entry in Model)
+                {
+                    <tr>
+                        <td>@entry.Game?.Title</td>
+                        <td>@entry.User?.Username</td>
+                        <td><span class="badge bg-secondary">@entry.Status</span></td>
+                        <td>@entry.HoursPlayed</td>
+                        <td>@(entry.ReviewScore.HasValue ? entry.ReviewScore.Value.ToString() : "-")</td>
+                        <td>@entry.CreatedAt.ToString("g")</td>
+                        <td class="mario-action-row">
+                            <a asp-action="Details" asp-route-id="@entry.Id" class="btn btn-sm">Details</a>
+                            <a asp-action="Edit" asp-route-id="@entry.Id" class="btn btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@entry.Id" class="btn btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

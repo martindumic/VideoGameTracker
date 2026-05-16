@@ -1,0 +1,26 @@
+@model AutocompleteViewModel
+
+<div class="mario-autocomplete" data-autocomplete data-search-url="@Model.SearchUrl">
+    <label for="@Model.InputId" class="form-label">@Model.Label</label>
+    <div class="mario-autocomplete-input">
+        <input
+            type="text"
+            id="@Model.InputId"
+            name="@Model.InputName"
+            class="form-control mario-input js-autocomplete-input"
+            value="@Model.SelectedText"
+            placeholder="@Model.Placeholder"
+            autocomplete="off"
+            @(Model.IsRequired ? "required" : "") />
+        <input
+            type="hidden"
+            id="@Model.HiddenId"
+            name="@Model.HiddenName"
+            value="@Model.SelectedId"
+            class="js-autocomplete-hidden"
+            @(Model.IsRequired ? "data-val=\"true\"" : "")
+            @(Model.IsRequired ? $"data-val-required=\"{(!string.IsNullOrWhiteSpace(Model.Label) ? Model.Label + " is required." : "Selection is required.")}\"" : "") />
+        <span class="mario-autocomplete-spinner" aria-hidden="true"></span>
+    </div>
+    <div class="mario-autocomplete-results" role="listbox" aria-label="@Model.Label results"></div>
+</div>

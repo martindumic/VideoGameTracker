@@ -1,39 +1,44 @@
-@model List<GameEntry>
+@model GameEntryIndexViewModel
 
 @{
     ViewData["Title"] = "Game Entries";
+    ViewData["BodyClass"] = "page-mario page-game-entries";
 }
 
-<h1>@ViewData["Title"]</h1>
+<section class="mario-stage mario-stage-prose">
+    <div class="mario-panel mario-panel-wide mario-panel-split">
+        <div class="mario-panel-header">
+            <div>
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <a asp-action="Create" class="btn btn-sm">New Entry</a>
+        </div>
 
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Game</th>
-                <th>User</th>
-                <th>Status</th>
-                <th>Hours Played</th>
-                <th>Date Added</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var entry in Model)
-            {
-                <tr>
-                    <td>@entry.Id</td>
-                    <td>@entry.Game?.Title</td>
-                    <td>@entry.User?.Username</td>
-                    <td><span class="badge bg-secondary">@entry.Status</span></td>
-                    <td>@entry.HoursPlayed</td>
-                    <td>@entry.CreatedAt.ToString("dd/MM/yyyy")</td>
-                    <td>
-                        <a asp-controller="GameEntries" asp-action="Details" asp-route-id="@entry.Id" class="btn btn-sm btn-primary">Details</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        @if (TempData["Success"] != null)
+        {
+            <div class="login-alert home-alert login-alert-success" role="alert">@TempData["Success"]</div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="login-alert home-alert login-alert-error" role="alert">@TempData["Error"]</div>
+        }
+
+        <div class="mario-panel-card">
+            <div class="mario-search">
+                <label for="game-entry-search" class="form-label">Search entries</label>
+                <div class="mario-search-row">
+                    <input id="game-entry-search" type="text" class="form-control mario-input js-entry-search" placeholder="Search games, users, comments..." data-search-url="@Url.Action("Search", "GameEntries")" />
+                    <span class="mario-search-spinner" aria-hidden="true"></span>
+                </div>
+            </div>
+
+            <div id="game-entry-list" class="mario-list-region">
+                @await Html.PartialAsync("_GameEntryTable", Model.Entries)
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

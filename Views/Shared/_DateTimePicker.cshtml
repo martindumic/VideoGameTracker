@@ -1,0 +1,34 @@
+@model DateTimePickerViewModel
+
+<div class="mario-datetime" data-datetime>
+    <label for="@Model.InputId" class="form-label">@Model.Label</label>
+    <div class="mario-datetime-row">
+        <input
+            type="text"
+            id="@Model.InputId"
+            name="@Model.InputName"
+            class="form-control mario-input js-datetime-input"
+            value="@Model.Value"
+            placeholder="@Model.Placeholder"
+            autocomplete="off"
+            data-val="true"
+            data-val-required="@(!string.IsNullOrWhiteSpace(Model.Label) ? Model.Label + " is required." : "Date and time is required.")"
+            @(Model.IsRequired ? "required" : "") />
+    </div>
+    <div class="mario-datetime-popup" role="dialog" aria-hidden="true">
+        <div class="mario-datetime-popup-inner">
+            <div class="mario-datetime-header">
+                <span>Select date & time</span>
+                <button type="button" class="mario-datetime-close js-datetime-close" aria-label="Close">X</button>
+            </div>
+            <div class="mario-datetime-grid">
+                <div class="mario-datetime-calendar js-datetime-calendar"></div>
+            </div>
+            <div class="mario-datetime-actions">
+                <button type="button" class="btn btn-sm mario-inline-button js-datetime-now">Now</button>
+                <button type="button" class="btn btn-sm mario-inline-button mario-inline-button-muted js-datetime-clear">Clear</button>
+                <button type="button" class="btn btn-sm js-datetime-apply">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>

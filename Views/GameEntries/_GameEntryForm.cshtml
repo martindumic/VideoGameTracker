@@ -1,0 +1,79 @@
+@model GameEntryFormViewModel
+
+<div>
+    <div asp-validation-summary="ModelOnly" class="mario-validation-summary"></div>
+
+    @await Html.PartialAsync("_AutocompleteDropdown", new AutocompleteViewModel
+    {
+        Label = "Game",
+        InputName = "GameTitle",
+        InputId = "game-entry-game-title",
+        HiddenName = nameof(Model.GameId),
+        HiddenId = "game-entry-game-id",
+        SelectedText = Model.GameTitle,
+        SelectedId = Model.GameId,
+        Placeholder = "Start typing a game title...",
+        SearchUrl = Url.Action("SearchGames", "GameEntries") ?? string.Empty,
+        IsRequired = true
+    })
+    <span asp-validation-for="GameId" class="text-danger"></span>
+
+    @if (Model.CanSelectUser)
+    {
+        <div class="mb-3">
+            <label asp-for="UserId" class="form-label">User</label>
+            <select asp-for="UserId" asp-items="Model.UserOptions" class="form-select mario-input">
+                <option value="">Select user...</option>
+            </select>
+            <span asp-validation-for="UserId" class="text-danger"></span>
+        </div>
+    }
+    else
+    {
+        <div class="mb-3">
+            <label class="form-label">User</label>
+            <input type="text" class="form-control mario-input" value="@Model.Username" readonly />
+            <input type="hidden" asp-for="UserId" />
+        </div>
+    }
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label">Status</label>
+        <select asp-for="Status" asp-items="Model.StatusOptions" class="form-select mario-input">
+            <option value="">Select status...</option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="HoursPlayed" class="form-label">Hours Played</label>
+        <input asp-for="HoursPlayed" type="number" class="form-control mario-input" min="0" />
+        <span asp-validation-for="HoursPlayed" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ReviewScore" class="form-label">Score / Rating</label>
+        <input asp-for="ReviewScore" type="number" class="form-control mario-input" min="1" max="100" />
+        <span asp-validation-for="ReviewScore" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ReviewComment" class="form-label">Comment</label>
+        <textarea asp-for="ReviewComment" rows="4" class="form-control mario-input" placeholder="Write your review..."></textarea>
+        <span asp-validation-for="ReviewComment" class="text-danger"></span>
+    </div>
+
+    @await Html.PartialAsync("_DateTimePicker", new DateTimePickerViewModel
+    {
+        Label = "Review date & time",
+        InputName = nameof(Model.ReviewTimestamp),
+        InputId = "game-entry-review-timestamp",
+        Value = Model.ReviewTimestamp,
+        Placeholder = "dd.MM.yyyy HH:mm",
+        IsRequired = true
+    })
+    <span asp-validation-for="ReviewTimestamp" class="text-danger"></span>
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="FormContext" />
+</div>
