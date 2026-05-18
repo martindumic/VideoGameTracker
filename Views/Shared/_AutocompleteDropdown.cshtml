@@ -11,15 +11,15 @@
             value="@Model.SelectedText"
             placeholder="@Model.Placeholder"
             autocomplete="off"
-            @(Model.IsRequired ? "required" : "") />
+            required="@(Model.IsRequired ? "required" : null)" />
         <input
             type="hidden"
             id="@Model.HiddenId"
             name="@Model.HiddenName"
             value="@Model.SelectedId"
             class="js-autocomplete-hidden"
-            @(Model.IsRequired ? "data-val=\"true\"" : "")
-            @(Model.IsRequired ? $"data-val-required=\"{(!string.IsNullOrWhiteSpace(Model.Label) ? Model.Label + " is required." : "Selection is required.")}\"" : "") />
+            data-val="@(Model.IsRequired ? "true" : null)"
+            data-val-required="@(Model.IsRequired ? (!string.IsNullOrWhiteSpace(Model.Label) ? Model.Label + " is required." : "Selection is required.") : null)" />
         <span class="mario-autocomplete-spinner" aria-hidden="true"></span>
     </div>
     <div class="mario-autocomplete-results" role="listbox" aria-label="@Model.Label results"></div>

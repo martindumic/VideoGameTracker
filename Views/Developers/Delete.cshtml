@@ -1,0 +1,35 @@
+@model Developer
+
+@{
+    ViewData["Title"] = "Delete Developer";
+    ViewData["BodyClass"] = "page-mario page-developers";
+    var deleteBlocked = ViewData["DeleteBlocked"] as bool? ?? false;
+    var deleteReason = ViewData["DeleteReason"] as string;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="card">
+    <div class="card-body">
+        <div class="mario-delete-summary">
+            <p><strong>Name:</strong> @Model.Name</p>
+            <p><strong>Country:</strong> @Model.Country</p>
+            <p><strong>Founded:</strong> @Model.Founded.ToString("d")</p>
+        </div>
+
+        @if (deleteBlocked)
+        {
+            <div class="login-alert home-alert login-alert-error" role="alert">@deleteReason</div>
+        }
+        else
+        {
+            <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="mario-actions">
+                <button type="submit" class="btn btn-sm">Delete Developer</button>
+            </form>
+        }
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

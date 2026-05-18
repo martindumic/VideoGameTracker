@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Game Details";
+    ViewData["BodyClass"] = "page-mario page-games";
 }
 
 <h1>@Model.Title</h1>
@@ -33,7 +34,7 @@
         <div class="row mb-3">
             <div class="col-12">
                 <h5>Description</h5>
-                <p>@Model.Description</p>
+                <p>@(string.IsNullOrWhiteSpace(Model.Description) ? "No description." : Model.Description)</p>
             </div>
         </div>
 
@@ -42,15 +43,15 @@
             <div class="row mb-3">
                 <div class="col-12">
                     <h5>Genres</h5>
-                    <div>
-                        @foreach (var genre in Model.Genres)
-                        {
-                            <span class="badge bg-info me-1">
-                                <a asp-controller="Genres" asp-action="Details" asp-route-id="@genre.Id" style="color: white; text-decoration: none;">
-                                    @genre.Name
-                                </a>
-                            </span>
-                        }
+                    <div class="mario-detail-box">
+                        <div class="mario-detail-box-body">
+                            @foreach (var genre in Model.Genres)
+                            {
+                                <span class="badge bg-info me-1">
+                                    <a asp-controller="Genres" asp-action="Details" asp-route-id="@genre.Id" style="color: white; text-decoration: none;">@genre.Name</a>
+                                </span>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,23 +62,27 @@
             <div class="row mb-3">
                 <div class="col-12">
                     <h5>Platforms</h5>
-                    <div>
-                        @foreach (var platform in Model.Platforms)
-                        {
-                            <span class="badge bg-warning me-1">
-                                <a asp-controller="Platforms" asp-action="Details" asp-route-id="@platform.Id" style="color: white; text-decoration: none;">
-                                    @platform.Name
-                                </a>
-                            </span>
-                        }
+                    <div class="mario-detail-box">
+                        <div class="mario-detail-box-body">
+                            @foreach (var platform in Model.Platforms)
+                            {
+                                <span class="badge bg-warning me-1">
+                                    <a asp-controller="Platforms" asp-action="Details" asp-route-id="@platform.Id" style="color: white; text-decoration: none;">@platform.Name</a>
+                                </span>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         }
 
+        <div class="mario-actions">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm">Edit</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm">Delete</a>
+        </div>
     </div>
 </div>
 
 <div class="mt-3">
-    <a asp-controller="Games" asp-action="Index" class="btn btn-secondary">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>

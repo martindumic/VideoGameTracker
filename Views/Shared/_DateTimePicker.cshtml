@@ -13,7 +13,7 @@
             autocomplete="off"
             data-val="true"
             data-val-required="@(!string.IsNullOrWhiteSpace(Model.Label) ? Model.Label + " is required." : "Date and time is required.")"
-            @(Model.IsRequired ? "required" : "") />
+            required="@(Model.IsRequired ? "required" : null)" />
     </div>
     <div class="mario-datetime-popup" role="dialog" aria-hidden="true">
         <div class="mario-datetime-popup-inner">

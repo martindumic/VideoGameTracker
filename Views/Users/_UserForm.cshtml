@@ -1,0 +1,48 @@
+@model UserFormViewModel
+
+<div>
+    <div asp-validation-summary="ModelOnly" class="mario-validation-summary"></div>
+
+    <div class="mb-3">
+        <label asp-for="Username" class="form-label">Username</label>
+        <input asp-for="Username" class="form-control mario-input" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" type="email" class="form-control mario-input" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Password</label>
+        @if (Model.RequirePassword)
+        {
+            <input asp-for="Password" type="password" class="form-control mario-input" required data-val="true" data-val-required="Password is required." />
+        }
+        else
+        {
+            <input asp-for="Password" type="password" class="form-control mario-input" data-val="true" data-val-required="Password is required." />
+        }
+        <span asp-validation-for="Password" class="text-danger"></span>
+        @if (!Model.RequirePassword)
+        {
+            <div class="form-text">Leave blank to keep the current password.</div>
+        }
+    </div>
+
+    @await Html.PartialAsync("_DateTimePicker", new DateTimePickerViewModel
+    {
+        Label = "Registered at",
+        InputName = nameof(Model.RegisteredAt),
+        InputId = "user-registered-at",
+        Value = Model.RegisteredAt,
+        Placeholder = "dd.MM.yyyy",
+        IsRequired = true
+    })
+    <span asp-validation-for="RegisteredAt" class="text-danger"></span>
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="RequirePassword" />
+</div>

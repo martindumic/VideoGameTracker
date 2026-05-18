@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Platform Details";
+    ViewData["BodyClass"] = "page-mario page-platforms";
 }
 
 <h1>@Model.Name</h1>
@@ -33,9 +34,14 @@
                 </div>
             </div>
         }
+
+        <div class="mario-actions mt-3">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm">Edit</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm">Delete</a>
+        </div>
     </div>
 </div>
 
 <div class="mt-3">
-    <a asp-controller="Platforms" asp-action="Index" class="btn btn-secondary">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>

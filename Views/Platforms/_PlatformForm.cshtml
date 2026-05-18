@@ -1,0 +1,21 @@
+@model PlatformFormViewModel
+
+<div>
+    <div asp-validation-summary="ModelOnly" class="mario-validation-summary"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" class="form-control mario-input" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Type" class="form-label">Platform Type</label>
+        <select asp-for="Type" asp-items="Model.TypeOptions" class="form-select mario-input">
+            <option value="">Select type...</option>
+        </select>
+        <span asp-validation-for="Type" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="Id" />
+</div>

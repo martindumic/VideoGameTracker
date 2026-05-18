@@ -1,0 +1,62 @@
+@model GameFormViewModel
+
+<div>
+    <div asp-validation-summary="ModelOnly" class="mario-validation-summary"></div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Title</label>
+        <input asp-for="Title" class="form-control mario-input" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    @await Html.PartialAsync("_AutocompleteDropdown", new AutocompleteViewModel
+    {
+        Label = "Developer",
+        InputName = "DeveloperName",
+        InputId = "game-developer-name",
+        HiddenName = nameof(Model.DeveloperId),
+        HiddenId = "game-developer-id",
+        SelectedText = Model.DeveloperName,
+        SelectedId = Model.DeveloperId,
+        Placeholder = "Start typing a developer...",
+        SearchUrl = Url.Action("SearchDevelopers", "Games") ?? string.Empty,
+        IsRequired = true
+    })
+    <span asp-validation-for="DeveloperId" class="text-danger"></span>
+
+    <div class="mb-3">
+        <label asp-for="ReleaseYear" class="form-label">Release Year</label>
+        <input asp-for="ReleaseYear" type="number" min="1970" max="2100" class="form-control mario-input" />
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="AverageRating" class="form-label">Average Rating</label>
+        <input asp-for="AverageRating" type="number" min="0" max="100" class="form-control mario-input" />
+        <span asp-validation-for="AverageRating" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea asp-for="Description" rows="4" class="form-control mario-input" placeholder="Short game summary..."></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SelectedGenreIds" class="form-label">Genres</label>
+        <select asp-for="SelectedGenreIds" asp-items="Model.GenreOptions" multiple class="form-select mario-input">
+        </select>
+        <span asp-validation-for="SelectedGenreIds" class="text-danger"></span>
+        <div class="form-text">Hold Ctrl/Command to select multiple genres.</div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SelectedPlatformIds" class="form-label">Platforms</label>
+        <select asp-for="SelectedPlatformIds" asp-items="Model.PlatformOptions" multiple class="form-select mario-input">
+        </select>
+        <span asp-validation-for="SelectedPlatformIds" class="text-danger"></span>
+        <div class="form-text">Hold Ctrl/Command to select multiple platforms.</div>
+    </div>
+
+    <input type="hidden" asp-for="Id" />
+</div>

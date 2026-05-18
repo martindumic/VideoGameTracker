@@ -1,4 +1,4 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
 (() => {
@@ -326,6 +326,38 @@
 		input.addEventListener("input", performSearch);
 	};
 
+	const wireListSearch = () => {
+		document.querySelectorAll(".js-list-search").forEach((input) => {
+			const target = input.dataset.target;
+			const url = input.dataset.searchUrl;
+			if (!target || !url) return;
+
+			const list = document.querySelector(target);
+			if (!list) return;
+
+			const spinner = input.parentElement?.querySelector(".mario-search-spinner");
+			const performSearch = debounce(async () => {
+				const term = input.value.trim();
+				list.classList.add("is-loading");
+				spinner?.classList.add("is-loading");
+				try {
+					const response = await fetch(`${url}?term=${encodeURIComponent(term)}`);
+					const html = await response.text();
+					list.innerHTML = html;
+					list.classList.add("is-updated");
+					window.setTimeout(() => list.classList.remove("is-updated"), 250);
+				} catch {
+					list.innerHTML = '<div class="mario-empty">Search failed. Try again.</div>';
+				} finally {
+					list.classList.remove("is-loading");
+					spinner?.classList.remove("is-loading");
+				}
+			}, 300);
+
+			input.addEventListener("input", performSearch);
+		});
+	};
+
 	const wireValidation = () => {
 		if (window.jQuery && window.jQuery.validator) {
 			window.jQuery.validator.setDefaults({
@@ -343,6 +375,7 @@
 		wireDateTimePicker();
 		wireAutocomplete();
 		wireEntrySearch();
+		wireListSearch();
 		wireValidation();
 	});
 })();

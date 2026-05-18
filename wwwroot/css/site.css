@@ -371,9 +371,23 @@ body.page-login .mario-stage-login {
 }
 
 body.page-game-entries .mario-panel,
+body.page-games .mario-panel,
+body.page-developers .mario-panel,
+body.page-genres .mario-panel,
+body.page-platforms .mario-panel,
+body.page-users .mario-panel,
 body.page-game-entries .mario-panel::before,
-body.page-game-entries .mario-delete-summary,
-body.page-game-entries .table-responsive {
+body.page-games .mario-panel::before,
+body.page-developers .mario-panel::before,
+body.page-genres .mario-panel::before,
+body.page-platforms .mario-panel::before,
+body.page-users .mario-panel::before,
+body.page-game-entries .table-responsive,
+body.page-games .table-responsive,
+body.page-developers .table-responsive,
+body.page-genres .table-responsive,
+body.page-platforms .table-responsive,
+body.page-users .table-responsive {
   background: transparent;
   border: 0;
   border-image: none;
@@ -381,7 +395,17 @@ body.page-game-entries .table-responsive {
 }
 
 body.page-game-entries .mario-panel-card,
-body.page-game-entries .table-responsive {
+body.page-games .mario-panel-card,
+body.page-developers .mario-panel-card,
+body.page-genres .mario-panel-card,
+body.page-platforms .mario-panel-card,
+body.page-users .mario-panel-card,
+body.page-game-entries .table-responsive,
+body.page-games .table-responsive,
+body.page-developers .table-responsive,
+body.page-genres .table-responsive,
+body.page-platforms .table-responsive,
+body.page-users .table-responsive {
   background: rgba(6, 12, 22, 0.5);
   box-shadow: inset 0 0 0 1px rgba(255, 247, 230, 0.1);
 }
@@ -674,9 +698,11 @@ body.page-game-entries .table-responsive {
 
 .mario-action-row {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 0.35rem;
   justify-content: center;
+  align-items: center;
 }
 
 .mario-delete-summary {
