@@ -23,7 +23,7 @@
         }
         else
         {
-            <input asp-for="Password" type="password" class="form-control mario-input" data-val="true" data-val-required="Password is required." />
+            <input asp-for="Password" type="password" class="form-control mario-input" />
         }
         <span asp-validation-for="Password" class="text-danger"></span>
         @if (!Model.RequirePassword)

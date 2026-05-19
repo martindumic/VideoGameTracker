@@ -49,6 +49,29 @@ public class GamesRepository : IGamesRepository
 
     public void Create(Game game)
     {
+        var genreIds = game.Genres?.Select(g => g.Id).ToList() ?? new List<int>();
+        var platformIds = game.Platforms?.Select(p => p.Id).ToList() ?? new List<int>();
+
+        game.Genres = new List<Genre>();
+        foreach (var genreId in genreIds)
+        {
+            var trackedGenre = _dbContext.Genres.Find(genreId);
+            if (trackedGenre != null)
+            {
+                game.Genres.Add(trackedGenre);
+            }
+        }
+
+        game.Platforms = new List<Platform>();
+        foreach (var platformId in platformIds)
+        {
+            var trackedPlatform = _dbContext.Platforms.Find(platformId);
+            if (trackedPlatform != null)
+            {
+                game.Platforms.Add(trackedPlatform);
+            }
+        }
+
         _dbContext.Games.Add(game);
         _dbContext.SaveChanges();
     }

@@ -721,7 +721,6 @@ body.page-users .table-responsive {
 }
 
 .mario-alert {
-  opacity: 0;
   transform: translateY(-10px);
   max-height: 200px;
   overflow: hidden;
@@ -1320,7 +1319,12 @@ body.page-login .mario-decoration {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-body.page-game-entries .login-alert {
+body.page-game-entries .login-alert,
+body.page-games .login-alert,
+body.page-developers .login-alert,
+body.page-genres .login-alert,
+body.page-platforms .login-alert,
+body.page-users .login-alert {
   background: rgba(6, 12, 22, 0.5);
   box-shadow: inset 0 0 0 1px rgba(255, 247, 230, 0.1);
 }
