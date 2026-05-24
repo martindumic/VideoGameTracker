@@ -1,36 +1,55 @@
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using VideoGameTracker.Data;
 using VideoGameTracker.Models;
 using VideoGameTracker.ViewModels;
 
 namespace VideoGameTracker.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("users")]
     public class UsersController : Controller
     {
-        private readonly UsersRepository _usersRepository;
+        private readonly VideoGameTrackerDbContext _dbContext;
+        private readonly UserManager<AppUser> _userManager;
 
-        public UsersController(UsersRepository usersRepository)
+        public UsersController(VideoGameTrackerDbContext dbContext, UserManager<AppUser> userManager)
         {
-            _usersRepository = usersRepository;
+            _dbContext = dbContext;
+            _userManager = userManager;
         }
 
         [HttpGet("")]
         public IActionResult Index()
         {
-            var users = _usersRepository.GetAll();
+            var users = _dbContext.Users
+                .Include(u => u.GameEntries)
+                    .ThenInclude(e => e.Game)
+                .ToList();
+
             return View(users);
         }
 
         [HttpGet("search")]
         public IActionResult Search(string? term)
         {
-            var results = string.IsNullOrWhiteSpace(term)
-                ? _usersRepository.GetAll()
-                : _usersRepository.Search(term);
+            var usersQuery = _dbContext.Users
+                .Include(u => u.GameEntries)
+                    .ThenInclude(e => e.Game)
+                .AsQueryable();
 
-            return PartialView("_UserTable", results);
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                var likeTerm = $"%{term.Trim()}%";
+                usersQuery = usersQuery.Where(u =>
+                    EF.Functions.Like(u.UserName ?? string.Empty, likeTerm) ||
+                    EF.Functions.Like(u.Email ?? string.Empty, likeTerm));
+            }
+
+            return PartialView("_UserTable", usersQuery.ToList());
         }
 
         [HttpGet("create")]
@@ -42,7 +61,7 @@ namespace VideoGameTracker.Controllers
 
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(UserFormViewModel model)
+        public async Task<IActionResult> Create(UserFormViewModel model)
         {
             model.RequirePassword = true;
 
@@ -61,40 +80,52 @@ namespace VideoGameTracker.Controllers
                 return View(model);
             }
 
-            var user = new User
+            var user = new AppUser
             {
-                Username = model.Username?.Trim(),
+                UserName = model.Username?.Trim(),
                 Email = model.Email?.Trim(),
-                Password = model.Password?.Trim(),
+                OIB = model.OIB?.Trim() ?? string.Empty,
+                JMBG = model.JMBG?.Trim() ?? string.Empty,
                 RegisteredAt = registeredAt
             };
 
-            try
+            var result = await _userManager.CreateAsync(user, model.Password!.Trim());
+            if (result.Succeeded)
             {
-                _usersRepository.Create(user);
+                await _userManager.AddToRoleAsync(user, "Player");
                 TempData["Success"] = "User created successfully.";
                 return RedirectToAction(nameof(Index));
             }
-            catch
+
+            foreach (var error in result.Errors)
             {
-                TempData["Error"] = "Unable to create user.";
-                return View(model);
+                ModelState.AddModelError(string.Empty, error.Description);
             }
+
+            TempData["Error"] = "Unable to create user.";
+            return View(model);
         }
 
-        [HttpGet("{id:int}")]
-        public IActionResult Details(int id)
+        [HttpGet("{id}")]
+        public IActionResult Details(string id)
         {
-            var user = _usersRepository.GetById(id);
+            var user = _dbContext.Users
+                .Include(u => u.GameEntries)
+                    .ThenInclude(e => e.Game)
+                .FirstOrDefault(u => u.Id == id);
+
             if (user == null)
+            {
                 return NotFound();
+            }
+
             return View(user);
         }
 
-        [HttpGet("{id:int}/edit")]
-        public IActionResult Edit(int id)
+        [HttpGet("{id}/edit")]
+        public IActionResult Edit(string id)
         {
-            var user = _usersRepository.GetById(id);
+            var user = _dbContext.Users.FirstOrDefault(u => u.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -104,9 +135,9 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
-        [HttpPost("{id:int}/edit")]
+        [HttpPost("{id}/edit")]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, UserFormViewModel model)
+        public async Task<IActionResult> Edit(string id, UserFormViewModel model)
         {
             if (id != model.Id)
             {
@@ -125,39 +156,57 @@ namespace VideoGameTracker.Controllers
                 return View(model);
             }
 
-            var existing = _usersRepository.GetById(id);
-            if (existing == null)
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            var password = string.IsNullOrWhiteSpace(model.Password)
-                ? existing.Password
-                : model.Password?.Trim();
+            user.UserName = model.Username?.Trim();
+            user.Email = model.Email?.Trim();
+            user.OIB = model.OIB?.Trim() ?? string.Empty;
+            user.JMBG = model.JMBG?.Trim() ?? string.Empty;
+            user.RegisteredAt = registeredAt;
 
-            var user = new User
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
             {
-                Id = id,
-                Username = model.Username?.Trim(),
-                Email = model.Email?.Trim(),
-                Password = password,
-                RegisteredAt = registeredAt
-            };
+                foreach (var error in updateResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
 
-            if (_usersRepository.Update(user))
-            {
-                TempData["Success"] = "User updated successfully.";
-                return RedirectToAction(nameof(Index));
+                TempData["Error"] = "Unable to update user.";
+                return View(model);
             }
 
-            TempData["Error"] = "Unable to update user.";
-            return View(model);
+            if (!string.IsNullOrWhiteSpace(model.Password))
+            {
+                var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResult = await _userManager.ResetPasswordAsync(user, resetToken, model.Password.Trim());
+                if (!passwordResult.Succeeded)
+                {
+                    foreach (var error in passwordResult.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+
+                    TempData["Error"] = "Unable to update user password.";
+                    return View(model);
+                }
+            }
+
+            TempData["Success"] = "User updated successfully.";
+            return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("{id:int}/delete")]
-        public IActionResult Delete(int id)
+        [HttpGet("{id}/delete")]
+        public IActionResult Delete(string id)
         {
-            var user = _usersRepository.GetById(id);
+            var user = _dbContext.Users
+                .Include(u => u.GameEntries)
+                .FirstOrDefault(u => u.Id == id);
+
             if (user == null)
             {
                 return NotFound();
@@ -172,12 +221,15 @@ namespace VideoGameTracker.Controllers
             return View(user);
         }
 
-        [HttpPost("{id:int}/delete")]
+        [HttpPost("{id}/delete")]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var user = _usersRepository.GetById(id);
+            var user = _dbContext.Users
+                .Include(u => u.GameEntries)
+                .FirstOrDefault(u => u.Id == id);
+
             if (user == null)
             {
                 return NotFound();
@@ -189,7 +241,8 @@ namespace VideoGameTracker.Controllers
                 return RedirectToAction(nameof(Delete), new { id });
             }
 
-            if (_usersRepository.Delete(id))
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
             {
                 TempData["Success"] = "User deleted successfully.";
                 return RedirectToAction(nameof(Index));
@@ -199,13 +252,15 @@ namespace VideoGameTracker.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private UserFormViewModel BuildFormViewModel(User? user, bool requirePassword)
+        private static UserFormViewModel BuildFormViewModel(AppUser? user, bool requirePassword)
         {
             return new UserFormViewModel
             {
                 Id = user?.Id,
-                Username = user?.Username,
+                Username = user?.UserName,
                 Email = user?.Email,
+                OIB = user?.OIB,
+                JMBG = user?.JMBG,
                 Password = string.Empty,
                 RegisteredAt = (user?.RegisteredAt ?? DateTime.Now)
                     .ToString("g", CultureInfo.CurrentCulture),

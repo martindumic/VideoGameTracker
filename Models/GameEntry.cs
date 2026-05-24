@@ -14,9 +14,9 @@ public class GameEntry
     public virtual Game? Game { get; set; }
 
     [ForeignKey(nameof(User))]
-    public int UserId { get; set; }
+    public string UserId { get; set; } = string.Empty;
 
-    public virtual User? User { get; set; }
+    public virtual AppUser? User { get; set; }
 
     public GameStatus Status { get; set; }
 

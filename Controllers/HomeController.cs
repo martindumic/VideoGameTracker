@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using VideoGameTracker.Data;
@@ -6,65 +8,45 @@ using VideoGameTracker.Models;
 namespace VideoGameTracker.Controllers
 {
     [Route("home")]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly UsersRepository _usersRepository;
         private readonly GamesRepository _gamesRepository;
         private readonly GameEntriesRepository _gameEntriesRepository;
 
         public HomeController(
-            UsersRepository usersRepository,
             GamesRepository gamesRepository,
-            GameEntriesRepository gameEntriesRepository)
+            GameEntriesRepository gameEntriesRepository,
+            UserManager<AppUser> userManager)
+            : base(userManager)
         {
-            _usersRepository = usersRepository;
             _gamesRepository = gamesRepository;
             _gameEntriesRepository = gameEntriesRepository;
         }
 
+        [AllowAnonymous]
         [HttpGet("")]
+        [HttpGet("/")]
         public IActionResult Index()
         {
-            // Provjeri dali je korisnik prijavljen
-            var userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            var user = _usersRepository.GetById(userId.Value);
-            if (user == null)
-            {
-                HttpContext.Session.Clear();
-                return RedirectToAction("Index", "Login");
-            }
-
             // Pripremi podatke za view
             var games = _gamesRepository.GetAll();
             var statuses = Enum.GetValues(typeof(GameStatus)).Cast<GameStatus>().ToList();
 
             // Kreiraj ViewModel ili proslijedi kroz ViewBag
-            ViewBag.User = user;
             ViewBag.Games = games;
             ViewBag.Statuses = statuses;
 
             return View();
         }
 
+        [Authorize]
         [HttpPost("create-game-entry")]
         public IActionResult CreateGameEntry(int gameId, GameStatus status, int hoursPlayed, string comment, int score)
         {
-            // Provjeri dali je korisnik prijavljen
-            var userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            var user = _usersRepository.GetById(userId.Value);
+            var userId = CurrentUserId;
             var game = _gamesRepository.GetById(gameId);
 
-            if (user == null || game == null)
+            if (string.IsNullOrWhiteSpace(userId) || game == null)
             {
                 TempData["Error"] = "User or game was not found!";
                 return RedirectToAction("Index");
@@ -74,7 +56,7 @@ namespace VideoGameTracker.Controllers
             var gameEntry = new GameEntry
             {
                 GameId = game.Id,
-                UserId = user.Id,
+                UserId = userId,
                 Status = status,
                 CreatedAt = DateTime.Now,
                 HoursPlayed = hoursPlayed,

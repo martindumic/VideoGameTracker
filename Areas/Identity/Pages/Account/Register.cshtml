@@ -1,0 +1,53 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    ViewData["BodyClass"] = "page-mario page-login";
+}
+
+<section class="login-title-stage">
+    <div class="login-title-lockup">
+        <img src="~/images/videogametracker_logo.png" alt="VideoGameTracker logo" class="login-logo-image" />
+        <p class="login-subtitle">CREATE YOUR ACCOUNT</p>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="login-alert login-alert-error" role="alert"></div>
+
+    <form method="post" class="login-title-form">
+        <div class="login-field">
+            <label asp-for="Input.Email" class="login-field-label">EMAIL</label>
+            <input asp-for="Input.Email" class="login-title-input" autocomplete="username" placeholder="gamer@email.com" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="login-field">
+            <label asp-for="Input.Password" class="login-field-label">PASSWORD</label>
+            <input asp-for="Input.Password" class="login-title-input" autocomplete="new-password" placeholder="********" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="login-field">
+            <label asp-for="Input.ConfirmPassword" class="login-field-label">CONFIRM PASSWORD</label>
+            <input asp-for="Input.ConfirmPassword" class="login-title-input" autocomplete="new-password" placeholder="********" />
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <div class="login-field">
+            <label asp-for="Input.OIB" class="login-field-label">OIB</label>
+            <input asp-for="Input.OIB" class="login-title-input" placeholder="11 digits" />
+            <span asp-validation-for="Input.OIB" class="text-danger"></span>
+        </div>
+
+        <div class="login-field">
+            <label asp-for="Input.JMBG" class="login-field-label">JMBG</label>
+            <input asp-for="Input.JMBG" class="login-title-input" placeholder="13 digits" />
+            <span asp-validation-for="Input.JMBG" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="login-title-button">REGISTER</button>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

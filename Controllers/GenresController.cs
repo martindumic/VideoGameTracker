@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VideoGameTracker.Data;
 using VideoGameTracker.Models;
@@ -32,12 +33,14 @@ namespace VideoGameTracker.Controllers
             return PartialView("_GenreTable", results);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("create")]
         public IActionResult Create()
         {
             return View(new GenreFormViewModel());
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
         public IActionResult Create(GenreFormViewModel model)
@@ -75,6 +78,7 @@ namespace VideoGameTracker.Controllers
             return View(genre);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}/edit")]
         public IActionResult Edit(int id)
         {
@@ -94,6 +98,7 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("{id:int}/edit")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, GenreFormViewModel model)
@@ -125,6 +130,7 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}/delete")]
         public IActionResult Delete(int id)
         {
@@ -143,6 +149,7 @@ namespace VideoGameTracker.Controllers
             return View(genre);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("{id:int}/delete")]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

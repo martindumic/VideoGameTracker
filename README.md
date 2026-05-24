@@ -46,10 +46,14 @@ dotnet run --project VideoGameTracker.csproj
 Po pokretanju aplikacija će ispisati lokalnu adresu, najčešće nešto poput:
 
 ```bash
-https://localhost:xxxx
+http://localhost:xxxx
 ```
 
-Otvori tu adresu u browseru.
+Otvori tu adresu u browseru. Ako koristiš HTTP i vidiš 404 na rootu, probaj i:
+
+```bash
+http://localhost:xxxx/home
+```
 
 ## Napomena
 

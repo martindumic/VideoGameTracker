@@ -1,0 +1,42 @@
+@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+    ViewData["BodyClass"] = "page-mario page-login";
+}
+
+<section class="login-title-stage">
+    <div class="login-title-lockup">
+        <img src="~/images/videogametracker_logo.png" alt="VideoGameTracker logo" class="login-logo-image" />
+        <p class="login-subtitle">SIGN IN TO CONTINUE</p>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="login-alert login-alert-error" role="alert"></div>
+
+    <form method="post" class="login-title-form">
+        <div class="login-field">
+            <label asp-for="Input.Email" class="login-field-label">EMAIL</label>
+            <input asp-for="Input.Email" class="login-title-input" autocomplete="username" placeholder="gamer@email.com" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="login-field">
+            <label asp-for="Input.Password" class="login-field-label">PASSWORD</label>
+            <input asp-for="Input.Password" class="login-title-input" autocomplete="current-password" placeholder="********" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="login-field">
+            <label class="form-check">
+                <input asp-for="Input.RememberMe" class="form-check-input" />
+                <span class="form-check-label">Remember me</span>
+            </label>
+        </div>
+
+        <button type="submit" class="login-title-button">SIGN IN</button>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

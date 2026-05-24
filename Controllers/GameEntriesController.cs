@@ -1,4 +1,6 @@
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using VideoGameTracker.Data;
@@ -8,22 +10,22 @@ using VideoGameTracker.ViewModels;
 namespace VideoGameTracker.Controllers
 {
     [Route("game-entries")]
-    public class GameEntriesController : Controller
+    public class GameEntriesController : BaseController
     {
         private readonly GameEntriesRepository _gameEntriesRepository;
         private readonly GamesRepository _gamesRepository;
-        private readonly UsersRepository _usersRepository;
 
         public GameEntriesController(
             GameEntriesRepository gameEntriesRepository,
             GamesRepository gamesRepository,
-            UsersRepository usersRepository)
+            UserManager<AppUser> userManager)
+            : base(userManager)
         {
             _gameEntriesRepository = gameEntriesRepository;
             _gamesRepository = gamesRepository;
-            _usersRepository = usersRepository;
         }
 
+        [AllowAnonymous]
         [HttpGet("")]
         public IActionResult Index()
         {
@@ -32,6 +34,7 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id:int}")]
         public IActionResult Details(int id)
         {
@@ -41,6 +44,7 @@ namespace VideoGameTracker.Controllers
             return View(gameEntry);
         }
 
+        [AllowAnonymous]
         [HttpGet("search")]
         public IActionResult Search(string? term)
         {
@@ -51,6 +55,7 @@ namespace VideoGameTracker.Controllers
             return PartialView("_GameEntryTable", results);
         }
 
+        [AllowAnonymous]
         [HttpGet("search-games")]
         public IActionResult SearchGames(string? term)
         {
@@ -63,6 +68,7 @@ namespace VideoGameTracker.Controllers
             return Json(results);
         }
 
+        [Authorize]
         [HttpGet("create")]
         public IActionResult Create()
         {
@@ -70,19 +76,30 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
         public IActionResult Create(GameEntryFormViewModel model)
         {
-            model.CanSelectUser = true;
+            model.CanSelectUser = IsAdmin;
             PrepareFormOptions(model);
+
+            if (!IsAdmin)
+            {
+                if (string.IsNullOrWhiteSpace(CurrentUserId))
+                {
+                    return Challenge();
+                }
+
+                model.UserId = CurrentUserId;
+            }
 
             if (!TryParseReviewTimestamp(model.ReviewTimestamp, out var reviewTimestamp))
             {
                 ModelState.AddModelError(nameof(GameEntryFormViewModel.ReviewTimestamp), "Review date and time format is invalid.");
             }
 
-            if (!model.UserId.HasValue)
+            if (string.IsNullOrWhiteSpace(model.UserId))
             {
                 ModelState.AddModelError(nameof(GameEntryFormViewModel.UserId), "User is required.");
             }
@@ -103,7 +120,7 @@ namespace VideoGameTracker.Controllers
             var gameEntry = new GameEntry
             {
                 GameId = model.GameId!.Value,
-                UserId = model.UserId!.Value,
+                UserId = model.UserId!,
                 Status = model.Status!.Value,
                 HoursPlayed = model.HoursPlayed,
                 ReviewScore = model.ReviewScore,
@@ -132,6 +149,7 @@ namespace VideoGameTracker.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("{id:int}/edit")]
         public IActionResult Edit(int id)
         {
@@ -141,10 +159,17 @@ namespace VideoGameTracker.Controllers
                 return NotFound();
             }
 
+            if (!IsAdmin && gameEntry.UserId != CurrentUserId)
+            {
+                TempData["Error"] = "You do not have permission to edit this game entry.";
+                return RedirectToAction(nameof(Index));
+            }
+
             var model = BuildFormViewModel(gameEntry, "Edit");
             return View(model);
         }
 
+        [Authorize]
         [HttpPost("{id:int}/edit")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, GameEntryFormViewModel model)
@@ -154,7 +179,7 @@ namespace VideoGameTracker.Controllers
                 return BadRequest();
             }
 
-            model.CanSelectUser = true;
+            model.CanSelectUser = IsAdmin;
             PrepareFormOptions(model);
 
             if (!TryParseReviewTimestamp(model.ReviewTimestamp, out var reviewTimestamp))
@@ -162,7 +187,7 @@ namespace VideoGameTracker.Controllers
                 ModelState.AddModelError(nameof(GameEntryFormViewModel.ReviewTimestamp), "Review date and time format is invalid.");
             }
 
-            if (!model.UserId.HasValue)
+            if (string.IsNullOrWhiteSpace(model.UserId))
             {
                 ModelState.AddModelError(nameof(GameEntryFormViewModel.UserId), "User is required.");
             }
@@ -173,11 +198,31 @@ namespace VideoGameTracker.Controllers
                 return View(model);
             }
 
+            var existing = _gameEntriesRepository.GetById(id);
+            if (existing == null)
+            {
+                return NotFound();
+            }
+
+            if (!IsAdmin && existing.UserId != CurrentUserId)
+            {
+                TempData["Error"] = "You do not have permission to edit this game entry.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var userId = IsAdmin ? model.UserId : existing.UserId;
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                ModelState.AddModelError(nameof(GameEntryFormViewModel.UserId), "User is required.");
+                PopulateSelectedGameTitle(model);
+                return View(model);
+            }
+
             var gameEntry = new GameEntry
             {
                 Id = id,
                 GameId = model.GameId!.Value,
-                UserId = model.UserId!.Value,
+                UserId = userId,
                 Status = model.Status!.Value,
                 HoursPlayed = model.HoursPlayed,
                 ReviewScore = model.ReviewScore,
@@ -196,6 +241,7 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpGet("{id:int}/delete")]
         public IActionResult Delete(int id)
         {
@@ -205,14 +251,33 @@ namespace VideoGameTracker.Controllers
                 return NotFound();
             }
 
+            if (!IsAdmin && gameEntry.UserId != CurrentUserId)
+            {
+                TempData["Error"] = "You do not have permission to delete this game entry.";
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(gameEntry);
         }
 
+        [Authorize]
         [HttpPost("{id:int}/delete")]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
+            var entry = _gameEntriesRepository.GetById(id);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+
+            if (!IsAdmin && entry.UserId != CurrentUserId)
+            {
+                TempData["Error"] = "You do not have permission to delete this game entry.";
+                return RedirectToAction(nameof(Index));
+            }
+
             if (_gameEntriesRepository.Delete(id))
             {
                 TempData["Success"] = "Game entry deleted successfully.";
@@ -236,18 +301,18 @@ namespace VideoGameTracker.Controllers
 
         private GameEntryFormViewModel BuildFormViewModel(GameEntry? entry, string formContext)
         {
-            var sessionUserId = HttpContext.Session.GetInt32("UserId");
-            var sessionUsername = HttpContext.Session.GetString("Username");
-            var canSelectUser = true;
+            var canSelectUser = IsAdmin;
+            var selectedUserId = entry?.UserId ?? (canSelectUser ? null : CurrentUserId);
+            var selectedUsername = entry?.User?.UserName ?? UserManager.GetUserName(User);
 
             var model = new GameEntryFormViewModel
             {
-            FormContext = formContext,
+                FormContext = formContext,
                 Id = entry?.Id,
                 GameId = entry?.GameId,
                 GameTitle = entry?.Game?.Title,
-                UserId = entry?.UserId ?? sessionUserId,
-                Username = entry?.User?.Username ?? sessionUsername,
+                UserId = selectedUserId,
+                Username = selectedUsername,
                 Status = entry?.Status,
                 HoursPlayed = entry?.HoursPlayed ?? 0,
                 ReviewScore = entry?.ReviewScore,
@@ -274,12 +339,12 @@ namespace VideoGameTracker.Controllers
 
             if (model.CanSelectUser)
             {
-                model.UserOptions = _usersRepository.GetAll()
-                    .OrderBy(u => u.Username)
+                model.UserOptions = UserManager.Users
+                    .OrderBy(u => u.UserName)
                     .Select(u => new SelectListItem
                     {
-                        Value = u.Id.ToString(),
-                        Text = u.Username ?? $"User {u.Id}",
+                        Value = u.Id,
+                        Text = u.UserName ?? u.Email ?? u.Id,
                         Selected = model.UserId == u.Id
                     })
                     .ToList();

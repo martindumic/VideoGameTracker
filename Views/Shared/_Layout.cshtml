@@ -16,16 +16,16 @@
         <nav class="smb-login-nav" aria-label="Primary">
             <div class="smb-login-nav-inner">
                 <a class="smb-login-nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                @if (Context.Session.GetInt32("UserId") != null)
+                <a class="smb-login-nav-link" asp-area="" asp-controller="Games" asp-action="Index">Games</a>
+                <a class="smb-login-nav-link" asp-area="" asp-controller="GameEntries" asp-action="Index">Game Entries</a>
+                @if (User.IsInRole("Admin"))
                 {
                     <a class="smb-login-nav-link" asp-area="" asp-controller="Developers" asp-action="Index">Developers</a>
-                    <a class="smb-login-nav-link" asp-area="" asp-controller="Games" asp-action="Index">Games</a>
                     <a class="smb-login-nav-link" asp-area="" asp-controller="Genres" asp-action="Index">Genres</a>
                     <a class="smb-login-nav-link" asp-area="" asp-controller="Platforms" asp-action="Index">Platforms</a>
                     <a class="smb-login-nav-link" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
-                    <a class="smb-login-nav-link" asp-area="" asp-controller="GameEntries" asp-action="Index">Game Entries</a>
-                    <a class="smb-login-nav-link" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
                 }
+                @await Html.PartialAsync("_LoginPartial")
                 <a class="smb-login-nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </nav>

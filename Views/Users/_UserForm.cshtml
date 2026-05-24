@@ -16,6 +16,18 @@
     </div>
 
     <div class="mb-3">
+        <label asp-for="OIB" class="form-label">OIB</label>
+        <input asp-for="OIB" class="form-control mario-input" />
+        <span asp-validation-for="OIB" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="JMBG" class="form-label">JMBG</label>
+        <input asp-for="JMBG" class="form-control mario-input" />
+        <span asp-validation-for="JMBG" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
         <label asp-for="Password" class="form-label">Password</label>
         @if (Model.RequirePassword)
         {

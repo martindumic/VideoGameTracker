@@ -1,4 +1,4 @@
-@model User
+@model AppUser
 
 @{
     ViewData["Title"] = "Delete User";
@@ -12,7 +12,7 @@
 <div class="card">
     <div class="card-body">
         <div class="mario-delete-summary">
-            <p><strong>Username:</strong> @Model.Username</p>
+            <p><strong>Username:</strong> @Model.UserName</p>
             <p><strong>Email:</strong> @Model.Email</p>
             <p><strong>Registered:</strong> @Model.RegisteredAt.ToString("d")</p>
         </div>

@@ -34,7 +34,7 @@ public class GameEntriesRepository : IGameEntriesRepository
             var term = $"%{query.Trim()}%";
             entriesQuery = entriesQuery.Where(e =>
                 (e.Game != null && EF.Functions.Like(e.Game.Title ?? string.Empty, term)) ||
-                (e.User != null && EF.Functions.Like(e.User.Username ?? string.Empty, term)) ||
+                (e.User != null && EF.Functions.Like(e.User.UserName ?? string.Empty, term)) ||
                 EF.Functions.Like(e.ReviewComment ?? string.Empty, term)
             );
         }

@@ -1,4 +1,5 @@
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VideoGameTracker.Data;
 using VideoGameTracker.Models;
@@ -33,6 +34,7 @@ namespace VideoGameTracker.Controllers
             return PartialView("_DeveloperTable", results);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("create")]
         public IActionResult Create()
         {
@@ -40,6 +42,7 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
         public IActionResult Create(DeveloperFormViewModel model)
@@ -84,6 +87,7 @@ namespace VideoGameTracker.Controllers
             return View(developer);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}/edit")]
         public IActionResult Edit(int id)
         {
@@ -97,6 +101,7 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("{id:int}/edit")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, DeveloperFormViewModel model)
@@ -135,6 +140,7 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}/delete")]
         public IActionResult Delete(int id)
         {
@@ -153,6 +159,7 @@ namespace VideoGameTracker.Controllers
             return View(developer);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("{id:int}/delete")]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -1,11 +1,11 @@
-@model User
+@model AppUser
 
 @{
     ViewData["Title"] = "User Details";
     ViewData["BodyClass"] = "page-mario page-users";
 }
 
-<h1>@Model.Username</h1>
+<h1>@Model.UserName</h1>
 
 <div class="card">
     <div class="card-body">
@@ -17,6 +17,17 @@
             <div class="col-md-6">
                 <h5>Registered At</h5>
                 <p>@Model.RegisteredAt.ToString("d")</p>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <h5>OIB</h5>
+                <p>@Model.OIB</p>
+            </div>
+            <div class="col-md-6">
+                <h5>JMBG</h5>
+                <p>@Model.JMBG</p>
             </div>
         </div>
 

@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VideoGameTracker.Models;
 
 namespace VideoGameTracker.Data;
 
-public class VideoGameTrackerDbContext : DbContext
+public class VideoGameTrackerDbContext : IdentityDbContext<AppUser>
 {
     public VideoGameTrackerDbContext(DbContextOptions<VideoGameTrackerDbContext> options)
         : base(options)
@@ -15,7 +16,6 @@ public class VideoGameTrackerDbContext : DbContext
     public DbSet<GameEntry> GameEntries => Set<GameEntry>();
     public DbSet<Genre> Genres => Set<Genre>();
     public DbSet<Platform> Platforms => Set<Platform>();
-    public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -73,11 +73,6 @@ public class VideoGameTrackerDbContext : DbContext
             new Platform { Id = 3, Name = "Xbox Series X", Type = PlatformType.Xbox }
         );
 
-        modelBuilder.Entity<User>().HasData(
-            new User { Id = 1, Username = "GamerPro", Email = "gamerpro@email.com", Password = "hashed_password_1", RegisteredAt = new DateTime(2020, 3, 15) },
-            new User { Id = 2, Username = "RPGFanatic", Email = "rpgfan@email.com", Password = "hashed_password_2", RegisteredAt = new DateTime(2021, 7, 22) },
-            new User { Id = 3, Username = "ActionJunkie", Email = "actionjunkie@email.com", Password = "hashed_password_3", RegisteredAt = new DateTime(2019, 11, 10) }
-        );
 
         modelBuilder.Entity<Game>().HasData(
             new Game { Id = 1, Title = "The Witcher 3: Wild Hunt", ReleaseYear = 2015, Description = "Open-world RPG with rich storytelling and complex characters", DeveloperId = 1, AverageRating = 95 },
@@ -91,16 +86,6 @@ public class VideoGameTrackerDbContext : DbContext
             new Game { Id = 9, Title = "Half-Life: Alyx", ReleaseYear = 2020, Description = "VR prequel to Half-Life 2", DeveloperId = 3, AverageRating = 93 }
         );
 
-        modelBuilder.Entity<GameEntry>().HasData(
-            new GameEntry { Id = 1, GameId = 1, UserId = 1, Status = GameStatus.Finished, CreatedAt = new DateTime(2022, 3, 10), HoursPlayed = 150, ReviewScore = 95, ReviewComment = "Amazing game, incredible story and characters!" },
-            new GameEntry { Id = 2, GameId = 1, UserId = 2, Status = GameStatus.Finished, CreatedAt = new DateTime(2022, 5, 15), HoursPlayed = 200, ReviewScore = 98, ReviewComment = "Best RPG I've ever played!" },
-            new GameEntry { Id = 3, GameId = 4, UserId = 1, Status = GameStatus.Playing, CreatedAt = new DateTime(2023, 6, 20), HoursPlayed = 80, ReviewScore = 90, ReviewComment = "Great open-world gameplay" },
-            new GameEntry { Id = 4, GameId = 8, UserId = 3, Status = GameStatus.Playing, CreatedAt = new DateTime(2023, 9, 10), HoursPlayed = 45, ReviewScore = 85, ReviewComment = "Competitive and fun" },
-            new GameEntry { Id = 5, GameId = 2, UserId = 2, Status = GameStatus.Finished, CreatedAt = new DateTime(2021, 1, 5), HoursPlayed = 120, ReviewScore = 75, ReviewComment = "Good game, but buggy at launch" },
-            new GameEntry { Id = 6, GameId = 5, UserId = 3, Status = GameStatus.Finished, CreatedAt = new DateTime(2022, 8, 15), HoursPlayed = 180, ReviewScore = 96, ReviewComment = "Outstanding story and immersion" },
-            new GameEntry { Id = 7, GameId = 7, UserId = 3, Status = GameStatus.Planned, CreatedAt = new DateTime(2023, 11, 1), HoursPlayed = 0, ReviewScore = null, ReviewComment = null },
-            new GameEntry { Id = 8, GameId = 3, UserId = 2, Status = GameStatus.Finished, CreatedAt = new DateTime(2020, 10, 20), HoursPlayed = 95, ReviewScore = null, ReviewComment = null }
-        );
 
         modelBuilder.Entity("GameGenres").HasData(
             new { GamesId = 1, GenresId = 1 },

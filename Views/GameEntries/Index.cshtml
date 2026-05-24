@@ -11,7 +11,10 @@
             <div>
                 <h1>@ViewData["Title"]</h1>
             </div>
-            <a asp-action="Create" class="btn btn-sm">New Entry</a>
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <a asp-action="Create" class="btn btn-sm">New Entry</a>
+            }
         </div>
 
         @if (TempData["Success"] != null)

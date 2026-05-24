@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using VideoGameTracker.Data;
@@ -58,6 +59,7 @@ namespace VideoGameTracker.Controllers
             return Json(results);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("create")]
         public IActionResult Create()
         {
@@ -65,6 +67,7 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
         public IActionResult Create(GameFormViewModel model)
@@ -102,6 +105,7 @@ namespace VideoGameTracker.Controllers
             return View(game);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}/edit")]
         public IActionResult Edit(int id)
         {
@@ -115,6 +119,7 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("{id:int}/edit")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, GameFormViewModel model)
@@ -144,6 +149,7 @@ namespace VideoGameTracker.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}/delete")]
         public IActionResult Delete(int id)
         {
@@ -162,6 +168,7 @@ namespace VideoGameTracker.Controllers
             return View(game);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("{id:int}/delete")]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

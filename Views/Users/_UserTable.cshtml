@@ -1,4 +1,4 @@
-@model List<User>
+@model List<AppUser>
 
 <div class="table-responsive mario-table-wrap">
     <table class="table table-striped table-hover mario-table">
@@ -23,7 +23,7 @@
                 foreach (var user in Model)
                 {
                     <tr>
-                        <td>@user.Username</td>
+                        <td>@user.UserName</td>
                         <td>@user.Email</td>
                         <td>@user.RegisteredAt.ToString("d")</td>
                         <td><span class="badge bg-info">@user.GameEntries.Count</span></td>
