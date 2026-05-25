@@ -28,4 +28,6 @@ public class GameEntry
 
     public string? ReviewComment { get; set; }
 
+    public virtual ICollection<GameEntryScreenshot> Screenshots { get; set; } = new List<GameEntryScreenshot>();
+
 }

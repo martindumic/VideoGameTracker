@@ -1,0 +1,67 @@
+@model GameEntryScreenshotListViewModel
+
+<div class="mario-gallery">
+    @if (Model.Screenshots.Count == 0)
+    {
+        <div class="mario-gallery-empty">No screenshots uploaded yet.</div>
+    }
+    else if (Model.UseSlideshow || !Model.CanManage)
+    {
+        var first = Model.Screenshots.First();
+        <div class="mario-slideshow" data-entry-id="@Model.GameEntryId">
+            <div class="mario-slideshow-stage">
+                <button type="button" class="mario-slideshow-nav mario-slideshow-prev" aria-label="Previous screenshot">Prev</button>
+                <div class="mario-slideshow-frame">
+                    <img src="@first.FilePath" alt="@first.OriginalFileName" loading="lazy" />
+                </div>
+                <button type="button" class="mario-slideshow-nav mario-slideshow-next" aria-label="Next screenshot">Next</button>
+            </div>
+            <div class="mario-slideshow-meta">
+                <div class="mario-slideshow-name">@first.OriginalFileName</div>
+                <div class="mario-slideshow-date">@first.UploadedAt.ToString("g")</div>
+            </div>
+            <div class="mario-slideshow-thumbs">
+                @for (var i = 0; i < Model.Screenshots.Count; i++)
+                {
+                    var shot = Model.Screenshots[i];
+                    <button type="button"
+                            class="mario-slideshow-thumb @(i == 0 ? "is-active" : "")"
+                            data-index="@i"
+                            data-src="@shot.FilePath"
+                            data-name="@shot.OriginalFileName"
+                            data-date="@shot.UploadedAt.ToString("g")">
+                        <img src="@shot.FilePath" alt="@shot.OriginalFileName" loading="lazy" />
+                    </button>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="mario-gallery-grid">
+            @foreach (var screenshot in Model.Screenshots)
+            {
+                <div class="mario-gallery-card">
+                    <div class="mario-gallery-thumb">
+                        <img src="@screenshot.FilePath" alt="@screenshot.OriginalFileName" loading="lazy" />
+                    </div>
+                    <div class="mario-gallery-meta">
+                        <div class="mario-gallery-name">@screenshot.OriginalFileName</div>
+                        <div class="mario-gallery-date">@screenshot.UploadedAt.ToString("g")</div>
+                    </div>
+                    @if (Model.CanManage)
+                    {
+                        <div class="mario-gallery-actions">
+                            <button type="button"
+                                    class="btn btn-sm mario-gallery-delete"
+                                    data-screenshot-id="@screenshot.Id"
+                                    data-delete-url="@Url.Action("DeleteScreenshot", "GameEntries", new { id = Model.GameEntryId, screenshotId = screenshot.Id })">
+                                Delete
+                            </button>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>

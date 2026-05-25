@@ -60,3 +60,6 @@ http://localhost:xxxx/home
 - `dotnet ef migrations add ...` se koristi samo kada mijenjaš modele i želiš generirati novu migraciju.
 - `dotnet ef database update` samo primjenjuje postojeće migracije na bazu.
 - Ako premještaš projekt na novo računalo, dovoljno je imati kod i .NET SDK; baza se može ponovno izgraditi kroz migracije.
+
+admin@example.com
+YourStrongPassword123!

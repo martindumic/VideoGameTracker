@@ -27,6 +27,7 @@ builder.Services.AddScoped<GenresRepository>();
 builder.Services.AddScoped<PlatformsRepository>();
 builder.Services.AddScoped<GamesRepository>();
 builder.Services.AddScoped<GameEntriesRepository>();
+builder.Services.AddScoped<GameEntryScreenshotsRepository>();
 
 var app = builder.Build();
 

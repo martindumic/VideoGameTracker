@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,15 +15,18 @@ namespace VideoGameTracker.Controllers
     {
         private readonly GameEntriesRepository _gameEntriesRepository;
         private readonly GamesRepository _gamesRepository;
+        private readonly GameEntryScreenshotsRepository _screenshotsRepository;
 
         public GameEntriesController(
             GameEntriesRepository gameEntriesRepository,
             GamesRepository gamesRepository,
+            GameEntryScreenshotsRepository screenshotsRepository,
             UserManager<AppUser> userManager)
             : base(userManager)
         {
             _gameEntriesRepository = gameEntriesRepository;
             _gamesRepository = gamesRepository;
+            _screenshotsRepository = screenshotsRepository;
         }
 
         [AllowAnonymous]
@@ -288,6 +292,142 @@ namespace VideoGameTracker.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [AllowAnonymous]
+        [HttpGet("{id:int}/screenshots")]
+        public IActionResult Screenshots(int id, [FromQuery] bool allowManage = true, [FromQuery] string? mode = null)
+        {
+            var entry = _gameEntriesRepository.GetById(id);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+
+            var canManage = allowManage && CanManageScreenshots(entry);
+            var model = new GameEntryScreenshotListViewModel
+            {
+                GameEntryId = id,
+                CanManage = canManage,
+                UseSlideshow = string.Equals(mode, "slideshow", StringComparison.OrdinalIgnoreCase),
+                Screenshots = _screenshotsRepository.GetByGameEntryId(id)
+            };
+
+            return PartialView("_GameEntryScreenshots", model);
+        }
+
+        [Authorize]
+        [HttpPost("{id:int}/screenshots")]
+        [ValidateAntiForgeryToken]
+        public IActionResult UploadScreenshot(int id, IFormFile file)
+        {
+            var entry = _gameEntriesRepository.GetById(id);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+
+            if (!CanManageScreenshots(entry))
+            {
+                return Forbid();
+            }
+
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("File is required.");
+            }
+
+            if (file.Length > 5 * 1024 * 1024)
+            {
+                return BadRequest("File is too large.");
+            }
+
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            var allowedExtensions = new HashSet<string> { ".jpg", ".jpeg", ".png", ".webp" };
+            if (!allowedExtensions.Contains(extension))
+            {
+                return BadRequest("Invalid file type.");
+            }
+
+            var allowedContentTypes = new HashSet<string>
+            {
+                "image/jpeg",
+                "image/png",
+                "image/webp"
+            };
+
+            if (!allowedContentTypes.Contains(file.ContentType))
+            {
+                return BadRequest("Invalid content type.");
+            }
+
+            var uploadsPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                "uploads",
+                "gameentries",
+                id.ToString());
+
+            Directory.CreateDirectory(uploadsPath);
+
+            var storedFileName = $"{Guid.NewGuid()}{extension}";
+            var physicalPath = Path.Combine(uploadsPath, storedFileName);
+
+            using (var stream = new FileStream(physicalPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            var screenshot = new GameEntryScreenshot
+            {
+                GameEntryId = id,
+                OriginalFileName = Path.GetFileName(file.FileName),
+                StoredFileName = storedFileName,
+                FilePath = $"/uploads/gameentries/{id}/{storedFileName}",
+                ContentType = file.ContentType,
+                FileSize = file.Length,
+                UploadedAt = DateTime.UtcNow,
+                UploadedByUserId = CurrentUserId
+            };
+
+            _screenshotsRepository.Create(screenshot);
+            return Ok(new { success = true });
+        }
+
+        [Authorize]
+        [HttpPost("{id:int}/screenshots/{screenshotId:int}/delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteScreenshot(int id, int screenshotId)
+        {
+            var entry = _gameEntriesRepository.GetById(id);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+
+            if (!CanManageScreenshots(entry))
+            {
+                return Forbid();
+            }
+
+            var screenshot = _screenshotsRepository.GetById(screenshotId);
+            if (screenshot == null || screenshot.GameEntryId != id)
+            {
+                return NotFound();
+            }
+
+            var physicalPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                screenshot.FilePath.TrimStart('/'));
+
+            if (System.IO.File.Exists(physicalPath))
+            {
+                System.IO.File.Delete(physicalPath);
+            }
+
+            _screenshotsRepository.Delete(screenshot);
+            return Ok(new { success = true });
+        }
+
         private GameEntryIndexViewModel BuildIndexViewModel(List<GameEntry> entries)
         {
             var model = new GameEntryIndexViewModel
@@ -388,6 +528,16 @@ namespace VideoGameTracker.Controllers
             }
 
             return DateTime.TryParse(value, CultureInfo.InvariantCulture, styles, out parsed);
+        }
+
+        private bool CanManageScreenshots(GameEntry entry)
+        {
+            if (IsAdmin)
+            {
+                return true;
+            }
+
+            return !string.IsNullOrWhiteSpace(CurrentUserId) && entry.UserId == CurrentUserId;
         }
     }
 }

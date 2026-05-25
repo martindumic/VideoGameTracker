@@ -14,6 +14,7 @@ public class VideoGameTrackerDbContext : IdentityDbContext<AppUser>
     public DbSet<Developer> Developers => Set<Developer>();
     public DbSet<Game> Games => Set<Game>();
     public DbSet<GameEntry> GameEntries => Set<GameEntry>();
+    public DbSet<GameEntryScreenshot> GameEntryScreenshots => Set<GameEntryScreenshot>();
     public DbSet<Genre> Genres => Set<Genre>();
     public DbSet<Platform> Platforms => Set<Platform>();
 
@@ -38,6 +39,12 @@ public class VideoGameTrackerDbContext : IdentityDbContext<AppUser>
             .WithMany(u => u.GameEntries)
             .HasForeignKey(ge => ge.UserId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<GameEntryScreenshot>()
+            .HasOne(s => s.GameEntry)
+            .WithMany(e => e.Screenshots)
+            .HasForeignKey(s => s.GameEntryId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Game>()
             .HasMany(g => g.Genres)
