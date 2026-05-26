@@ -21,6 +21,19 @@ builder.Services
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<VideoGameTrackerDbContext>();
 
+var googleClientId = builder.Configuration["Authentication:Google:ClientId"];
+var googleClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+if (!string.IsNullOrWhiteSpace(googleClientId) && !string.IsNullOrWhiteSpace(googleClientSecret))
+{
+    builder.Services
+        .AddAuthentication()
+        .AddGoogle(options =>
+        {
+            options.ClientId = googleClientId;
+            options.ClientSecret = googleClientSecret;
+        });
+}
+
 // Register EF Repositories
 builder.Services.AddScoped<DevelopersRepository>();
 builder.Services.AddScoped<GenresRepository>();

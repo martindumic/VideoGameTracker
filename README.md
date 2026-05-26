@@ -35,10 +35,10 @@ dotnet ef database update --project VideoGameTracker.csproj --startup-project Vi
 
 Ova naredba će kreirati bazu i tablice prema postojećim migracijama u folderu [Migrations](Migrations).
 
-### 4. Pokreni aplikaciju
+### 4. Pokreni aplikaciju (Google login)
 
 ```bash
-dotnet run --project VideoGameTracker.csproj
+dotnet run --launch-profile https
 ```
 
 ### 5. Otvori aplikaciju u pregledniku

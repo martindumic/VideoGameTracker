@@ -86,11 +86,31 @@ public class ExternalLoginModel : PageModel
             return RedirectToPage("./Lockout");
         }
 
+        var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+        if (!string.IsNullOrWhiteSpace(email))
+        {
+            var existingUser = await _userManager.FindByEmailAsync(email);
+            if (existingUser != null)
+            {
+                var addLoginResult = await _userManager.AddLoginAsync(existingUser, info);
+                if (addLoginResult.Succeeded)
+                {
+                    await _signInManager.SignInAsync(existingUser, isPersistent: false, info.LoginProvider);
+                    return LocalRedirect(returnUrl);
+                }
+
+                foreach (var error in addLoginResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+        }
+
         ReturnUrl = returnUrl;
         ProviderDisplayName = info.ProviderDisplayName ?? string.Empty;
         Input = new InputModel
         {
-            Email = info.Principal.FindFirstValue(ClaimTypes.Email) ?? string.Empty
+            Email = email ?? string.Empty
         };
 
         return Page();
@@ -111,6 +131,49 @@ public class ExternalLoginModel : PageModel
             ProviderDisplayName = info.ProviderDisplayName ?? string.Empty;
             ReturnUrl = returnUrl;
             return Page();
+        }
+
+        var existing = await _userManager.FindByEmailAsync(Input.Email);
+        if (existing != null)
+        {
+            if (string.IsNullOrWhiteSpace(existing.OIB))
+            {
+                existing.OIB = Input.OIB.Trim();
+            }
+
+            if (string.IsNullOrWhiteSpace(existing.JMBG))
+            {
+                existing.JMBG = Input.JMBG.Trim();
+            }
+
+            var updateResult = await _userManager.UpdateAsync(existing);
+            if (!updateResult.Succeeded)
+            {
+                foreach (var error in updateResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                ProviderDisplayName = info.ProviderDisplayName ?? string.Empty;
+                ReturnUrl = returnUrl;
+                return Page();
+            }
+
+            var linkResult = await _userManager.AddLoginAsync(existing, info);
+            if (!linkResult.Succeeded)
+            {
+                foreach (var error in linkResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                ProviderDisplayName = info.ProviderDisplayName ?? string.Empty;
+                ReturnUrl = returnUrl;
+                return Page();
+            }
+
+            await _signInManager.SignInAsync(existing, isPersistent: false, info.LoginProvider);
+            return LocalRedirect(returnUrl);
         }
 
         var user = new AppUser

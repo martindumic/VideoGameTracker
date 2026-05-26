@@ -20,6 +20,16 @@ public class GameEntryScreenshotsRepository : IGameEntryScreenshotsRepository
             .ToList();
     }
 
+    public List<GameEntryScreenshot> GetByGameId(int gameId)
+    {
+        return _dbContext.GameEntryScreenshots
+            .Include(s => s.GameEntry)
+            .ThenInclude(ge => ge!.User)
+            .Where(s => s.GameEntry != null && s.GameEntry.GameId == gameId)
+            .OrderByDescending(s => s.UploadedAt)
+            .ToList();
+    }
+
     public GameEntryScreenshot? GetById(int id)
     {
         return _dbContext.GameEntryScreenshots

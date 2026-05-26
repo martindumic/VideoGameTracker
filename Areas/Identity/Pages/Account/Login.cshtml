@@ -35,6 +35,19 @@
 
         <button type="submit" class="login-title-button">SIGN IN</button>
     </form>
+
+    @if (Model.ExternalLogins?.Count > 0)
+    {
+        <div class="login-hint">Or continue with</div>
+        <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="login-title-form">
+            @foreach (var provider in Model.ExternalLogins)
+            {
+                <button type="submit" class="login-title-button" name="provider" value="@provider.Name">
+                    LOGIN WITH @provider.DisplayName?.ToUpperInvariant()
+                </button>
+            }
+        </form>
+    }
 </section>
 
 @section Scripts {

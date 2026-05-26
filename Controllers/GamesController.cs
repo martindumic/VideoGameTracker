@@ -15,19 +15,22 @@ namespace VideoGameTracker.Controllers
         private readonly GenresRepository _genresRepository;
         private readonly PlatformsRepository _platformsRepository;
         private readonly GameEntriesRepository _gameEntriesRepository;
+        private readonly GameEntryScreenshotsRepository _screenshotsRepository;
 
         public GamesController(
             GamesRepository gamesRepository,
             DevelopersRepository developersRepository,
             GenresRepository genresRepository,
             PlatformsRepository platformsRepository,
-            GameEntriesRepository gameEntriesRepository)
+            GameEntriesRepository gameEntriesRepository,
+            GameEntryScreenshotsRepository screenshotsRepository)
         {
             _gamesRepository = gamesRepository;
             _developersRepository = developersRepository;
             _genresRepository = genresRepository;
             _platformsRepository = platformsRepository;
             _gameEntriesRepository = gameEntriesRepository;
+            _screenshotsRepository = screenshotsRepository;
         }
 
         [HttpGet("")]
@@ -103,6 +106,27 @@ namespace VideoGameTracker.Controllers
             if (game == null)
                 return NotFound();
             return View(game);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id:int}/screenshots")]
+        public IActionResult Screenshots(int id, string? mode)
+        {
+            var game = _gamesRepository.GetById(id);
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            var model = new GameEntryScreenshotListViewModel
+            {
+                GameEntryId = 0,
+                CanManage = false,
+                UseSlideshow = string.Equals(mode, "slideshow", StringComparison.OrdinalIgnoreCase),
+                Screenshots = _screenshotsRepository.GetByGameId(id)
+            };
+
+            return PartialView("~/Views/GameEntries/_GameEntryScreenshots.cshtml", model);
         }
 
         [Authorize(Roles = "Admin")]

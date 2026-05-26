@@ -1,5 +1,9 @@
 @model GameEntryScreenshotListViewModel
 
+@{
+    var showEntryInfo = Model.GameEntryId == 0;
+}
+
 <div class="mario-gallery">
     @if (Model.Screenshots.Count == 0)
     {
@@ -8,6 +12,10 @@
     else if (Model.UseSlideshow || !Model.CanManage)
     {
         var first = Model.Screenshots.First();
+        var firstUser = showEntryInfo ? (first.GameEntry?.User?.UserName ?? "Unknown") : string.Empty;
+        var firstEntryUrl = showEntryInfo
+            ? Url.Action("Details", "GameEntries", new { id = first.GameEntryId })
+            : string.Empty;
         <div class="mario-slideshow" data-entry-id="@Model.GameEntryId">
             <div class="mario-slideshow-stage">
                 <button type="button" class="mario-slideshow-nav mario-slideshow-prev" aria-label="Previous screenshot">Prev</button>
@@ -19,17 +27,28 @@
             <div class="mario-slideshow-meta">
                 <div class="mario-slideshow-name">@first.OriginalFileName</div>
                 <div class="mario-slideshow-date">@first.UploadedAt.ToString("g")</div>
+                @if (showEntryInfo)
+                {
+                    <div class="mario-slideshow-user">From user: <span class="mario-slideshow-user-name">@firstUser</span></div>
+                    <a class="btn btn-sm mario-slideshow-entry" href="@firstEntryUrl">View entry</a>
+                }
             </div>
             <div class="mario-slideshow-thumbs">
                 @for (var i = 0; i < Model.Screenshots.Count; i++)
                 {
                     var shot = Model.Screenshots[i];
+                    var shotUser = showEntryInfo ? (shot.GameEntry?.User?.UserName ?? "Unknown") : string.Empty;
+                    var shotEntryUrl = showEntryInfo
+                        ? Url.Action("Details", "GameEntries", new { id = shot.GameEntryId })
+                        : string.Empty;
                     <button type="button"
                             class="mario-slideshow-thumb @(i == 0 ? "is-active" : "")"
                             data-index="@i"
                             data-src="@shot.FilePath"
                             data-name="@shot.OriginalFileName"
-                            data-date="@shot.UploadedAt.ToString("g")">
+                            data-date="@shot.UploadedAt.ToString("g")"
+                            data-user="@shotUser"
+                            data-entry-url="@shotEntryUrl">
                         <img src="@shot.FilePath" alt="@shot.OriginalFileName" loading="lazy" />
                     </button>
                 }
@@ -48,16 +67,27 @@
                     <div class="mario-gallery-meta">
                         <div class="mario-gallery-name">@screenshot.OriginalFileName</div>
                         <div class="mario-gallery-date">@screenshot.UploadedAt.ToString("g")</div>
+                        @if (showEntryInfo)
+                        {
+                            <div class="mario-gallery-user">From user: @(screenshot.GameEntry?.User?.UserName ?? "Unknown")</div>
+                        }
                     </div>
-                    @if (Model.CanManage)
+                    @if (Model.CanManage || showEntryInfo)
                     {
                         <div class="mario-gallery-actions">
-                            <button type="button"
-                                    class="btn btn-sm mario-gallery-delete"
-                                    data-screenshot-id="@screenshot.Id"
-                                    data-delete-url="@Url.Action("DeleteScreenshot", "GameEntries", new { id = Model.GameEntryId, screenshotId = screenshot.Id })">
-                                Delete
-                            </button>
+                            @if (Model.CanManage)
+                            {
+                                <button type="button"
+                                        class="btn btn-sm mario-gallery-delete"
+                                        data-screenshot-id="@screenshot.Id"
+                                        data-delete-url="@Url.Action("DeleteScreenshot", "GameEntries", new { id = Model.GameEntryId, screenshotId = screenshot.Id })">
+                                    Delete
+                                </button>
+                            }
+                            @if (showEntryInfo)
+                            {
+                                <a class="btn btn-sm" href="@Url.Action("Details", "GameEntries", new { id = screenshot.GameEntryId })">View entry</a>
+                            }
                         </div>
                     }
                 </div>

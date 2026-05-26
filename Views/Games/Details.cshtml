@@ -83,6 +83,76 @@
     </div>
 </div>
 
+<div class="card mario-gallery-card-shell">
+    <div class="card-body">
+        <h2 class="mario-gallery-title">Game Gallery</h2>
+        <div id="game-gallery" class="mario-gallery-region"></div>
+    </div>
+</div>
+
 <div class="mt-3">
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        (function () {
+            const galleryRegion = "#game-gallery";
+            const listUrl = "@Url.Action("Screenshots", "Games", new { id = Model.Id, mode = "slideshow" })";
+
+            const loadGallery = () => {
+                $(galleryRegion).load(listUrl, function () {
+                    const slideshow = document.querySelector(".mario-slideshow");
+                    if (!slideshow) return;
+
+                    const thumbs = Array.from(slideshow.querySelectorAll(".mario-slideshow-thumb"));
+                    const img = slideshow.querySelector(".mario-slideshow-frame img");
+                    const name = slideshow.querySelector(".mario-slideshow-name");
+                    const date = slideshow.querySelector(".mario-slideshow-date");
+                    const user = slideshow.querySelector(".mario-slideshow-user-name");
+                    const entryLink = slideshow.querySelector(".mario-slideshow-entry");
+                    const prev = slideshow.querySelector(".mario-slideshow-prev");
+                    const next = slideshow.querySelector(".mario-slideshow-next");
+
+                    if (!img || !name || !date || thumbs.length === 0) return;
+
+                    let index = thumbs.findIndex((thumb) => thumb.classList.contains("is-active"));
+                    if (index < 0) index = 0;
+
+                    const setActive = (newIndex) => {
+                        index = (newIndex + thumbs.length) % thumbs.length;
+                        const active = thumbs[index];
+                        thumbs.forEach((thumb) => thumb.classList.remove("is-active"));
+                        active.classList.add("is-active");
+                        img.src = active.dataset.src;
+                        img.alt = active.dataset.name || "Screenshot";
+                        name.textContent = active.dataset.name || "";
+                        date.textContent = active.dataset.date || "";
+                        if (user) {
+                            user.textContent = active.dataset.user || "";
+                        }
+
+                        if (entryLink) {
+                            const entryUrl = active.dataset.entryUrl || "";
+                            entryLink.setAttribute("href", entryUrl);
+                        }
+                    };
+
+                    thumbs.forEach((thumb) => {
+                        thumb.addEventListener("click", () => {
+                            const thumbIndex = Number(thumb.dataset.index || 0);
+                            setActive(thumbIndex);
+                        });
+                    });
+
+                    prev?.addEventListener("click", () => setActive(index - 1));
+                    next?.addEventListener("click", () => setActive(index + 1));
+                });
+            };
+
+            $(function () {
+                loadGallery();
+            });
+        })();
+    </script>
+}
