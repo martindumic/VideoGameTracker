@@ -57,7 +57,7 @@
     }
     else
     {
-        <div class="mario-gallery-grid">
+        <div class="mario-gallery-grid@(Model.CanManage ? " mario-gallery-grid-fixed" : string.Empty)">
             @foreach (var screenshot in Model.Screenshots)
             {
                 <div class="mario-gallery-card">

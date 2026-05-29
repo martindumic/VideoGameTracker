@@ -1502,6 +1502,17 @@ body.page-game-entries .mario-panel-card {
   gap: 1rem;
 }
 
+.mario-gallery-grid-fixed {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 220px));
+  justify-content: start;
+}
+
+@media (max-width: 520px) {
+  .mario-gallery-grid-fixed {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .mario-gallery-card {
   background: rgba(18, 35, 63, 0.92);
   border: 2px solid rgba(255, 247, 222, 0.16);
