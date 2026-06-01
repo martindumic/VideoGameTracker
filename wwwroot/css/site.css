@@ -862,6 +862,14 @@ body.page-login .mario-panel {
     min-height: 130px;
   }
 
+  .smb-login-nav-inner {
+    gap: 0.85rem 1.5rem;
+  }
+
+  .smb-global-search {
+    max-width: 100%;
+  }
+
   .mario-panel-header {
     flex-direction: column;
     align-items: stretch;
@@ -873,6 +881,11 @@ body.page-login .mario-panel {
 
   .mario-panel-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mario-panel-card,
+  body.page-mario .card-body {
+    padding: 1rem;
   }
 }
 
@@ -908,6 +921,22 @@ body.page-login .mario-panel {
 
   .smb-question-button {
     min-height: 72px;
+  }
+
+  .smb-login-nav-link {
+    font-size: 0.9rem;
+  }
+
+  .smb-global-search-submit {
+    padding: 0.25rem 0.6rem;
+  }
+
+  .mario-form .form-label {
+    font-size: 0.9rem;
+  }
+
+  .mario-dropzone {
+    padding: 1rem;
   }
 }
 
@@ -957,6 +986,7 @@ body.page-mario .alert {
 body.page-mario .table-responsive {
   padding: 0.75rem;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 body.page-mario .table {
@@ -1141,6 +1171,24 @@ body.page-login .mario-stage-login {
   justify-content: center;
 }
 
+@media (max-width: 767.98px) {
+  body.page-mario.page-login {
+    overflow-y: auto;
+  }
+
+  body.page-login .smb-page-shell {
+    height: auto;
+    min-height: calc(100dvh - 92px);
+    overflow: visible;
+  }
+
+  body.page-login .mario-stage-login {
+    height: auto;
+    min-height: calc(100dvh - 92px);
+    overflow: visible;
+  }
+}
+
 body.page-login .mario-panel,
 body.page-login .mario-panel::before,
 body.page-login .mario-panel-wide,
@@ -1151,11 +1199,13 @@ body.page-login .mario-decoration {
 
 .smb-login-header {
   position: relative;
-  z-index: 1;
+  z-index: 2000;
   padding-top: 0.75rem;
 }
 
 .smb-login-nav {
+  position: relative;
+  z-index: 2000;
   width: min(760px, calc(100% - 2rem));
   margin: 0 auto;
   background: transparent;
@@ -1187,6 +1237,319 @@ body.page-login .mario-decoration {
 .smb-login-nav-link:hover,
 .smb-login-nav-link:focus {
   color: #fffbe7 !important;
+}
+
+.smb-global-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 280px;
+  max-width: 360px;
+  width: 100%;
+}
+
+.smb-global-search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(8, 16, 30, 0.62);
+  border: 2px solid rgba(255, 247, 230, 0.2);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.smb-global-search-input {
+  flex: 1;
+  min-width: 140px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #fff7e6;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.smb-global-search-input::placeholder {
+  color: rgba(255, 247, 230, 0.6);
+}
+
+.smb-global-search-submit {
+  border: 2px solid #2c1a00;
+  background: linear-gradient(180deg, #cb6b1d 0%, #9a4d12 100%);
+  color: #fff9ef;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.smb-global-search-spinner {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #ffd36d;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  animation: mario-spin 0.8s linear infinite;
+}
+
+.smb-global-search.is-loading .smb-global-search-spinner {
+  opacity: 1;
+}
+
+.smb-global-search-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  padding: 0.5rem;
+  border-radius: 0.85rem;
+  border: 3px solid #2b1d08;
+  background: #fff5d9;
+  box-shadow: 0 12px 0 rgba(0, 0, 0, 0.3);
+  display: none;
+  z-index: 2100;
+}
+
+.smb-global-search-panel.is-open {
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .smb-login-nav-inner {
+    align-items: stretch;
+  }
+
+  .smb-global-search {
+    order: 20;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .smb-global-search-form,
+  .smb-global-search-panel {
+    width: 100%;
+  }
+
+  .smb-global-search-panel {
+    position: static;
+    margin-top: 0.5rem;
+  }
+}
+
+.smb-search-group {
+  border-radius: 0.75rem;
+  background: rgba(8, 16, 30, 0.15);
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.65rem;
+}
+
+.smb-search-group:last-child {
+  margin-bottom: 0;
+}
+
+.smb-search-group-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #5b2200;
+  margin-bottom: 0.35rem;
+}
+
+.smb-search-group-body {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.smb-search-item {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.65rem;
+  background: rgba(255, 247, 230, 0.85);
+  color: #4d2a08;
+  text-decoration: none;
+  border: 2px solid rgba(80, 45, 0, 0.2);
+}
+
+.smb-search-item:hover,
+.smb-search-item:focus {
+  background: rgba(255, 214, 132, 0.75);
+}
+
+.smb-search-item-title {
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+.smb-search-item-sub {
+  font-size: 0.85rem;
+  color: #6f3a0a;
+}
+
+.smb-search-item-meta {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8b4a10;
+}
+
+.smb-search-empty {
+  padding: 0.75rem;
+  font-weight: 800;
+  color: #7a3e0b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.smb-search-results {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.smb-global-search-form-wide {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+body.page-search .mario-panel-card {
+  background: #fff5d9;
+  box-shadow: 0 12px 0 rgba(0, 0, 0, 0.25);
+  border: 3px solid #2b1d08;
+}
+
+body.page-search .mario-panel {
+  background: #fff5d9;
+  border: 3px solid #2b1d08;
+  border-radius: 0.85rem;
+  border-image: none;
+  box-shadow: 0 12px 0 rgba(0, 0, 0, 0.3);
+}
+
+body.page-search .mario-panel::before {
+  display: none;
+}
+
+body.page-search h1,
+body.page-search h2,
+body.page-search h3,
+body.page-search h4,
+body.page-search h5,
+body.page-search h6 {
+  color: #5b2200;
+  text-shadow: none;
+}
+
+body.page-search p,
+body.page-search label,
+body.page-search small,
+body.page-search .mario-subtitle {
+  color: #6f3a0a;
+  text-shadow: none;
+}
+
+body.page-search .smb-global-search-form {
+  background: rgba(255, 247, 230, 0.85);
+  border-color: rgba(80, 45, 0, 0.35);
+}
+
+body.page-search .smb-global-search-input {
+  color: #4d2a08;
+}
+
+body.page-search .smb-global-search-input::placeholder {
+  color: rgba(77, 42, 8, 0.55);
+}
+
+body.page-search .smb-search-group {
+  background: rgba(8, 16, 30, 0.08);
+  border: 2px solid rgba(80, 45, 0, 0.2);
+}
+
+body.page-search .smb-search-group-title {
+  color: #5b2200;
+}
+
+body.page-search .smb-search-item {
+  background: rgba(255, 247, 230, 0.9);
+  border-color: rgba(80, 45, 0, 0.25);
+  color: #4d2a08;
+}
+
+body.page-search .smb-search-item:hover,
+body.page-search .smb-search-item:focus {
+  background: rgba(255, 214, 132, 0.65);
+}
+
+body.page-search .smb-search-item-sub {
+  color: #6f3a0a;
+}
+
+body.page-search .smb-search-item-meta {
+  color: #8b4a10;
+}
+
+body.page-search .mario-empty {
+  color: #6f3a0a;
+}
+
+@media (max-width: 640px) {
+  .smb-login-nav-inner {
+    gap: 0.75rem 1.25rem;
+    align-items: stretch;
+  }
+
+  .smb-login-nav-link {
+    font-size: 0.95rem;
+  }
+
+  .mario-panel-header .btn {
+    align-self: stretch;
+  }
+
+  .mario-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mario-actions .btn {
+    width: 100%;
+  }
+
+  .smb-global-search {
+    order: 20;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .smb-global-search-form {
+    width: 100%;
+  }
+
+  .smb-global-search-panel {
+    position: static;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
 }
 
 .login-title-stage {
@@ -1510,6 +1873,32 @@ body.page-game-entries .mario-panel-card {
 @media (max-width: 520px) {
   .mario-gallery-grid-fixed {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .login-title-form,
+  .home-title-form {
+    width: min(100%, 540px);
+  }
+
+  .login-title-input {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .login-field-label {
+    font-size: 0.8rem;
+  }
+
+  .home-textarea {
+    min-height: 90px;
+  }
+
+  .mario-gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .mario-slideshow-thumb img {
+    height: 72px;
   }
 }
 

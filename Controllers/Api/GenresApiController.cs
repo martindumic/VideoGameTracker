@@ -11,10 +11,12 @@ namespace VideoGameTracker.Controllers.Api;
 public class GenresApiController : ControllerBase
 {
     private readonly GenresRepository _genresRepository;
+    private readonly ILogger<GenresApiController> _logger;
 
-    public GenresApiController(GenresRepository genresRepository)
+    public GenresApiController(GenresRepository genresRepository, ILogger<GenresApiController> logger)
     {
         _genresRepository = genresRepository;
+        _logger = logger;
     }
 
     [AllowAnonymous]
@@ -52,6 +54,7 @@ public class GenresApiController : ControllerBase
         };
 
         _genresRepository.Create(genre);
+        _logger.LogInformation("API genre created. GenreId={GenreId}, Name={Name}", genre.Id, genre.Name);
         return CreatedAtAction(nameof(GetById), new { id = genre.Id }, ToDto(genre));
     }
 
@@ -78,6 +81,7 @@ public class GenresApiController : ControllerBase
         };
 
         _genresRepository.Update(genre);
+        _logger.LogInformation("API genre updated. GenreId={GenreId}, Name={Name}", genre.Id, genre.Name);
         return Ok(ToDto(genre));
     }
 
@@ -87,9 +91,11 @@ public class GenresApiController : ControllerBase
     {
         if (!_genresRepository.Delete(id))
         {
+            _logger.LogWarning("API genre delete failed. GenreId={GenreId}", id);
             return NotFound();
         }
 
+        _logger.LogInformation("API genre deleted. GenreId={GenreId}", id);
         return NoContent();
     }
 

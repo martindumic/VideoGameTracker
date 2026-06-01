@@ -12,15 +12,18 @@ namespace VideoGameTracker.Controllers
     {
         private readonly GamesRepository _gamesRepository;
         private readonly GameEntriesRepository _gameEntriesRepository;
+        private readonly ILogger<HomeController> _logger;
 
         public HomeController(
             GamesRepository gamesRepository,
             GameEntriesRepository gameEntriesRepository,
-            UserManager<AppUser> userManager)
+            UserManager<AppUser> userManager,
+            ILogger<HomeController> logger)
             : base(userManager)
         {
             _gamesRepository = gamesRepository;
             _gameEntriesRepository = gameEntriesRepository;
+            _logger = logger;
         }
 
         [AllowAnonymous]
@@ -41,6 +44,7 @@ namespace VideoGameTracker.Controllers
 
         [Authorize]
         [HttpPost("create-game-entry")]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateGameEntry(int gameId, GameStatus status, int hoursPlayed, string comment, int score)
         {
             var userId = CurrentUserId;
@@ -48,6 +52,7 @@ namespace VideoGameTracker.Controllers
 
             if (string.IsNullOrWhiteSpace(userId) || game == null)
             {
+                _logger.LogWarning("Home create entry rejected. UserId={UserId}, GameId={GameId}", userId, gameId);
                 TempData["Error"] = "User or game was not found!";
                 return RedirectToAction("Index");
             }
@@ -64,6 +69,12 @@ namespace VideoGameTracker.Controllers
                 ReviewComment = string.IsNullOrWhiteSpace(comment) ? null : comment
             };
             _gameEntriesRepository.Add(gameEntry);
+
+            _logger.LogInformation(
+                "Game entry created from home. EntryId={EntryId}, UserId={UserId}, GameId={GameId}",
+                gameEntry.Id,
+                userId,
+                game.Id);
 
             TempData["Success"] = "Game entry was created successfully!";
             return RedirectToAction("Index");

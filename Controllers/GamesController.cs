@@ -16,6 +16,7 @@ namespace VideoGameTracker.Controllers
         private readonly PlatformsRepository _platformsRepository;
         private readonly GameEntriesRepository _gameEntriesRepository;
         private readonly GameEntryScreenshotsRepository _screenshotsRepository;
+        private readonly ILogger<GamesController> _logger;
 
         public GamesController(
             GamesRepository gamesRepository,
@@ -23,7 +24,8 @@ namespace VideoGameTracker.Controllers
             GenresRepository genresRepository,
             PlatformsRepository platformsRepository,
             GameEntriesRepository gameEntriesRepository,
-            GameEntryScreenshotsRepository screenshotsRepository)
+            GameEntryScreenshotsRepository screenshotsRepository,
+            ILogger<GamesController> logger)
         {
             _gamesRepository = gamesRepository;
             _developersRepository = developersRepository;
@@ -31,6 +33,7 @@ namespace VideoGameTracker.Controllers
             _platformsRepository = platformsRepository;
             _gameEntriesRepository = gameEntriesRepository;
             _screenshotsRepository = screenshotsRepository;
+            _logger = logger;
         }
 
         [HttpGet("")]
@@ -88,11 +91,13 @@ namespace VideoGameTracker.Controllers
             try
             {
                 _gamesRepository.Create(game);
+                _logger.LogInformation("Game created. GameId={GameId}, Title={Title}", game.Id, game.Title);
                 TempData["Success"] = "Game created successfully.";
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Failed to create game. Title={Title}", game.Title);
                 TempData["Error"] = "Unable to create game.";
                 PopulateSelectedDeveloperName(model);
                 return View(model);
@@ -164,10 +169,12 @@ namespace VideoGameTracker.Controllers
             var game = BuildGameEntity(model, id);
             if (_gamesRepository.Update(game))
             {
+                _logger.LogInformation("Game updated. GameId={GameId}, Title={Title}", game.Id, game.Title);
                 TempData["Success"] = "Game updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
 
+            _logger.LogWarning("Game update failed. GameId={GameId}", game.Id);
             TempData["Error"] = "Unable to update game.";
             PopulateSelectedDeveloperName(model);
             return View(model);
@@ -185,6 +192,7 @@ namespace VideoGameTracker.Controllers
 
             if (HasGameEntries(id))
             {
+                _logger.LogWarning("Delete blocked for game with entries. GameId={GameId}", id);
                 ViewData["DeleteBlocked"] = true;
                 ViewData["DeleteReason"] = "This game has game entries and cannot be deleted.";
             }
@@ -200,16 +208,19 @@ namespace VideoGameTracker.Controllers
         {
             if (HasGameEntries(id))
             {
+                _logger.LogWarning("Delete rejected for game with entries. GameId={GameId}", id);
                 TempData["Error"] = "This game has game entries and cannot be deleted.";
                 return RedirectToAction(nameof(Delete), new { id });
             }
 
             if (_gamesRepository.Delete(id))
             {
+                _logger.LogInformation("Game deleted. GameId={GameId}", id);
                 TempData["Success"] = "Game deleted successfully.";
                 return RedirectToAction(nameof(Index));
             }
 
+            _logger.LogWarning("Game delete failed. GameId={GameId}", id);
             TempData["Error"] = "Unable to delete game.";
             return RedirectToAction(nameof(Index));
         }

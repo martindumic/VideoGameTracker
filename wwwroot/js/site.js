@@ -358,6 +358,129 @@
 		});
 	};
 
+	const wireGlobalSearch = () => {
+		const wrapper = document.querySelector(".smb-global-search");
+		if (!wrapper) return;
+
+		const input = wrapper.querySelector(".smb-global-search-input");
+		const panel = wrapper.querySelector(".smb-global-search-panel");
+		const url = wrapper.dataset.suggestUrl;
+		if (!input || !panel || !url) return;
+
+		let activeController;
+
+		const closePanel = () => {
+			panel.innerHTML = "";
+			panel.classList.remove("is-open");
+			wrapper.classList.remove("is-loading");
+		};
+
+		const renderEmpty = (message) => {
+			panel.innerHTML = "";
+			const empty = document.createElement("div");
+			empty.className = "smb-search-empty";
+			empty.textContent = message;
+			panel.appendChild(empty);
+		};
+
+		const renderGroups = (groups) => {
+			panel.innerHTML = "";
+			if (!groups.length) {
+				renderEmpty("No matches found");
+				return;
+			}
+
+			groups.forEach((group) => {
+				if (!group || !Array.isArray(group.Items || group.items)) return;
+				const items = group.Items || group.items;
+				if (!items.length) return;
+
+				const groupEl = document.createElement("div");
+				groupEl.className = "smb-search-group";
+
+				const title = document.createElement("div");
+				title.className = "smb-search-group-title";
+				title.textContent = group.Title || group.title || "Results";
+				groupEl.appendChild(title);
+
+				const body = document.createElement("div");
+				body.className = "smb-search-group-body";
+
+				items.forEach((item) => {
+					if (!item) return;
+					const link = document.createElement("a");
+					link.className = "smb-search-item";
+					link.href = item.Url || item.url || "#";
+
+					const titleSpan = document.createElement("span");
+					titleSpan.className = "smb-search-item-title";
+					titleSpan.textContent = item.Title || item.title || "Result";
+					link.appendChild(titleSpan);
+
+					const subtitleValue = item.Subtitle || item.subtitle;
+					if (subtitleValue) {
+						const sub = document.createElement("span");
+						sub.className = "smb-search-item-sub";
+						sub.textContent = subtitleValue;
+						link.appendChild(sub);
+					}
+
+					const meta = document.createElement("span");
+					meta.className = "smb-search-item-meta";
+					meta.textContent = item.Category || item.category || "Result";
+					link.appendChild(meta);
+
+					body.appendChild(link);
+				});
+
+				groupEl.appendChild(body);
+				panel.appendChild(groupEl);
+			});
+		};
+
+		const fetchResults = debounce(async () => {
+			const term = input.value.trim();
+			if (term.length < 2) {
+				closePanel();
+				return;
+			}
+
+			wrapper.classList.add("is-loading");
+			if (activeController) {
+				activeController.abort();
+			}
+
+			activeController = new AbortController();
+			try {
+				const response = await fetch(`${url}?query=${encodeURIComponent(term)}`, {
+					signal: activeController.signal
+				});
+				if (!response.ok) {
+					throw new Error("Search failed");
+				}
+				const data = await response.json();
+				const groups = data.Groups || data.groups || [];
+				renderGroups(groups);
+				panel.classList.add("is-open");
+			} catch (error) {
+				if (error.name === "AbortError") return;
+				renderEmpty("Search failed. Try again.");
+				panel.classList.add("is-open");
+			} finally {
+				wrapper.classList.remove("is-loading");
+			}
+		}, 250);
+
+		input.addEventListener("input", fetchResults);
+		input.addEventListener("focus", fetchResults);
+
+		document.addEventListener("click", (event) => {
+			if (!wrapper.contains(event.target)) {
+				closePanel();
+			}
+		});
+	};
+
 	const wireValidation = () => {
 		if (window.jQuery && window.jQuery.validator) {
 			window.jQuery.validator.setDefaults({
@@ -376,6 +499,7 @@
 		wireAutocomplete();
 		wireEntrySearch();
 		wireListSearch();
+		wireGlobalSearch();
 		wireValidation();
 	});
 })();

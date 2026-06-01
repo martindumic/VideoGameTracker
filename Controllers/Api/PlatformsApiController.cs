@@ -11,10 +11,12 @@ namespace VideoGameTracker.Controllers.Api;
 public class PlatformsApiController : ControllerBase
 {
     private readonly PlatformsRepository _platformsRepository;
+    private readonly ILogger<PlatformsApiController> _logger;
 
-    public PlatformsApiController(PlatformsRepository platformsRepository)
+    public PlatformsApiController(PlatformsRepository platformsRepository, ILogger<PlatformsApiController> logger)
     {
         _platformsRepository = platformsRepository;
+        _logger = logger;
     }
 
     [AllowAnonymous]
@@ -62,6 +64,7 @@ public class PlatformsApiController : ControllerBase
         };
 
         _platformsRepository.Create(platform);
+        _logger.LogInformation("API platform created. PlatformId={PlatformId}, Name={Name}, Type={Type}", platform.Id, platform.Name, platform.Type);
         return CreatedAtAction(nameof(GetById), new { id = platform.Id }, ToDto(platform));
     }
 
@@ -88,6 +91,7 @@ public class PlatformsApiController : ControllerBase
         };
 
         _platformsRepository.Update(platform);
+        _logger.LogInformation("API platform updated. PlatformId={PlatformId}, Name={Name}, Type={Type}", platform.Id, platform.Name, platform.Type);
         return Ok(ToDto(platform));
     }
 
@@ -97,9 +101,11 @@ public class PlatformsApiController : ControllerBase
     {
         if (!_platformsRepository.Delete(id))
         {
+            _logger.LogWarning("API platform delete failed. PlatformId={PlatformId}", id);
             return NotFound();
         }
 
+        _logger.LogInformation("API platform deleted. PlatformId={PlatformId}", id);
         return NoContent();
     }
 

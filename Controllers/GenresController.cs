@@ -10,10 +10,12 @@ namespace VideoGameTracker.Controllers
     public class GenresController : Controller
     {
         private readonly GenresRepository _genresRepository;
+        private readonly ILogger<GenresController> _logger;
 
-        public GenresController(GenresRepository genresRepository)
+        public GenresController(GenresRepository genresRepository, ILogger<GenresController> logger)
         {
             _genresRepository = genresRepository;
+            _logger = logger;
         }
 
         [HttpGet("")]
@@ -59,11 +61,13 @@ namespace VideoGameTracker.Controllers
             try
             {
                 _genresRepository.Create(genre);
+                _logger.LogInformation("Genre created. GenreId={GenreId}, Name={Name}", genre.Id, genre.Name);
                 TempData["Success"] = "Genre created successfully.";
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Failed to create genre. Name={Name}", genre.Name);
                 TempData["Error"] = "Unable to create genre.";
                 return View(model);
             }
@@ -122,10 +126,12 @@ namespace VideoGameTracker.Controllers
 
             if (_genresRepository.Update(genre))
             {
+                _logger.LogInformation("Genre updated. GenreId={GenreId}, Name={Name}", genre.Id, genre.Name);
                 TempData["Success"] = "Genre updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
 
+            _logger.LogWarning("Genre update failed. GenreId={GenreId}", genre.Id);
             TempData["Error"] = "Unable to update genre.";
             return View(model);
         }
@@ -142,6 +148,7 @@ namespace VideoGameTracker.Controllers
 
             if (genre.Games.Any())
             {
+                _logger.LogWarning("Delete blocked for genre with games. GenreId={GenreId}", id);
                 ViewData["DeleteBlocked"] = true;
                 ViewData["DeleteReason"] = "This genre is assigned to games and cannot be deleted.";
             }
@@ -163,16 +170,19 @@ namespace VideoGameTracker.Controllers
 
             if (genre.Games.Any())
             {
+                _logger.LogWarning("Delete rejected for genre with games. GenreId={GenreId}", id);
                 TempData["Error"] = "This genre is assigned to games and cannot be deleted.";
                 return RedirectToAction(nameof(Delete), new { id });
             }
 
             if (_genresRepository.Delete(id))
             {
+                _logger.LogInformation("Genre deleted. GenreId={GenreId}", id);
                 TempData["Success"] = "Genre deleted successfully.";
                 return RedirectToAction(nameof(Index));
             }
 
+            _logger.LogWarning("Genre delete failed. GenreId={GenreId}", id);
             TempData["Error"] = "Unable to delete genre.";
             return RedirectToAction(nameof(Index));
         }

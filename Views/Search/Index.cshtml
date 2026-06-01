@@ -1,0 +1,68 @@
+@model VideoGameTracker.ViewModels.GlobalSearchViewModel
+
+@{
+    ViewData["Title"] = "Search";
+    ViewData["BodyClass"] = "page-mario page-search";
+}
+
+<section class="mario-stage mario-stage-prose">
+    <div class="mario-panel mario-panel-wide mario-panel-split">
+        <div class="mario-panel-header">
+            <div>
+                <h1>@ViewData["Title"]</h1>
+                <p class="mario-subtitle">Find pages and content across the tracker.</p>
+            </div>
+        </div>
+
+        <div class="mario-panel-card">
+            <form class="smb-global-search-form smb-global-search-form-wide" method="get" asp-controller="Search" asp-action="Index">
+                <label for="global-search-page" class="visually-hidden">Search</label>
+                <input id="global-search-page"
+                       name="query"
+                       type="search"
+                       class="smb-global-search-input"
+                       placeholder="Search games, entries, and pages..."
+                       value="@Model.Query" />
+                <button type="submit" class="smb-global-search-submit">Search</button>
+            </form>
+        </div>
+
+        <div class="smb-search-results">
+            @if (string.IsNullOrWhiteSpace(Model.Query))
+            {
+                <div class="mario-empty">Type a search term to see results.</div>
+            }
+            else if (!Model.HasResults)
+            {
+                <div class="mario-empty">No results found. Try another term.</div>
+            }
+            else
+            {
+                foreach (var group in Model.Groups)
+                {
+                    if (group.Items.Count == 0)
+                    {
+                        continue;
+                    }
+
+                    <div class="smb-search-group">
+                        <div class="smb-search-group-title">@group.Title</div>
+                        <div class="smb-search-group-body">
+                            @foreach (var item in group.Items)
+                            {
+                                <a class="smb-search-item" href="@item.Url">
+                                    <span class="smb-search-item-title">@item.Title</span>
+                                    @if (!string.IsNullOrWhiteSpace(item.Subtitle))
+                                    {
+                                        <span class="smb-search-item-sub">@item.Subtitle</span>
+                                    }
+                                    <span class="smb-search-item-meta">@item.Category</span>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

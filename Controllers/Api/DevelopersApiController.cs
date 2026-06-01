@@ -11,10 +11,12 @@ namespace VideoGameTracker.Controllers.Api;
 public class DevelopersApiController : ControllerBase
 {
     private readonly DevelopersRepository _developersRepository;
+    private readonly ILogger<DevelopersApiController> _logger;
 
-    public DevelopersApiController(DevelopersRepository developersRepository)
+    public DevelopersApiController(DevelopersRepository developersRepository, ILogger<DevelopersApiController> logger)
     {
         _developersRepository = developersRepository;
+        _logger = logger;
     }
 
     [AllowAnonymous]
@@ -54,6 +56,7 @@ public class DevelopersApiController : ControllerBase
         };
 
         _developersRepository.Create(developer);
+        _logger.LogInformation("API developer created. DeveloperId={DeveloperId}, Name={Name}", developer.Id, developer.Name);
         return CreatedAtAction(nameof(GetById), new { id = developer.Id }, ToDto(developer));
     }
 
@@ -82,6 +85,7 @@ public class DevelopersApiController : ControllerBase
         };
 
         _developersRepository.Update(developer);
+        _logger.LogInformation("API developer updated. DeveloperId={DeveloperId}, Name={Name}", developer.Id, developer.Name);
         return Ok(ToDto(developer));
     }
 
@@ -91,9 +95,11 @@ public class DevelopersApiController : ControllerBase
     {
         if (!_developersRepository.Delete(id))
         {
+            _logger.LogWarning("API developer delete failed. DeveloperId={DeveloperId}", id);
             return NotFound();
         }
 
+        _logger.LogInformation("API developer deleted. DeveloperId={DeveloperId}", id);
         return NoContent();
     }
 

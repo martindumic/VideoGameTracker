@@ -11,10 +11,12 @@ namespace VideoGameTracker.Controllers
     public class DevelopersController : Controller
     {
         private readonly DevelopersRepository _developersRepository;
+        private readonly ILogger<DevelopersController> _logger;
 
-        public DevelopersController(DevelopersRepository developersRepository)
+        public DevelopersController(DevelopersRepository developersRepository, ILogger<DevelopersController> logger)
         {
             _developersRepository = developersRepository;
+            _logger = logger;
         }
 
         [HttpGet("")]
@@ -68,11 +70,13 @@ namespace VideoGameTracker.Controllers
             try
             {
                 _developersRepository.Create(developer);
+                _logger.LogInformation("Developer created. DeveloperId={DeveloperId}, Name={Name}", developer.Id, developer.Name);
                 TempData["Success"] = "Developer created successfully.";
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Failed to create developer. Name={Name}", developer.Name);
                 TempData["Error"] = "Unable to create developer.";
                 return View(model);
             }
@@ -132,10 +136,12 @@ namespace VideoGameTracker.Controllers
 
             if (_developersRepository.Update(developer))
             {
+                _logger.LogInformation("Developer updated. DeveloperId={DeveloperId}, Name={Name}", developer.Id, developer.Name);
                 TempData["Success"] = "Developer updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
 
+            _logger.LogWarning("Developer update failed. DeveloperId={DeveloperId}", developer.Id);
             TempData["Error"] = "Unable to update developer.";
             return View(model);
         }
@@ -152,6 +158,7 @@ namespace VideoGameTracker.Controllers
 
             if (developer.Games.Any())
             {
+                _logger.LogWarning("Delete blocked for developer with games. DeveloperId={DeveloperId}", id);
                 ViewData["DeleteBlocked"] = true;
                 ViewData["DeleteReason"] = "This developer has games and cannot be deleted.";
             }
@@ -173,16 +180,19 @@ namespace VideoGameTracker.Controllers
 
             if (developer.Games.Any())
             {
+                _logger.LogWarning("Delete rejected for developer with games. DeveloperId={DeveloperId}", id);
                 TempData["Error"] = "This developer has games and cannot be deleted.";
                 return RedirectToAction(nameof(Delete), new { id });
             }
 
             if (_developersRepository.Delete(id))
             {
+                _logger.LogInformation("Developer deleted. DeveloperId={DeveloperId}", id);
                 TempData["Success"] = "Developer deleted successfully.";
                 return RedirectToAction(nameof(Index));
             }
 
+            _logger.LogWarning("Developer delete failed. DeveloperId={DeveloperId}", id);
             TempData["Error"] = "Unable to delete developer.";
             return RedirectToAction(nameof(Index));
         }

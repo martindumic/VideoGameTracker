@@ -1,11 +1,26 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Serilog;
+using Serilog.Events;
 using VideoGameTracker.Data;
 using VideoGameTracker.Models;
 
 // ============= WEB APLIKACIJA SETUP =============
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File(
+        Path.Combine("Logs", "video-game-tracker-.log"),
+        rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -43,6 +58,9 @@ builder.Services.AddScoped<GameEntriesRepository>();
 builder.Services.AddScoped<GameEntryScreenshotsRepository>();
 
 var app = builder.Build();
+
+Log.Information("VideoGameTracker starting up.");
+app.Lifetime.ApplicationStopped.Register(Log.CloseAndFlush);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

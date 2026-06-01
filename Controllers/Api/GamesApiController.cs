@@ -11,10 +11,12 @@ namespace VideoGameTracker.Controllers.Api;
 public class GamesApiController : ControllerBase
 {
     private readonly GamesRepository _gamesRepository;
+    private readonly ILogger<GamesApiController> _logger;
 
-    public GamesApiController(GamesRepository gamesRepository)
+    public GamesApiController(GamesRepository gamesRepository, ILogger<GamesApiController> logger)
     {
         _gamesRepository = gamesRepository;
+        _logger = logger;
     }
 
     [AllowAnonymous]
@@ -57,6 +59,7 @@ public class GamesApiController : ControllerBase
         };
 
         _gamesRepository.Create(game);
+        _logger.LogInformation("API game created. GameId={GameId}, Title={Title}", game.Id, game.Title);
         return CreatedAtAction(nameof(GetById), new { id = game.Id }, ToDto(game));
     }
 
@@ -88,6 +91,7 @@ public class GamesApiController : ControllerBase
         };
 
         _gamesRepository.Update(game);
+        _logger.LogInformation("API game updated. GameId={GameId}, Title={Title}", game.Id, game.Title);
         return Ok(ToDto(game));
     }
 
@@ -97,9 +101,11 @@ public class GamesApiController : ControllerBase
     {
         if (!_gamesRepository.Delete(id))
         {
+            _logger.LogWarning("API game delete failed. GameId={GameId}", id);
             return NotFound();
         }
 
+        _logger.LogInformation("API game deleted. GameId={GameId}", id);
         return NoContent();
     }
 

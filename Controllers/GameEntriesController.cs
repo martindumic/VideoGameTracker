@@ -16,17 +16,20 @@ namespace VideoGameTracker.Controllers
         private readonly GameEntriesRepository _gameEntriesRepository;
         private readonly GamesRepository _gamesRepository;
         private readonly GameEntryScreenshotsRepository _screenshotsRepository;
+        private readonly ILogger<GameEntriesController> _logger;
 
         public GameEntriesController(
             GameEntriesRepository gameEntriesRepository,
             GamesRepository gamesRepository,
             GameEntryScreenshotsRepository screenshotsRepository,
-            UserManager<AppUser> userManager)
+            UserManager<AppUser> userManager,
+            ILogger<GameEntriesController> logger)
             : base(userManager)
         {
             _gameEntriesRepository = gameEntriesRepository;
             _gamesRepository = gamesRepository;
             _screenshotsRepository = screenshotsRepository;
+            _logger = logger;
         }
 
         [AllowAnonymous]
@@ -92,6 +95,7 @@ namespace VideoGameTracker.Controllers
             {
                 if (string.IsNullOrWhiteSpace(CurrentUserId))
                 {
+                    _logger.LogWarning("Create game entry blocked. Missing user id.");
                     return Challenge();
                 }
 
@@ -135,11 +139,17 @@ namespace VideoGameTracker.Controllers
             try
             {
                 _gameEntriesRepository.Create(gameEntry);
+                _logger.LogInformation(
+                    "Game entry created. EntryId={EntryId}, UserId={UserId}, GameId={GameId}",
+                    gameEntry.Id,
+                    gameEntry.UserId,
+                    gameEntry.GameId);
                 TempData["Success"] = "Game entry created successfully.";
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Failed to create game entry. UserId={UserId}, GameId={GameId}", gameEntry.UserId, gameEntry.GameId);
                 TempData["Error"] = "Unable to create game entry.";
                 PopulateSelectedGameTitle(model);
                 if (string.Equals(model.FormContext, "Index", StringComparison.OrdinalIgnoreCase))
@@ -165,6 +175,10 @@ namespace VideoGameTracker.Controllers
 
             if (!IsAdmin && gameEntry.UserId != CurrentUserId)
             {
+                _logger.LogWarning(
+                    "Edit forbidden for game entry. EntryId={EntryId}, UserId={UserId}",
+                    gameEntry.Id,
+                    CurrentUserId);
                 TempData["Error"] = "You do not have permission to edit this game entry.";
                 return RedirectToAction(nameof(Index));
             }
@@ -210,6 +224,10 @@ namespace VideoGameTracker.Controllers
 
             if (!IsAdmin && existing.UserId != CurrentUserId)
             {
+                _logger.LogWarning(
+                    "Edit forbidden for game entry. EntryId={EntryId}, UserId={UserId}",
+                    existing.Id,
+                    CurrentUserId);
                 TempData["Error"] = "You do not have permission to edit this game entry.";
                 return RedirectToAction(nameof(Index));
             }
@@ -236,10 +254,16 @@ namespace VideoGameTracker.Controllers
 
             if (_gameEntriesRepository.Update(gameEntry))
             {
+                _logger.LogInformation(
+                    "Game entry updated. EntryId={EntryId}, UserId={UserId}, GameId={GameId}",
+                    gameEntry.Id,
+                    gameEntry.UserId,
+                    gameEntry.GameId);
                 TempData["Success"] = "Game entry updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
 
+            _logger.LogWarning("Game entry update failed. EntryId={EntryId}", gameEntry.Id);
             TempData["Error"] = "Unable to update game entry.";
             PopulateSelectedGameTitle(model);
             return View(model);
@@ -257,6 +281,10 @@ namespace VideoGameTracker.Controllers
 
             if (!IsAdmin && gameEntry.UserId != CurrentUserId)
             {
+                _logger.LogWarning(
+                    "Delete forbidden for game entry. EntryId={EntryId}, UserId={UserId}",
+                    gameEntry.Id,
+                    CurrentUserId);
                 TempData["Error"] = "You do not have permission to delete this game entry.";
                 return RedirectToAction(nameof(Index));
             }
@@ -278,16 +306,25 @@ namespace VideoGameTracker.Controllers
 
             if (!IsAdmin && entry.UserId != CurrentUserId)
             {
+                _logger.LogWarning(
+                    "Delete forbidden for game entry. EntryId={EntryId}, UserId={UserId}",
+                    entry.Id,
+                    CurrentUserId);
                 TempData["Error"] = "You do not have permission to delete this game entry.";
                 return RedirectToAction(nameof(Index));
             }
 
             if (_gameEntriesRepository.Delete(id))
             {
+                _logger.LogInformation(
+                    "Game entry deleted. EntryId={EntryId}, UserId={UserId}",
+                    id,
+                    entry.UserId);
                 TempData["Success"] = "Game entry deleted successfully.";
                 return RedirectToAction(nameof(Index));
             }
 
+            _logger.LogWarning("Game entry delete failed. EntryId={EntryId}", id);
             TempData["Error"] = "Unable to delete game entry.";
             return RedirectToAction(nameof(Index));
         }
@@ -327,16 +364,22 @@ namespace VideoGameTracker.Controllers
 
             if (!CanManageScreenshots(entry))
             {
+                _logger.LogWarning(
+                    "Screenshot upload forbidden. EntryId={EntryId}, UserId={UserId}",
+                    entry.Id,
+                    CurrentUserId);
                 return Forbid();
             }
 
             if (file == null || file.Length == 0)
             {
+                _logger.LogWarning("Screenshot upload rejected. Empty file. EntryId={EntryId}", id);
                 return BadRequest("File is required.");
             }
 
             if (file.Length > 5 * 1024 * 1024)
             {
+                _logger.LogWarning("Screenshot upload rejected. File too large. EntryId={EntryId}", id);
                 return BadRequest("File is too large.");
             }
 
@@ -344,6 +387,7 @@ namespace VideoGameTracker.Controllers
             var allowedExtensions = new HashSet<string> { ".jpg", ".jpeg", ".png", ".webp" };
             if (!allowedExtensions.Contains(extension))
             {
+                _logger.LogWarning("Screenshot upload rejected. Invalid extension. EntryId={EntryId}", id);
                 return BadRequest("Invalid file type.");
             }
 
@@ -356,6 +400,7 @@ namespace VideoGameTracker.Controllers
 
             if (!allowedContentTypes.Contains(file.ContentType))
             {
+                _logger.LogWarning("Screenshot upload rejected. Invalid content type. EntryId={EntryId}", id);
                 return BadRequest("Invalid content type.");
             }
 
@@ -389,6 +434,11 @@ namespace VideoGameTracker.Controllers
             };
 
             _screenshotsRepository.Create(screenshot);
+            _logger.LogInformation(
+                "Screenshot uploaded. EntryId={EntryId}, ScreenshotId={ScreenshotId}, UserId={UserId}",
+                id,
+                screenshot.Id,
+                CurrentUserId);
             return Ok(new { success = true });
         }
 
@@ -405,12 +455,17 @@ namespace VideoGameTracker.Controllers
 
             if (!CanManageScreenshots(entry))
             {
+                _logger.LogWarning(
+                    "Screenshot delete forbidden. EntryId={EntryId}, UserId={UserId}",
+                    entry.Id,
+                    CurrentUserId);
                 return Forbid();
             }
 
             var screenshot = _screenshotsRepository.GetById(screenshotId);
             if (screenshot == null || screenshot.GameEntryId != id)
             {
+                _logger.LogWarning("Screenshot delete failed. EntryId={EntryId}, ScreenshotId={ScreenshotId}", id, screenshotId);
                 return NotFound();
             }
 
@@ -425,6 +480,11 @@ namespace VideoGameTracker.Controllers
             }
 
             _screenshotsRepository.Delete(screenshot);
+            _logger.LogInformation(
+                "Screenshot deleted. EntryId={EntryId}, ScreenshotId={ScreenshotId}, UserId={UserId}",
+                id,
+                screenshot.Id,
+                CurrentUserId);
             return Ok(new { success = true });
         }
 

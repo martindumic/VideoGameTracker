@@ -24,6 +24,7 @@
         @if (User.Identity?.IsAuthenticated ?? false)
         {
             <form method="post" asp-action="CreateGameEntry" asp-controller="Home" class="login-title-form home-title-form">
+                @Html.AntiForgeryToken()
                 <h2 class="home-form-title">CREATE GAME ENTRY</h2>
 
                 <div class="login-field">

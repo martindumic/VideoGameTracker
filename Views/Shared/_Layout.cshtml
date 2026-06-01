@@ -25,6 +25,20 @@
                     <a class="smb-login-nav-link" asp-area="" asp-controller="Platforms" asp-action="Index">Platforms</a>
                     <a class="smb-login-nav-link" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
                 }
+                <div class="smb-global-search" data-suggest-url="@Url.Action("Suggestions", "Search")">
+                    <form class="smb-global-search-form" method="get" asp-controller="Search" asp-action="Index">
+                        <label class="visually-hidden" for="global-search-input">Search</label>
+                        <input id="global-search-input"
+                               name="query"
+                               type="search"
+                               class="smb-global-search-input"
+                               placeholder="Search games, entries, pages..."
+                               autocomplete="off" />
+                        <button type="submit" class="smb-global-search-submit">Search</button>
+                        <span class="smb-global-search-spinner" aria-hidden="true"></span>
+                    </form>
+                    <div class="smb-global-search-panel" aria-live="polite"></div>
+                </div>
                 @await Html.PartialAsync("_LoginPartial")
                 <a class="smb-login-nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>

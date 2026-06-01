@@ -11,7 +11,10 @@
             <div>
                 <h1>@ViewData["Title"]</h1>
             </div>
-            <a asp-action="Create" class="btn btn-sm">New Developer</a>
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-action="Create" class="btn btn-sm">New Developer</a>
+            }
         </div>
 
         @if (TempData["Success"] != null)

@@ -28,9 +28,17 @@ public class PlatformsRepository : IPlatformsRepository
 
         if (!string.IsNullOrWhiteSpace(query))
         {
-            var term = $"%{query.Trim()}%";
+            var trimmed = query.Trim();
+            var term = $"%{trimmed}%";
+            PlatformType? parsedType = null;
+            if (Enum.TryParse<PlatformType>(trimmed, true, out var type))
+            {
+                parsedType = type;
+            }
+
             platformsQuery = platformsQuery.Where(p =>
-                EF.Functions.Like(p.Name ?? string.Empty, term)
+                EF.Functions.Like(p.Name ?? string.Empty, term) ||
+                (parsedType.HasValue && p.Type == parsedType.Value)
             );
         }
 
